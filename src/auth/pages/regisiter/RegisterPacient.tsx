@@ -1,4 +1,4 @@
-import { Logo, User, Mail, DNI, PadLock, Verify } from '../../../assets/img/index';
+import { Logo, User, Mail, DNI, PadLock, Verify } from '../../../../assets/index';
 import { Link } from 'react-router-dom';
 
 export const RegisterPacient = () => {
