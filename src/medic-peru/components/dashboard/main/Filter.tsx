@@ -1,7 +1,7 @@
 
 export const Filter = () => {
     return (
-        <div>
+        <div className="mt-4">
             <div className="flex space-x-5 text-white">
                 <div className="filtro-color-box-1 rounded-3xl p-3 w-56 py-4">
                     <div className="flex items-center">

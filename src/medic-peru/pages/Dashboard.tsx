@@ -5,13 +5,13 @@ import { Historial } from "../components/dashboard/main/Historial"
 
 export const Dashboard = () => {
   return (
-    <div className="flex justify-around my-20">
-      <div className="flex flex-col items-center justify-center space-y-10">
+    <div className="flex justify-around">
+      <div className="flex flex-col items-center justify-center">
         <Anuncios />
         <Filter />
         <Historial />
       </div>
-
+      <div className="divider lg:divider-horizontal pt-9"></div>
       <div>
         <Calendar />
       </div>

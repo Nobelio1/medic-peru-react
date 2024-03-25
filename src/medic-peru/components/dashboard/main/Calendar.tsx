@@ -15,7 +15,7 @@ export const Calendar = () => {
 	const [selectDate, setSelectDate] = useState(currentDate);
 
 	return (
-		<div className="gap-10 justify-center items-center">
+		<div className="mt-8 gap-10 justify-center items-center">
 			<div>
 				<div className="flex justify-between items-center">
 					<h1 className="select-none font-semibold">
