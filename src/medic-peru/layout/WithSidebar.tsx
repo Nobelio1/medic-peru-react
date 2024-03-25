@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import SidebarItems from "../components/sidebar/SidebarItems";
+import Sidebar from "../components/sidebar/Sidebar";
 
 const WithSidebar = () => {
     return (
-        <>
-            <Sidebar />
-            <div>
+        <div className="flex">
+            <Sidebar children={<SidebarItems />}/>
+            <div className="container mx-auto">
                 <Outlet />
             </div>
-        </>
+        </div>
     );
 }
 
