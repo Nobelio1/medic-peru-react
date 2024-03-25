@@ -1,4 +1,4 @@
-import { Logo } from '../../assets/img/index'
+import { Logo } from '../../../assets/index'
 
 export const Panel = () => {
   return (

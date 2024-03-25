@@ -1,4 +1,4 @@
-import { Logo, Facebook, Google, Apple, Mail, PadLock } from '../../../assets/img/index'
+import { Logo, Facebook, Google, Apple, Mail, PadLock } from '../../../../assets/index'
 import { Link } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../../../shared/atoms/authAtom'

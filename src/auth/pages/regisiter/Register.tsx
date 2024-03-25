@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Logo, Paciente, User } from '../../../assets/img/index'
+import { Logo, Paciente, User } from '../../../../assets/index'
 
 export const Register = () => {
   return (
