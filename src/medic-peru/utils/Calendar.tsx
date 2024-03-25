@@ -1,4 +1,7 @@
 import dayjs from "dayjs";
+import 'dayjs/locale/es';
+
+dayjs.locale('es');
 
 export const generateDate = (
 	month = dayjs().month(),
@@ -46,16 +49,16 @@ export const generateDate = (
 };
 
 export const months = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December",
+	"Enero",
+	"Febrero",
+	"Marzo",
+	"Abril",
+	"Mayo",
+	"Junio",
+	"Julio",
+	"Agosto",
+	"Septiembre",
+	"Octubre",
+	"Noviembre",
+	"Diciembre",
 ];
