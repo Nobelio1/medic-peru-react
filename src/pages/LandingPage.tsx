@@ -4,7 +4,7 @@ import Main from "../components/landingpage/Main";
 import Footer from "../components/landingpage/Footer";
 
 
-const LandingPage: React.FC = () => {
+export const LandingPage: React.FC = () => {
     return (
         <div>
             <Header />
@@ -14,4 +14,3 @@ const LandingPage: React.FC = () => {
     )
 }
 
-export default LandingPage;

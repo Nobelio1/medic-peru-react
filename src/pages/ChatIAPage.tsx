@@ -1,8 +1,7 @@
 
-const ChatIAPage = () => {
+export const ChatIAPage = () => {
   return (
     <div>ChatIAPage</div>
   )
 }
 
-export default ChatIAPage

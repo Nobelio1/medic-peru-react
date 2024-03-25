@@ -3,12 +3,13 @@ import Panel from "../auth/Panel"
 
 const WithAuth = () => {
     return (
-        <>
-            <Panel />
+            // <div className="flex flex-col h-screen md:flex-row montserrat-regular"> DIOS MIO PRIMO ARREGLA ESTO POR DIOS
             <div>
-                <Outlet />
+                {/* <Panel /> */}
+                <div>
+                    <Outlet />
+                </div>
             </div>
-        </>
     )
 }
 

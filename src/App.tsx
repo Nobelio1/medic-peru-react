@@ -1,13 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
-import LandingPage from './pages/LandingPage'
-import AuthPage from './pages/AuthPage'
-import Dashboard from './pages/Dashboard'
-import RegisterPage from './pages/RegisterPage'
-import ChatPage from './pages/ChatPage'
+import { AuthPage, ChatIAPage, ChatPage, Dashboard, LandingPage, ProfilePage, RegisterPage } from './pages/index'
+
 import WithSidebar from './components/shared/WithSidebar'
-import ProfilePage from './pages/ProfilePage'
-import ChatIAPage from './pages/ChatIAPage'
 import WithAuth from './components/shared/WithAuth'
+import RegisterDoctor from './components/auth/Register/Doctor/RegisterDoctor'
+import RegisterPacient from './components/auth/Register/Pacient/RegisterPacient'
 
 function App() {
 
@@ -18,8 +15,8 @@ function App() {
 
         <Route element={<WithAuth />}>
           <Route path='/auth' element={<AuthPage />} />
-          <Route path='/register-doctor' element={<RegisterPage />} />
-          <Route path='/register-paciente' element={<RegisterPage />} />
+          <Route path='/register-doctor' element={<RegisterDoctor />} />
+          <Route path='/register-paciente' element={<RegisterPacient />} />
         </Route>
 
         <Route element={<WithSidebar />}>

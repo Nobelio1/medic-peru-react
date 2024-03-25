@@ -1,13 +1,20 @@
-import Login from "../components/auth/Login"
-import Register from "../components/auth/Register"
+import { useRecoilValue } from "recoil";
+import {Login, Register} from "../components/auth/index"
+import authScreenAtom from "../atoms/authAtom";
 
-const AuthPage = () => {
+//!---------------------------------------------------------------------------------!//
+
+
+export const AuthPage = () => {
+    const authScreenState = useRecoilValue(authScreenAtom);
+
+    //!---------------------------------------------------------------------------------!//
+
     return (
         <>
-            <Login />
-            <Register />
+            {authScreenState === 'login' ? <Login /> : <Register />}
         </>
     )
 }
 
-export default AuthPage
+//!---------------------------------------------------------------------------------!//

@@ -1,4 +1,5 @@
-import Logo from './../../assets/img/Logo.png'
+import { Link } from 'react-router-dom'
+import { Logo } from '../../assets/img/index'
 
 const Header = () => {
     return (
@@ -17,7 +18,7 @@ const Header = () => {
                     </span>
                 </div>
 
-                <div>
+                <Link to={'/auth'}>
                     <button
                         className="btn xl:btn-lg md:btn-lg btn-md bg-red-400 hover:bg-red-500 flex text-white">
                         <span className="mr-3">Ingresar</span>
@@ -36,7 +37,7 @@ const Header = () => {
                             />
                         </svg>
                     </button>
-                </div>
+                </Link>
             </header >
 
             <section className="background-landing md:p-10 p-6 xl:px-24">
