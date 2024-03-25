@@ -20,7 +20,7 @@ export const AppRouter = () => {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/chat' element={<ChatPage />} />
           <Route path='/chat-ia' element={<ChatIAPage />} />
-          <Route path='/register-doctor' element={<ProfilePage />} />
+          <Route path='/profile' element={<ProfilePage />} />
         </Route>
       </Routes>
     </>
