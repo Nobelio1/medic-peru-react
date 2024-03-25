@@ -3,8 +3,7 @@ import { AuthPage, ChatIAPage, ChatPage, Dashboard, LandingPage, ProfilePage, Re
 
 import WithSidebar from './components/shared/WithSidebar'
 import WithAuth from './components/shared/WithAuth'
-import RegisterDoctor from './components/auth/Register/Doctor/RegisterDoctor'
-import RegisterPacient from './components/auth/Register/Pacient/RegisterPacient'
+import { RegisterDoctor, RegisterPacient } from './components/auth'
 
 function App() {
 
