@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil"
-import registerDoctorScreenAtom from "../../../../atoms/registerDoctorAtom"
+import registerDoctorScreenAtom from "../../../shared/atoms/registerDoctorAtom"
 import { RegisterPacient, RegisterDoctorSpecialization } from "../.."
 
 export const RegisterDoctor = () => {

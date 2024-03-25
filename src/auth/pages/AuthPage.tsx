@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
-import {Login, Register} from "../components/auth/index"
-import authScreenAtom from "../atoms/authAtom";
+import {Login, Register} from "../index"
+import authScreenAtom from "../../shared/atoms/authAtom";
 
 //!---------------------------------------------------------------------------------!//
 

@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import { AuthPage, ChatIAPage, ChatPage, Dashboard, LandingPage, ProfilePage, RegisterPage } from './pages/index'
+import { AuthPage, ChatIAPage, ChatPage, Dashboard, LandingPage, ProfilePage } from './medic-peru/index'
 
-import WithSidebar from './components/shared/WithSidebar'
-import WithAuth from './components/shared/WithAuth'
-import { RegisterDoctor, RegisterPacient } from './components/auth'
+import WithSidebar from './medic-peru/layout/WithSidebar'
+import WithAuth from './auth/layout/WithAuth'
+import { RegisterDoctor, RegisterPacient } from './auth'
 
 function App() {
 
