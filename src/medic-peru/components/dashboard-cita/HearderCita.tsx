@@ -42,16 +42,16 @@ export const HearderCita = () => {
             </div>
             <ul
               tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-30"
+              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-36"
             >
               <li>
-                <a className="justify-between">Profile</a>
+                <a>Enfermedad 1</a>
               </li>
               <li>
-                <a>Settings</a>
+                <a>Enfermedad 2</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a>Enfermedad 3</a>
               </li>
             </ul>
           </div>

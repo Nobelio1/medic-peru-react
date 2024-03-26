@@ -1,4 +1,4 @@
-import { User } from "../../../../assets";
+import { UserPersona } from "../../../../assets";
 import { SlArrowRight } from "react-icons/sl";
 
 export const CitaCard = () => {
@@ -9,7 +9,11 @@ export const CitaCard = () => {
           scope="row"
           className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
         >
-          <img className="w-10 h-10 rounded-full" src={User} alt="user-name" />
+          <img
+            className="w-10 h-10 rounded-full"
+            src={UserPersona}
+            alt="user-name"
+          />
           <div className="pl-4">
             <div className="text-base font-semibold">Edith Beatriz</div>
             <div className="font-normal text-gray-500">Vacunacion</div>

@@ -8,6 +8,7 @@ import Mail from "./img/icons8-mail-50.png";
 import PadLock from "./img/icons8-padlock.svg";
 import User from "./img/user-svg.svg";
 import Verify from "./img/verify-key.svg";
+import UserPersona from "./img/user-Person.jpg";
 
 export { Logo };
 export { DNI };
@@ -19,3 +20,4 @@ export { Mail };
 export { PadLock };
 export { User };
 export { Verify };
+export { UserPersona };
