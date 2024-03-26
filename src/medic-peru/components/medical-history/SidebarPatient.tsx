@@ -16,7 +16,7 @@ export const SidebarPatient = () => {
               <img src={UserPersona} alt="user-photo" className="" />
             </div>
           </div>
-          <h2 className="text-2xl text-gray-500">Carlos Barrera</h2>
+          <h2 className="text-2xl mt-4 text-gray-500">Carlos Barrera</h2>
         </div>
         {/* INFO */}
         <div className="w-full px-2 mb-36">

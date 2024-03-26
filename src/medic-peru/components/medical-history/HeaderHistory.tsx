@@ -11,7 +11,7 @@ export const HeaderHistory = () => {
           </a>
         </div>
       </div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 mb-10">
         <div className="flex-1">
           <h1 className="text-3xl font-bold">Historia Clinica</h1>
         </div>
