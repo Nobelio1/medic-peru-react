@@ -1,14 +1,15 @@
 import { SlArrowLeft } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 export const HeaderHistory = () => {
   return (
     <>
       <div>
         <div className="flex-1">
-          <a className="btn btn-ghost text-lg">
+          <Link className="btn btn-ghost text-lg" to={"/profile"}>
             <SlArrowLeft />
             Volver
-          </a>
+          </Link>
         </div>
       </div>
       <div className="navbar bg-base-100 mb-10">

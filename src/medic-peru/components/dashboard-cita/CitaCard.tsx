@@ -1,5 +1,6 @@
 import { UserPersona } from "../../../../assets";
 import { SlArrowRight } from "react-icons/sl";
+import { Link } from 'react-router-dom';
 
 export const CitaCard = () => {
   return (
@@ -15,7 +16,7 @@ export const CitaCard = () => {
             alt="user-name"
           />
           <div className="pl-4">
-            <div className="text-base font-semibold">Edith Beatriz</div>
+            <div className="text-base font-semibold">Carlos Barrera</div>
             <div className="font-normal text-gray-500">Vacunacion</div>
           </div>
         </td>
@@ -31,9 +32,11 @@ export const CitaCard = () => {
         <td className="px-6 py-4 font-semibold">30 minutos</td>
 
         <td className="px-6 py-4">
-          <button className="btn bg-transparent border-none shadow-none">
-            <SlArrowRight />
-          </button>
+          <Link to={"/medical-history"}>
+            <button className="btn bg-transparent border-none shadow-none">
+              <SlArrowRight />
+            </button>
+          </Link>
         </td>
       </tr>
     </>

@@ -6,7 +6,7 @@ export const RegisterPacient = () => {
     // const setDoctorScreen = useSetRecoilState(registerDoctorScreenAtom)
 
     return (
-        <div className="flex flex-col h-screen md:flex-row container mx-auto">
+        <div className="flex flex-col h-screen md:flex-row mx-auto">
             <div className="w-full lg:w-3/4 md:w-1/2 h-full sm:block hidden">
                 <div
                     className="flex flex-row md:flex-col lg:flex-row w-full h-full justify-center items-center font-bold text-center montserrat-bold"

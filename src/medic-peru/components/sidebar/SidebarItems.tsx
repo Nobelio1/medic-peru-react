@@ -32,8 +32,11 @@ export default function SidebarItems() {
             <NavLink to={"/chat-ia"}>
                 <SidebarItem icon={<Boxes size={30} />} text="ChatIA" active={location.pathname === "/chat-ia"} />
             </NavLink>
-            {/* <SidebarItem icon={<Package size={30} />} text="Ordenes" alert />
-            <SidebarItem icon={<Receipt size={30} />} text="Pagos" /> */}
+
+            <NavLink to={"/medical-history"}>
+                <SidebarItem icon={<Package size={30} />} text="Historia Medica" alert active={location.pathname === "/medical-history"}/>
+            </NavLink>
+            {/* <SidebarItem icon={<Receipt size={30} />} text="Pagos" /> */}
             <hr className="my-3 border border-gray-400 " />
             <SidebarItem icon={<Settings size={30} />} text="Configuracion" />
             <SidebarItem icon={<LifeBuoy size={30} />} text="Ayuda" />
