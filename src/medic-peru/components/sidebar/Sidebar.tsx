@@ -68,7 +68,7 @@ export default function Sidebar({ children }: SidebarProps) {
                             <h4 className="font-semibold text-black">Jairo Barrera</h4>
                             <span className="text-sm text-gray-600">jairo.b0401@gmail.com</span>
                         </div>
-                        <MoreVertical size={20} className="text-black"/>
+                        <MoreVertical size={20} className="text-black" />
                     </div>
                 </div>
             </nav>

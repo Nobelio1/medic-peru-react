@@ -1,11 +1,14 @@
 import { Logo } from "../../../../../assets"
+import { Link } from 'react-router-dom';
 
 export const Historial = () => {
     return (
         <div className="mt-8">
             <div className="flex justify-between">
                 <h3 className="montserrat-bold">Historial de Citas</h3>
-                <p className="montserrat-medium"> Ver todo</p>
+                <Link to={"/profile"}>
+                    <p className="montserrat-medium"> Ver todo</p>
+                </Link>
             </div>
 
             <div className="mt-7 space-y-3">
@@ -52,8 +55,8 @@ export const Historial = () => {
                         <p className="montserrat-medium text-sm text-color-historial ml-1">Descargar Cita</p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
-  )
+    )
 }

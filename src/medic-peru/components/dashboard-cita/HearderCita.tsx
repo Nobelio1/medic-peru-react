@@ -1,15 +1,16 @@
 import { SlArrowLeft } from "react-icons/sl";
 import { FaFilter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const HearderCita = () => {
   return (
     <>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-lg">
+          <Link className="btn btn-ghost text-lg" to={"/dashboard"}>
             <SlArrowLeft />
             Volver a Inicio
-          </a>
+          </Link>
         </div>
         <div className="flex-none gap-2">
           <label className="input rounded-full bg-purple-50 flex items-center gap-2">
