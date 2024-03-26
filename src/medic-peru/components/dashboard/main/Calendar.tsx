@@ -15,7 +15,7 @@ export const Calendar = () => {
 	const [selectDate, setSelectDate] = useState(currentDate);
 
 	return (
-		<div className="mt-8 gap-10 justify-center items-center">
+		<div className="mt-8 gap-10 justify-center items-center bg-white p-10 rounded-xl">
 			<div>
 				<div className="flex justify-between items-center">
 					<h1 className="select-none font-semibold">
@@ -35,7 +35,7 @@ export const Calendar = () => {
 								setToday(currentDate);
 							}}
 						>
-							Hoy dia
+							Mes Actual
 						</h1>
 						<ChevronRight
 							className="w-5 h-5 cursor-pointer hover:scale-105 transition-all"

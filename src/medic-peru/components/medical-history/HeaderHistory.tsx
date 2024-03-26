@@ -12,9 +12,9 @@ export const HeaderHistory = () => {
           </Link>
         </div>
       </div>
-      <div className="navbar bg-base-100 mb-10">
+      <div className="navbar bg-base-100 mb-10 rounded-xl">
         <div className="flex-1">
-          <h1 className="text-3xl font-bold">Historia Clinica</h1>
+          <h1 className="text-3xl font-bold ml-4">Historia Clinica</h1>
         </div>
         <div className="flex-none gap-2">
           <label className="input rounded-full bg-purple-50 flex items-center gap-2">

@@ -8,7 +8,7 @@ import { BsJournalMedical } from "react-icons/bs";
 export const SidebarPatient = () => {
   return (
     <>
-      <div className="p-5 w-full flex flex-col items-center gap-3">
+      <div className="p-5 w-full flex flex-col items-center gap-3 bg-white">
         {/* USER */}
         <div className="text-center mb-6 font-bold">
           <div className="avatar">

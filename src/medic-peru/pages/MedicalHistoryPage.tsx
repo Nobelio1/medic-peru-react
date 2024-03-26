@@ -9,6 +9,8 @@ export const MedicalHistoryPage = () => {
         <div className="w-3/4">
           <HeaderHistory />
           <HospitalCard />
+          <HospitalCard />
+          <HospitalCard />
         </div>
         <div className="w-1/4 ml-14 rounded-md border-2 border-gray-300">
           <SidebarPatient />

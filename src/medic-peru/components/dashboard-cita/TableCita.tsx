@@ -40,7 +40,6 @@ export const TableCita = () => {
             <CitaCard />
             <CitaCard />
             <CitaCard />
-            <CitaCard />
           </tbody>
         </table>
       </div>
