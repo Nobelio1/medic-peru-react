@@ -12,7 +12,7 @@ export const Login = () => {
   //!---------------------------------------------------------------------------------!//
 
   return (
-    <div className='container mx-auto montserrat-regular'>
+    <div className=' mx-auto montserrat-regular'>
       <div className="flex flex-col h-screen md:flex-row">
         <div className="w-full lg:w-3/4 md:w-1/2 h-full sm:block hidden">
           <div
