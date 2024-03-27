@@ -2,12 +2,54 @@ import { Logo, Facebook, Google, Apple, Mail, PadLock } from '../../../../assets
 import { Link } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import authScreenAtom from '../../../shared/atoms/authAtom'
+import { ChangeEvent, useState } from 'react'
 
 //!---------------------------------------------------------------------------------!//
 
 export const Login = () => {
 
   const setAuthScreen = useSetRecoilState(authScreenAtom);
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: ''
+  });
+  const { username, password } = inputs;
+  // const showToast = useShowToast();
+
+  //*---------------------------------------------------------------------------------*//
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  //*---------------------------------------------------------------------------------*//
+
+  const handleLogin = async () => {
+
+    try {
+      const res = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(inputs)
+      });
+      
+      const data = await res.json();
+
+      // if (data.error) {
+      //     showToast('Error', data.error, 'error');
+      //     return;
+      // }
+
+      localStorage.setItem('medic-peru', JSON.stringify(data));
+      // setUser(data);
+    } catch (error) {
+      console.log('No se pudo iniciar sesion')
+      // showToast('Error', (error as string), 'error')
+    }
+  }
 
   //!---------------------------------------------------------------------------------!//
 
@@ -51,6 +93,7 @@ export const Login = () => {
                 <span>Continuar con Apple</span>
               </button>
             </div>
+
             <form>
               <div className="flex flex-col w-80 mt-14">
                 <span className="font-bold text-3xl">¡Bienvenido!</span>
@@ -67,6 +110,9 @@ export const Login = () => {
                       type="text"
                       placeholder="Correo Electrónico"
                       className="flex-1 focus:outline-none"
+                      value={username}
+                      name="username"
+                      onChange={handleChange}
                     />
                   </label>
                   <label
@@ -81,11 +127,15 @@ export const Login = () => {
                       type="password"
                       placeholder="Contraseña"
                       className="flex-1 focus:outline-none"
+                      value={password}
+                      name="password"
+                      onChange={handleChange}
                     />
                   </label>
                 </div>
                 <button
                   className="btn my-2 p-3 rounded-full bg-blue-500 hover:bg-blue-700 w-full h-16"
+                  onClick={handleLogin}
                 >
                   <span className="font-bold text-xl text-white">Ingresar</span>
                 </button>
