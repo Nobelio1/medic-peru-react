@@ -7,8 +7,6 @@ import {
   PadLock,
 } from "../../../assets/index";
 import { Link, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import authScreenAtom from "../../../utils/atoms/authAtom";
 import { LoginOut } from "../../../interfaces/auth.inteface";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
@@ -20,8 +18,6 @@ interface LoginIn {
 
 export const Login = () => {
   const navigate = useNavigate();
-
-  const setAuthScreen = useSetRecoilState(authScreenAtom);
 
   //*---------------------------------------------------------------------------------*//
 
@@ -47,7 +43,7 @@ export const Login = () => {
 
       if (data.code === "000") {
         console.log("se inicio correctamente");
-        navigate("/dashboard");
+        navigate("/medic-peru/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -172,8 +168,7 @@ export const Login = () => {
               <span className="mt-10">¿No tienes una cuenta?</span>
               <Link
                 className="font-bold hover:text-blue-500"
-                onClick={() => setAuthScreen("signup")}
-                to={""}
+                to={"/auth/register"}
               >
                 Regístrate
               </Link>

@@ -19,7 +19,7 @@ export default function SidebarItems() {
 
   return (
     <main className="App">
-      <NavLink to={"/dashboard"}>
+      <NavLink to={"/medic-peru"}>
         <SidebarItem
           icon={<LayoutDashboard size={30} />}
           text="Dashboard"
@@ -28,7 +28,7 @@ export default function SidebarItems() {
         />
       </NavLink>
 
-      <NavLink to={"/profile"}>
+      <NavLink to={"/medic-peru/profile"}>
         <SidebarItem
           icon={<BarChart3 size={30} />}
           text="Pacientes"
@@ -36,7 +36,7 @@ export default function SidebarItems() {
         />
       </NavLink>
 
-      <NavLink to={"/chat"}>
+      <NavLink to={"/medic-peru/chat"}>
         <SidebarItem
           icon={<UserCircle size={30} />}
           text="Chats"
@@ -44,7 +44,7 @@ export default function SidebarItems() {
         />
       </NavLink>
 
-      <NavLink to={"/chat-ia"}>
+      <NavLink to={"/medic-peru/chat-ia"}>
         <SidebarItem
           icon={<Boxes size={30} />}
           text="ChatIA"
@@ -52,7 +52,7 @@ export default function SidebarItems() {
         />
       </NavLink>
 
-      <NavLink to={"/medical-history"}>
+      <NavLink to={"/medic-peru/medical-history"}>
         <SidebarItem
           icon={<Package size={30} />}
           text="Historia Medica"

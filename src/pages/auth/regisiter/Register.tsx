@@ -18,14 +18,14 @@ export const Register = () => {
               <span className="montserrat-bold text-3xl">Bienvenido!</span>
 
               <div className="flex flex-col my-8 gap-4">
-                <Link to={"/register-paciente"}>
+                <Link to={"/auth/register-paciente"}>
                   <button className="btn rounded-full border-solid border-2 border-black w-full">
                     <img src={Paciente} alt="paciente" className="w-6" />
                     <span>Paciente</span>
                   </button>
                 </Link>
 
-                <Link to={"/register-doctor"} className="">
+                <Link to={"/auth/register-doctor"} className="">
                   <button className="btn rounded-full border-solid border-2 border-black w-full">
                     <img src={User} alt="doctor" className="w-6" />
                     <span>Doctor</span>

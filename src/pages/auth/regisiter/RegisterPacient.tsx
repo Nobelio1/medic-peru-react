@@ -82,7 +82,7 @@ export const RegisterPacient = () => {
 
       await sendCode(value.email);
 
-      navigate("/register-code");
+      navigate("/auth/register-code");
     } catch (error) {
       console.log(error);
     }

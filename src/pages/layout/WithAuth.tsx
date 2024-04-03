@@ -1,15 +1,15 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
+import { Panel } from "../auth";
 
 const WithAuth = () => {
-    return (
-            // <div className="flex flex-col h-screen md:flex-row montserrat-regular"> DIOS MIO PRIMO ARREGLA ESTO POR DIOS
-            <div>
-                {/* <Panel /> */}
-                <div>
-                    <Outlet />
-                </div>
-            </div>
-    )
-}
+  return (
+    <div>
+      <Panel />
+      <div>
+        <Outlet />
+      </div>
+    </div>
+  );
+};
 
-export default WithAuth
+export default WithAuth;

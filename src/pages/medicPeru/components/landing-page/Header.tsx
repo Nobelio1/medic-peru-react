@@ -16,7 +16,7 @@ const Header = () => {
           </span>
         </div>
 
-        <Link to={"/auth"}>
+        <Link to={"/auth/login"}>
           <button className="btn xl:btn-lg md:btn-lg btn-md bg-red-400 hover:bg-red-500 flex text-white">
             <span className="mr-3">Ingresar</span>
             <svg
