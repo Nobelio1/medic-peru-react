@@ -1,8 +1,9 @@
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import {
-  RegisterIn,
-  RegisterValidation,
-} from "../auth/interface/auth.inteface";
+import { RegisterIn, RegisterValidation } from "../interfaces/auth.inteface";
+
+//!! ------------------------------------------------------------------------------------
+//!! EN DESUSO
+//!! ------------------------------------------------------------------------------------
 
 export const useForm = (
   initialForm: RegisterIn,
