@@ -1,5 +1,6 @@
-import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
+import { ChevronLast, ChevronFirst } from "lucide-react";
 import { useContext, createContext, useState, ReactNode } from "react";
+import { ButtonLogout } from "../../../../components/ButtonLogout";
 
 //!-------------------------------------------------------------------------------------------------------
 
@@ -72,7 +73,10 @@ export default function Sidebar({ children }: SidebarProps) {
               <h4 className="font-semibold text-black">Username1</h4>
               <span className="text-sm text-gray-600">username1@gmail.com</span>
             </div>
-            <MoreVertical size={20} className="text-black" />
+            {/* REVISAR Z-INDEX */}
+            <div className="z-40">
+              <ButtonLogout />
+            </div>
           </div>
         </div>
       </nav>

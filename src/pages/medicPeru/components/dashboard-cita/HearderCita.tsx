@@ -7,7 +7,7 @@ export const HearderCita = () => {
     <>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link className="btn btn-ghost text-lg" to={"/dashboard"}>
+          <Link className="btn btn-ghost text-lg" to={"/medic-peru"}>
             <SlArrowLeft />
             Volver a Inicio
           </Link>

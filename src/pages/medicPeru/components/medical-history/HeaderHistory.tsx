@@ -6,7 +6,7 @@ export const HeaderHistory = () => {
     <>
       <div>
         <div className="flex-1">
-          <Link className="btn btn-ghost text-lg" to={"/profile"}>
+          <Link className="btn btn-ghost text-lg" to={"/medic-peru/profile"}>
             <SlArrowLeft />
             Volver
           </Link>

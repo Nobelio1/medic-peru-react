@@ -3,6 +3,7 @@ import {
   Boxes,
   LayoutDashboard,
   LifeBuoy,
+  LogOut,
   Package,
   Settings,
   UserCircle,
@@ -19,6 +20,7 @@ export default function SidebarItems() {
 
   return (
     <main className="App">
+      {/* ALGUNAS RUTAS ESTAR AQUI PROVISIONALMENTE */}
       <NavLink to={"/medic-peru"}>
         <SidebarItem
           icon={<LayoutDashboard size={30} />}
@@ -27,7 +29,6 @@ export default function SidebarItems() {
           active={location.pathname === "/dashboard"}
         />
       </NavLink>
-
       <NavLink to={"/medic-peru/profile"}>
         <SidebarItem
           icon={<BarChart3 size={30} />}
@@ -35,7 +36,13 @@ export default function SidebarItems() {
           active={location.pathname === "/profile"}
         />
       </NavLink>
-
+      <NavLink to={"/medic-peru/filter-doctor"}>
+        <SidebarItem
+          icon={<BarChart3 size={30} />}
+          text="Doctores"
+          active={location.pathname === "/profile"}
+        />
+      </NavLink>
       <NavLink to={"/medic-peru/chat"}>
         <SidebarItem
           icon={<UserCircle size={30} />}
@@ -43,7 +50,13 @@ export default function SidebarItems() {
           active={location.pathname === "/chat"}
         />
       </NavLink>
-
+      <NavLink to={"/medic-peru/profile-doctor"}>
+        <SidebarItem
+          icon={<UserCircle size={30} />}
+          text="Perfil Doctor"
+          active={location.pathname === "/chat"}
+        />
+      </NavLink>
       <NavLink to={"/medic-peru/chat-ia"}>
         <SidebarItem
           icon={<Boxes size={30} />}
@@ -51,7 +64,6 @@ export default function SidebarItems() {
           active={location.pathname === "/chat-ia"}
         />
       </NavLink>
-
       <NavLink to={"/medic-peru/medical-history"}>
         <SidebarItem
           icon={<Package size={30} />}
@@ -64,6 +76,9 @@ export default function SidebarItems() {
       <hr className="my-3 border border-gray-400 " />
       <SidebarItem icon={<Settings size={30} />} text="Configuracion" />
       <SidebarItem icon={<LifeBuoy size={30} />} text="Ayuda" />
+      <NavLink to={"/"}>
+        <SidebarItem icon={<LogOut size={30} />} text="Cerrar Sesión" />
+      </NavLink>
     </main>
   );
 }
