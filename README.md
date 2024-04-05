@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Un proyecto que no se sabe a donde va a parar - El Proyecto 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
