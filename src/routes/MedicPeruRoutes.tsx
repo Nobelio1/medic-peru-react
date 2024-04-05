@@ -8,6 +8,7 @@ import {
 } from "../pages/medicPeru";
 import { MedicalHistoryPage } from "../pages/medicPeru/MedicalHistoryPage";
 import { ProfileDoctorPage } from "../pages/medicPeru/ProfileDoctorPage";
+import { FilterDoctorPage } from "../pages/medicPeru/FilterDoctorPage";
 
 export const MedicPeruRoutes = () => {
   return (
@@ -20,6 +21,7 @@ export const MedicPeruRoutes = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/medical-history" element={<MedicalHistoryPage />} />
           <Route path="/profile-doctor" element={<ProfileDoctorPage />} />
+          <Route path="/filter-doctor" element={<FilterDoctorPage />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
