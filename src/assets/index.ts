@@ -9,6 +9,9 @@ import PadLock from "./img/icons8-padlock.svg";
 import User from "./img/user-svg.svg";
 import Verify from "./img/verify-key.svg";
 import UserPersona from "./img/user-Person.jpg";
+import UserPhoto from "./img/use-photo-prueba.jpg";
+import MapsDemo from "./img/maps-demo.jpg";
+import MapPoint from "./img/map-point.svg";
 
 export { Logo };
 export { DNI };
@@ -21,3 +24,6 @@ export { PadLock };
 export { User };
 export { Verify };
 export { UserPersona };
+export { UserPhoto };
+export { MapsDemo };
+export { MapPoint };

@@ -7,6 +7,7 @@ import {
   ProfilePage,
 } from "../pages/medicPeru";
 import { MedicalHistoryPage } from "../pages/medicPeru/MedicalHistoryPage";
+import { ProfileDoctorPage } from "../pages/medicPeru/ProfileDoctorPage";
 
 export const MedicPeruRoutes = () => {
   return (
@@ -18,6 +19,7 @@ export const MedicPeruRoutes = () => {
           <Route path="/chat-ia" element={<ChatIAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/medical-history" element={<MedicalHistoryPage />} />
+          <Route path="/profile-doctor" element={<ProfileDoctorPage />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
