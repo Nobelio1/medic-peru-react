@@ -1,47 +1,32 @@
 import { Facebook, Google, Apple, Mail, PadLock } from "../../../assets/index";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginOut } from "../../../interfaces/auth.inteface";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { LoginIn } from "../../../interfaces/auth.inteface";
+import { loginUser } from "../../../api/auth/authService";
+import { useState } from "react";
+import { authLoginValidator } from "../../../utils/auth/authValidator";
 
 //!---------------------------------------------------------------------------------!//
-interface LoginIn {
-  username: string;
-  password: string;
-}
+
+const initialValues: LoginIn = {
+  username: "",
+  password: "",
+};
 
 export const Login = () => {
   const navigate = useNavigate();
-
-  //*---------------------------------------------------------------------------------*//
+  const [isValidad, setIsValidad] = useState(false);
+  const [message, setMessage] = useState("");
 
   const onLogin = async (value: LoginIn) => {
-    try {
-      const res = await fetch(
-        "http://localhost:8080/authentication/loginUser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(value),
-        }
-      );
+    const accessUser = await loginUser({ user: value });
 
-      let data: LoginOut = await res.json();
-
-      if (data.code === "401 UNAUTHORIZED") {
-        console.log("NO SE INICIO CORRECTAMENTE");
-        return;
-      }
-
-      if (data.code === "000") {
-        console.log("se inicio correctamente");
-        navigate("/medic-peru");
-      }
-    } catch (error) {
-      console.log(error);
-      console.log("No se pudo iniciar sesion");
+    if (accessUser !== "000") {
+      setIsValidad(true);
+      setMessage(accessUser);
+      return;
     }
+    navigate("/medic-peru");
   };
 
   //!---------------------------------------------------------------------------------!//
@@ -55,7 +40,7 @@ export const Login = () => {
         </button>
         <button className="btn bg-white">
           <img src={Google} alt="logo-fb" className="w-6" />
-          <span>Continuar con Google</span>
+          <span>Continuar con Google </span>
         </button>
         <button className="btn bg-black text-white">
           <img src={Apple} alt="logo-fb" className="w-6" />
@@ -64,39 +49,14 @@ export const Login = () => {
       </div>
 
       <Formik
-        initialValues={{
-          username: "",
-          password: "",
-        }}
+        initialValues={initialValues}
         validate={(values: LoginIn) => {
-          let errores: LoginIn = {
-            username: "",
-            password: "",
-          };
-
-          if (!values.username) {
-            errores.username = "Por favor ingresa un username";
-          } else if (
-            !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-              values.username
-            )
-          ) {
-            errores.username = "El correo ingresado no es valido";
-          }
-
-          if (!values.password) {
-            errores.password = "Por favor ingresa un contraseña";
-          } else if (values.password.length < 7) {
-            errores.password = "La cantidad de caracteres es menor que 7";
-          }
-
-          if (errores.username === "" && errores.password === "") {
-            return;
-          }
+          const errores = authLoginValidator({
+            loginUser: values,
+          });
           return errores;
         }}
         onSubmit={(values: LoginIn) => {
-          console.log("todo correcto");
           onLogin(values);
         }}
       >
@@ -140,6 +100,13 @@ export const Login = () => {
                   )}
                 />
               </div>
+              {isValidad && (
+                <div className="my-5 p-3 rounded-md bg-red-600 w-full h-10 flex justify-center items-center">
+                  <span className="font-bold text-md text-white">
+                    {message}
+                  </span>
+                </div>
+              )}
               <button
                 className="btn my-2 p-3 rounded-full bg-blue-500 hover:bg-blue-700 w-full h-16"
                 type="submit"

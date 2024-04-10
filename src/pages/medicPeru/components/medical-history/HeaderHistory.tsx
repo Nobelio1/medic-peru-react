@@ -30,7 +30,7 @@ export const HeaderHistory = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="rgb(79, 70, 229)"
-              stroke-width="2"
+              strokeWidth="2"
               stroke-linecap="round"
               stroke-linejoin="round"
               className="lucide lucide-search"

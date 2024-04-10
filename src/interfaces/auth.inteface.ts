@@ -1,4 +1,28 @@
-import { Result } from "./shared.inteface";
+export interface RegisterUser {
+  username: string;
+  password: string;
+  email: string;
+  dni: string;
+  nombres: string;
+  apellido: string;
+  celular: string;
+  direccion: string;
+  departamento: string;
+  provincia: string;
+  distrito: string;
+  sexo: string;
+  edad: string;
+  fecNac: any;
+  //registro interno
+  apellidos?: string;
+  rol?: string;
+}
+
+export interface RegisterDoctor extends RegisterUser {
+  lugarDeTrabajo: string;
+  numColegiatura: string;
+  especialidad: string;
+}
 
 export interface Token {
   accessToken: string;
@@ -8,35 +32,4 @@ export interface Token {
 export interface LoginIn {
   username: string;
   password: string;
-}
-
-export interface LoginOut extends Result {
-  data: Token | null;
-}
-
-export interface RegisterIn {
-  [key: string]: string | any; //!OJO  - MODIFICAR
-  username: string;
-  password: string;
-  email: string;
-  rol?: string;
-  dni: string;
-}
-
-export interface RegisterValidation {
-  [key: string]: [(value: string) => boolean, string];
-  // username: [(value: string) => boolean, string];
-  // password: [(value: string) => boolean, string];
-  // email: [(value: string) => boolean, string];
-  // dni: [(value: string) => boolean, string];
-}
-
-export interface RegisterOut {
-  id: string;
-  username: string;
-  password: null;
-  roles: null;
-  email: string;
-  message: string;
-  timestamp: string;
 }

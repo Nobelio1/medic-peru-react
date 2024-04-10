@@ -1,292 +1,353 @@
 import { useNavigate } from "react-router-dom";
 import { User, Mail, DNI, PadLock } from "../../../assets/index";
-import { environment } from "../../../api/environment";
 
-import { ErrorMessage, Field, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { RegisterUser } from "../../../interfaces/auth.inteface";
+import { authRegisterValidator } from "../../../utils/auth/authValidator";
+import { MyDatePicker } from "../../../utils/DatePicker";
 
-const API_MASTER: string = environment.API_MASTER;
-
-interface Values {
-  nombres: string;
-  dni: string;
-  username: string;
-  password: string;
-  celular: string;
-  email: string;
-  rol: string;
-  especialidad?: string;
-}
-
-interface CodeOut {
-  code: string;
-  message: string;
-}
-
-interface RegisterOut {
-  code: string;
-  message: string;
-}
+const initialValues: RegisterUser = {
+  username: "",
+  password: "",
+  email: "",
+  dni: "",
+  nombres: "",
+  apellido: "",
+  celular: "",
+  direccion: "",
+  departamento: "",
+  provincia: "",
+  distrito: "",
+  sexo: "",
+  edad: "",
+  fecNac: new Date(),
+};
 
 export const RegisterPacient = () => {
   const navigate = useNavigate();
 
-  const sendCode = async (value: string) => {
-    try {
-      const res = await fetch(
-        `${API_MASTER}/public/sendValidationCode?email=${value}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: "",
-        }
-      );
-
-      let data: CodeOut = await res.json();
-
-      if (data.code !== "000") {
-        console.log("sucedio un error");
-        return;
-      }
-
-      if (data.code === "000") {
-        console.log(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onRegister = async (value: Values) => {
-    value.rol = "Paciente";
-    try {
-      const res = await fetch(`${API_MASTER}/user/createUser`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(value),
-      });
-
-      const data: RegisterOut = await res.json();
-
-      if (data.code !== "000") {
-        console.log(data.message);
-        return;
-      }
-
-      console.log(data.message);
-
-      localStorage.setItem("email", value.email);
-
-      await sendCode(value.email);
-
-      //TODO: IMPLEMENTAR SPINNER DE CARGA
-
-      navigate("/auth/register-code");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div className="flex flex-col w-full items-center animate__animated animate__fast animate__fadeInRight">
-      <Formik
-        initialValues={{
-          username: "",
-          email: "",
-          dni: "",
-          password: "",
-          celular: "",
-          nombres: "",
-          rol: "",
-        }}
-        validate={(onFormValues: Values) => {
-          let errores: Values = {
-            username: "",
-            email: "",
-            dni: "",
-            password: "",
-            celular: "",
-            nombres: "",
-            rol: "",
-          };
+    <div className="flex  h-full overflow-y-auto flex-col w-full items-center animate__animated animate__fast animate__fadeInRight">
+      <main>
+        <Formik
+          initialValues={initialValues}
+          validate={(onFormValues: RegisterUser) => {
+            const errores = authRegisterValidator({
+              registerPaciente: onFormValues,
+            });
+            return errores;
+          }}
+          onSubmit={(onFormValues: RegisterUser, { resetForm }) => {
+            // resetForm();
+            console.log(onFormValues);
+          }}
+        >
+          {({ errors }) => (
+            <Form>
+              <div className="flex flex-col w-80 mt-14">
+                <h1 className="montserrat-bold text-2xl">
+                  Registrate, Paciente!
+                </h1>
 
-          if (!onFormValues.username) {
-            errores.username = "Por favor ingresa un nombre";
-          } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(onFormValues.username)) {
-            errores.username =
-              "El nombre solo puede contener letras y espacios";
-          }
-
-          if (!onFormValues.email) {
-            errores.email = "Por favor ingresa un email";
-          } else if (
-            !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-              onFormValues.email
-            )
-          ) {
-            errores.email = "El correo ingresado no es valido";
-          }
-
-          if (!onFormValues.dni) {
-            errores.dni = "Por favor ingresa un dni";
-          } else if (onFormValues.dni.length < 7) {
-            errores.dni = "EL dni ingresado no es valido";
-          }
-
-          if (!onFormValues.password) {
-            errores.password = "Por favor ingresa un contraseña";
-          } else if (onFormValues.password.length < 7) {
-            errores.password = "La cantidad de caracteres es menor que 7";
-          }
-
-          if (
-            errores.dni === "" &&
-            errores.username === "" &&
-            errores.email === "" &&
-            errores.password === ""
-          ) {
-            return;
-          }
-          return errores;
-        }}
-        onSubmit={(onFormValues: Values, { resetForm }) => {
-          resetForm();
-          onRegister(onFormValues);
-        }}
-      >
-        {({ errors, handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col w-80 mt-14">
-              <span className="montserrat-bold text-3xl">Hola Paciente</span>
-              <span className="montserrat-medium mt-6">
-                Completa el formulario con tus datos personales para registrarte
-              </span>
-
-              <div className="flex flex-col my-8">
-                <div className="flex flex-col my-2">
-                  <label className="flex items-center bg-white mb-1 p-5 rounded-full border-solid border-2 border-gray-300 w-full">
-                    <img src={User} alt="Logo" className="w-6 mr-2" />
-                    <Field
-                      type="text"
-                      placeholder="Nombre Completo"
+                <div className="flex flex-col my-8">
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Nombres: </span>
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={User} alt="Logo" className="w-6 mr-2" />
+                      <Field
+                        type="text"
+                        placeholder="Ingrese sus Nombres"
+                        name="nombres"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
                       name="nombres"
-                      className="flex-1 focus:outline-none"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.nombres}
+                        </div>
+                      )}
                     />
-                  </label>
-                  <ErrorMessage
-                    name="nombres"
-                    component={() => (
-                      <div className="ml-6 font-bold text-sm text-red-600">
-                        {errors.nombres}
-                      </div>
-                    )}
-                  />
-                </div>
+                  </div>
 
-                <div className="flex flex-col my-2">
-                  <label className="flex items-center bg-white mb-1 p-5 rounded-full border-solid border-2 border-gray-300 w-full">
-                    <img src={DNI} alt="Logo" className="w-5 mr-2" />
-                    <Field
-                      type="text"
-                      placeholder="Dni"
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Apellidos: </span>
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={User} alt="Logo" className="w-6 mr-2" />
+                      <Field
+                        type="text"
+                        placeholder="Ingrese sus Apellidos"
+                        name="apellido"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name="apellido"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.apellido}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Dni: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={DNI} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        type="number"
+                        placeholder="Dni"
+                        name="dni"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
                       name="dni"
-                      className="flex-1 focus:outline-none"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.dni}
+                        </div>
+                      )}
                     />
-                  </label>
-                  <ErrorMessage
-                    name="dni"
-                    component={() => (
-                      <div className="ml-6 font-bold text-sm text-red-600">
-                        {errors.dni}
-                      </div>
-                    )}
-                  />
-                </div>
+                  </div>
 
-                <div className="flex flex-col my-2">
-                  <label className="flex items-center bg-white mb-1 p-5 rounded-full border-solid border-2 border-gray-300 w-full">
-                    <img src={User} alt="Logo" className="w-6 mr-2" />
-                    <Field
-                      type="text"
-                      placeholder="Nombre de Usuario"
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Usuario: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={User} alt="Logo" className="w-6 mr-2" />
+                      <Field
+                        type="text"
+                        placeholder="Nombre de Usuario"
+                        name="username"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
                       name="username"
-                      className="flex-1 focus:outline-none"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.username}
+                        </div>
+                      )}
                     />
-                  </label>
-                  <ErrorMessage
-                    name="username"
-                    component={() => (
-                      <div className="ml-6 font-bold text-sm text-red-600">
-                        {errors.username}
-                      </div>
-                    )}
-                  />
-                </div>
+                  </div>
 
-                <div className="flex flex-col my-2">
-                  <label className="flex items-center bg-white mb-1 p-5 rounded-full border-solid border-2 border-gray-300 w-full">
-                    <img src={PadLock} alt="Logo" className="w-5 mr-2" />
-                    <Field
-                      type="password"
-                      placeholder="Contraseña"
-                      name="password"
-                      className="flex-1 focus:outline-none"
-                    />
-                  </label>
-                  <ErrorMessage
-                    name="password"
-                    component={() => (
-                      <div className="ml-6 font-bold text-sm text-red-600">
-                        {errors.password}
-                      </div>
-                    )}
-                  />
-                </div>
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Correo Electronico: </span>
 
-                <div className="flex flex-col my-2">
-                  <label className="flex items-center bg-white mb-1 p-5 rounded-full border-solid border-2 border-gray-300 w-full">
-                    <img src={Mail} alt="Logo" className="w-5 mr-2" />
-                    <Field
-                      type="text"
-                      placeholder="Correo Electroncio"
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        type="email"
+                        placeholder="Ingrese su correo electronico"
+                        name="email"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
                       name="email"
-                      className="flex-1 focus:outline-none"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.email}
+                        </div>
+                      )}
                     />
-                  </label>
-                  <ErrorMessage
-                    name="email"
-                    component={() => (
-                      <div className="ml-6 font-bold text-sm text-red-600">
-                        {errors.email}
-                      </div>
-                    )}
-                  />
-                </div>
+                  </div>
 
-                <div className="flex flex-col my-2">
-                  <label className="flex items-center bg-white mb-1 p-5 rounded-full border-solid border-2 border-gray-300 w-full">
-                    <img src={Mail} alt="Logo" className="w-5 mr-2" />
-                    <Field
-                      type="text"
-                      placeholder="Celular"
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Contraseña: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={PadLock} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        type="password"
+                        placeholder="Contraseña"
+                        name="password"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name="password"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.password}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Celular: </span>
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        type="number"
+                        placeholder="Celular"
+                        name="celular"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
                       name="celular"
-                      className="flex-1 focus:outline-none"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.celular}
+                        </div>
+                      )}
                     />
-                  </label>
-                  <ErrorMessage
-                    name="celular"
-                    component={() => (
-                      <div className="ml-6 font-bold text-sm text-red-600">
-                        {errors.celular}
-                      </div>
-                    )}
-                  />
-                </div>
+                  </div>
 
-                {/* {isFormValid && (
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Departamento: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        as="select"
+                        name="departamento"
+                        className="flex-1 focus:outline-none"
+                      >
+                        <option value="1">Lima</option>
+                      </Field>
+                    </label>
+                    <ErrorMessage
+                      name="departamento"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.departamento}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Provincia: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        as="select"
+                        name="provincia"
+                        className="flex-1 focus:outline-none"
+                      >
+                        <option value="1">Lima</option>
+                      </Field>
+                    </label>
+                    <ErrorMessage
+                      name="provincia"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.provincia}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Distrito: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        as="select"
+                        name="distrito"
+                        className="flex-1 focus:outline-none"
+                      >
+                        <option value="1">San Martin de Porres</option>
+                      </Field>
+                    </label>
+                    <ErrorMessage
+                      name="distrito"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.distrito}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Direccion: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={User} alt="Logo" className="w-6 mr-2" />
+                      <Field
+                        type="text"
+                        placeholder="Ingrese su direccion"
+                        name="direccion"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name="direccion"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.direccion}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Sexo: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        as="select"
+                        name="sexo"
+                        className="flex-1 focus:outline-none"
+                      >
+                        <option value="1">Hombre</option>
+                        <option value="2">Mujer</option>
+                        <option value="3">No especifico</option>
+                      </Field>
+                    </label>
+                    <ErrorMessage
+                      name="sexo"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.sexo}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Fecha de Nacimiento: </span>
+
+                    <MyDatePicker name="fecNac" />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Edad: </span>
+
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <Field
+                        type="number"
+                        placeholder="Edad"
+                        name="edad"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name="edad"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.edad}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  {/* todo: implementar validacion */}
+
+                  {/* {isFormValid && (
                       <label className="mt-5">
                         <div className="my-1 p-3 rounded-full bg-red-600 w-full h-14 flex justify-center items-center">
                           <span className="font-bold text-lg text-white">
@@ -295,19 +356,20 @@ export const RegisterPacient = () => {
                         </div>
                       </label>
                     )} */}
+                </div>
+                <button
+                  type="submit"
+                  className="btn my-2 p-3 rounded-full bg-blue-500 hover:bg-blue-700 w-full h-16"
+                >
+                  <span className="montserrat-bold text-xl text-white">
+                    Siguiente
+                  </span>
+                </button>
               </div>
-              <button
-                type="submit"
-                className="btn my-2 p-3 rounded-full bg-blue-500 hover:bg-blue-700 w-full h-16"
-              >
-                <span className="montserrat-bold text-xl text-white">
-                  Registarse
-                </span>
-              </button>
-            </div>
-          </form>
-        )}
-      </Formik>
+            </Form>
+          )}
+        </Formik>
+      </main>
     </div>
   );
 };
