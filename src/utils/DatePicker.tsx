@@ -11,7 +11,8 @@ export const MyDatePicker = ({ name = "" }) => {
   return (
     <DatePicker
       {...field}
-      className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full"
+      dateFormat="dd/MM/yyyy"
+      className="focus:outline-none"
       selected={value}
       onChange={(date) => setValue(date)}
     />

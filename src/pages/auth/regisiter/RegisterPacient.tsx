@@ -1,10 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import { User, Mail, DNI, PadLock } from "../../../assets/index";
+import {
+  User,
+  Mail,
+  DNI,
+  PadLock,
+  Phone,
+  MapPoint,
+  PointDir,
+  Gender,
+  Calendar,
+} from "../../../assets/index";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { RegisterUser } from "../../../interfaces/auth.inteface";
 import { authRegisterValidator } from "../../../utils/auth/authValidator";
 import { MyDatePicker } from "../../../utils/DatePicker";
+import {
+  dataDepartamento,
+  dataDistritos,
+  dataProvincia,
+  generos,
+} from "../../../data";
+import { registerUser } from "../../../api/auth/authService";
+import { useState } from "react";
 
 const initialValues: RegisterUser = {
   username: "",
@@ -15,16 +33,30 @@ const initialValues: RegisterUser = {
   apellido: "",
   celular: "",
   direccion: "",
-  departamento: "",
-  provincia: "",
-  distrito: "",
-  sexo: "",
+  departamento: "Lima",
+  provincia: "Lima",
+  distrito: "San Isidro",
+  sexo: "Mujer",
   edad: "",
-  fecNac: new Date(),
+  fecNac: new Date().toLocaleDateString(),
 };
 
 export const RegisterPacient = () => {
   const navigate = useNavigate();
+  const [isValidad, setIsValidad] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const onRegisterUser = async (user: RegisterUser) => {
+    user.fecNac = user.fecNac.toLocaleDateString();
+    const accessUser = await registerUser({ user: user });
+
+    if (accessUser !== "000") {
+      setIsValidad(true);
+      setMessage(accessUser);
+      return;
+    }
+    navigate("/auth/register-code");
+  };
 
   return (
     <div className="flex  h-full overflow-y-auto flex-col w-full items-center animate__animated animate__fast animate__fadeInRight">
@@ -38,7 +70,8 @@ export const RegisterPacient = () => {
             return errores;
           }}
           onSubmit={(onFormValues: RegisterUser, { resetForm }) => {
-            // resetForm();
+            resetForm();
+            onRegisterUser(onFormValues);
             console.log(onFormValues);
           }}
         >
@@ -183,7 +216,7 @@ export const RegisterPacient = () => {
                   <div className="flex flex-col my-2">
                     <span className="font-medium">Celular: </span>
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <img src={Phone} alt="Logo" className="w-5 mr-2" />
                       <Field
                         type="number"
                         placeholder="Celular"
@@ -205,13 +238,17 @@ export const RegisterPacient = () => {
                     <span className="font-medium">Departamento: </span>
 
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
                       <Field
                         as="select"
                         name="departamento"
                         className="flex-1 focus:outline-none"
                       >
-                        <option value="1">Lima</option>
+                        {dataDepartamento.map((item) => (
+                          <option key={item.id} value={item.name}>
+                            {item.name}
+                          </option>
+                        ))}
                       </Field>
                     </label>
                     <ErrorMessage
@@ -228,13 +265,17 @@ export const RegisterPacient = () => {
                     <span className="font-medium">Provincia: </span>
 
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
                       <Field
                         as="select"
                         name="provincia"
                         className="flex-1 focus:outline-none"
                       >
-                        <option value="1">Lima</option>
+                        {dataProvincia.map((item) => (
+                          <option key={item.id} value={item.name}>
+                            {item.name}
+                          </option>
+                        ))}
                       </Field>
                     </label>
                     <ErrorMessage
@@ -251,13 +292,17 @@ export const RegisterPacient = () => {
                     <span className="font-medium">Distrito: </span>
 
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
                       <Field
                         as="select"
                         name="distrito"
                         className="flex-1 focus:outline-none"
                       >
-                        <option value="1">San Martin de Porres</option>
+                        {dataDistritos.map((item) => (
+                          <option key={item.id} value={item.name}>
+                            {item.name}
+                          </option>
+                        ))}
                       </Field>
                     </label>
                     <ErrorMessage
@@ -274,7 +319,7 @@ export const RegisterPacient = () => {
                     <span className="font-medium">Direccion: </span>
 
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={User} alt="Logo" className="w-6 mr-2" />
+                      <img src={PointDir} alt="Logo" className="w-6 mr-2" />
                       <Field
                         type="text"
                         placeholder="Ingrese su direccion"
@@ -293,18 +338,20 @@ export const RegisterPacient = () => {
                   </div>
 
                   <div className="flex flex-col my-2">
-                    <span className="font-medium">Sexo: </span>
+                    <span className="font-medium">Sexo:</span>
 
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <img src={Gender} alt="Logo" className="w-5 mr-2" />
                       <Field
                         as="select"
                         name="sexo"
                         className="flex-1 focus:outline-none"
                       >
-                        <option value="1">Hombre</option>
-                        <option value="2">Mujer</option>
-                        <option value="3">No especifico</option>
+                        {generos.map((item) => (
+                          <option key={item.id} value={item.name}>
+                            {item.name}
+                          </option>
+                        ))}
                       </Field>
                     </label>
                     <ErrorMessage
@@ -319,15 +366,18 @@ export const RegisterPacient = () => {
 
                   <div className="flex flex-col my-2">
                     <span className="font-medium">Fecha de Nacimiento: </span>
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={Calendar} alt="Logo" className="w-5 mr-2" />
 
-                    <MyDatePicker name="fecNac" />
+                      <MyDatePicker name="fecNac" />
+                    </label>
                   </div>
 
                   <div className="flex flex-col my-2">
                     <span className="font-medium">Edad: </span>
 
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={Mail} alt="Logo" className="w-5 mr-2" />
+                      <img src={User} alt="Logo" className="w-5 mr-2" />
                       <Field
                         type="number"
                         placeholder="Edad"
@@ -345,17 +395,13 @@ export const RegisterPacient = () => {
                     />
                   </div>
 
-                  {/* todo: implementar validacion */}
-
-                  {/* {isFormValid && (
-                      <label className="mt-5">
-                        <div className="my-1 p-3 rounded-full bg-red-600 w-full h-14 flex justify-center items-center">
-                          <span className="font-bold text-lg text-white">
-                            Datos ingresados no validos
-                          </span>
-                        </div>
-                      </label>
-                    )} */}
+                  {isValidad && (
+                    <div className="my-5 p-3 rounded-md bg-red-600 w-full h-10 flex justify-center items-center">
+                      <span className="font-bold text-md text-white">
+                        {message}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <button
                   type="submit"

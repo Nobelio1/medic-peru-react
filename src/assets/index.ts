@@ -12,6 +12,10 @@ import UserPersona from "./img/user-Person.jpg";
 import UserPhoto from "./img/use-photo-prueba.jpg";
 import MapsDemo from "./img/maps-demo.jpg";
 import MapPoint from "./img/map-point.svg";
+import Phone from "./img/phone.svg";
+import PointDir from "./img/map-ubi.svg";
+import Gender from "./img/persons.svg";
+import Calendar from "./img/calendar.svg";
 
 export { Logo };
 export { DNI };
@@ -27,3 +31,7 @@ export { UserPersona };
 export { UserPhoto };
 export { MapsDemo };
 export { MapPoint };
+export { Phone };
+export { PointDir };
+export { Gender };
+export { Calendar };

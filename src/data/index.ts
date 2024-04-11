@@ -1,5 +1,10 @@
 import { DataDoctor } from "../interfaces/medicPeru.interface";
 
+interface DataGeneric {
+  id: string;
+  name: string;
+}
+
 export const dataPrueba: DataDoctor[] = [
   {
     id: "1",
@@ -390,3 +395,139 @@ export const requestRegister = {
   numColegiatura: "123456789",
   especialidad: "Pedriatia",
 };
+
+export const dataDepartamento: DataGeneric[] = [
+  {
+    id: "1",
+    name: "Lima",
+  },
+  {
+    id: "2",
+    name: "Cusco",
+  },
+  {
+    id: "3",
+    name: "Arequipa",
+  },
+  {
+    id: "4",
+    name: "Trujillo",
+  },
+  {
+    id: "5",
+    name: "Iquitos",
+  },
+  {
+    id: "6",
+    name: "Chiclayo",
+  },
+  {
+    id: "7",
+    name: "Piura",
+  },
+  {
+    id: "8",
+    name: "Huancayo",
+  },
+  {
+    id: "9",
+    name: "Tacna",
+  },
+];
+
+export const dataProvincia: DataGeneric[] = [
+  {
+    id: "1",
+    name: "Lima",
+  },
+  {
+    id: "2",
+    name: "Cusco",
+  },
+  {
+    id: "3",
+    name: "Arequipa",
+  },
+  {
+    id: "4",
+    name: "La Libertad",
+  },
+  {
+    id: "5",
+    name: "Loreto",
+  },
+  {
+    id: "6",
+    name: "Lambayeque",
+  },
+  {
+    id: "7",
+    name: "Piura",
+  },
+  {
+    id: "8",
+    name: "Junín",
+  },
+  {
+    id: "9",
+    name: "Tacna",
+  },
+  {
+    id: "10",
+    name: "Ica",
+  },
+];
+
+export const dataDistritos: DataGeneric[] = [
+  {
+    id: "1",
+    name: "San Isidro",
+  },
+  {
+    id: "2",
+    name: "Cusco",
+  },
+  {
+    id: "3",
+    name: "Cerro Colorado",
+  },
+  {
+    id: "4",
+    name: "Trujillo",
+  },
+  {
+    id: "5",
+    name: "Iquitos",
+  },
+  {
+    id: "6",
+    name: "Chiclayo",
+  },
+  {
+    id: "7",
+    name: "Piura",
+  },
+  {
+    id: "8",
+    name: "Huancayo",
+  },
+  {
+    id: "9",
+    name: "Tacna",
+  },
+  {
+    id: "10",
+    name: "Ica",
+  },
+];
+
+export const generos: DataGeneric[] = [
+  {
+    id: "M",
+    name: "Mujer",
+  },
+  {
+    id: "H",
+    name: "Hombre",
+  },
+];
