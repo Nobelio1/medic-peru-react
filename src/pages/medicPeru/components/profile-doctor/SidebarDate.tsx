@@ -26,8 +26,8 @@ export const SidebarDate = () => {
         </div>
         {/* fechas disponibles */}
         <div className="mt-1 mb-6 mx-2">
-          <h3>Esto deberia estar un carousel con opciones</h3>
-          <h1>SI SUPIERA COMO HACERLO </h1>
+          <h3>Esto sera un carousel con opciones</h3>
+          <p>---- En desarrollo ----</p>
         </div>
         {/* horas y turnos disponibles */}
         <div className="mx-2">

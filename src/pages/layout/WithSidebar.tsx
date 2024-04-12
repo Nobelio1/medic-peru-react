@@ -5,7 +5,9 @@ import Sidebar from "../medicPeru/components/sidebar/Sidebar";
 const WithSidebar = () => {
   return (
     <div className="flex">
-      <Sidebar children={<SidebarItems />} />
+      <div>
+        <Sidebar children={<SidebarItems />} />
+      </div>
       <div className="container mx-auto ">
         <Outlet />
       </div>

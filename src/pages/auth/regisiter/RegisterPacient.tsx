@@ -5,7 +5,6 @@ import {
   DNI,
   PadLock,
   Phone,
-  MapPoint,
   PointDir,
   Gender,
   Calendar,
@@ -15,14 +14,12 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { RegisterUser } from "../../../interfaces/auth.inteface";
 import { authRegisterValidator } from "../../../utils/auth/authValidator";
 import { MyDatePicker } from "../../../utils/DatePicker";
-import {
-  dataDepartamento,
-  dataDistritos,
-  dataProvincia,
-  generos,
-} from "../../../data";
+import { generos } from "../../../data";
 import { registerUser } from "../../../api/auth/authService";
 import { useState } from "react";
+import { SelectUbigeo } from "../components/SelectUbigeo";
+
+//!----------------------------------------------------------------------------
 
 const initialValues: RegisterUser = {
   username: "",
@@ -33,18 +30,26 @@ const initialValues: RegisterUser = {
   apellido: "",
   celular: "",
   direccion: "",
-  departamento: "Lima",
-  provincia: "Lima",
-  distrito: "San Isidro",
+  departamento: "",
+  provincia: "",
+  distrito: "",
   sexo: "Mujer",
   edad: "",
   fecNac: new Date().toLocaleDateString(),
 };
 
+//!----------------------------------------------------------------------------
+
 export const RegisterPacient = () => {
+  //*-------------------------------------------------
   const navigate = useNavigate();
   const [isValidad, setIsValidad] = useState(false);
   const [message, setMessage] = useState("");
+
+  const [departamento, setDepartamento] = useState("");
+  const [provincias, setProvincias] = useState("");
+  const [distritos, setDistritos] = useState("");
+  //*-------------------------------------------------
 
   const onRegisterUser = async (user: RegisterUser) => {
     user.fecNac = user.fecNac.toLocaleDateString();
@@ -57,6 +62,8 @@ export const RegisterPacient = () => {
     }
     navigate("/auth/register-code");
   };
+
+  //!----------------------------------------------------------------------------
 
   return (
     <div className="flex  h-full overflow-y-auto flex-col w-full items-center animate__animated animate__fast animate__fadeInRight">
@@ -234,86 +241,29 @@ export const RegisterPacient = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col my-2">
-                    <span className="font-medium">Departamento: </span>
+                  <SelectUbigeo
+                    name="departamento"
+                    setChange={setDepartamento}
+                    value="1"
+                  />
 
-                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
-                      <Field
-                        as="select"
-                        name="departamento"
-                        className="flex-1 focus:outline-none"
-                      >
-                        {dataDepartamento.map((item) => (
-                          <option key={item.id} value={item.name}>
-                            {item.name}
-                          </option>
-                        ))}
-                      </Field>
-                    </label>
-                    <ErrorMessage
-                      name="departamento"
-                      component={() => (
-                        <div className=" font-bold text-sm text-red-600">
-                          {errors.departamento}
-                        </div>
-                      )}
-                    />
-                  </div>
-
-                  <div className="flex flex-col my-2">
-                    <span className="font-medium">Provincia: </span>
-
-                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
-                      <Field
-                        as="select"
-                        name="provincia"
-                        className="flex-1 focus:outline-none"
-                      >
-                        {dataProvincia.map((item) => (
-                          <option key={item.id} value={item.name}>
-                            {item.name}
-                          </option>
-                        ))}
-                      </Field>
-                    </label>
-                    <ErrorMessage
+                  {departamento && (
+                    <SelectUbigeo
                       name="provincia"
-                      component={() => (
-                        <div className=" font-bold text-sm text-red-600">
-                          {errors.provincia}
-                        </div>
-                      )}
+                      setChange={setProvincias}
+                      value="2"
+                      ubigeo={departamento}
                     />
-                  </div>
+                  )}
 
-                  <div className="flex flex-col my-2">
-                    <span className="font-medium">Distrito: </span>
-
-                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
-                      <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
-                      <Field
-                        as="select"
-                        name="distrito"
-                        className="flex-1 focus:outline-none"
-                      >
-                        {dataDistritos.map((item) => (
-                          <option key={item.id} value={item.name}>
-                            {item.name}
-                          </option>
-                        ))}
-                      </Field>
-                    </label>
-                    <ErrorMessage
+                  {provincias && (
+                    <SelectUbigeo
                       name="distrito"
-                      component={() => (
-                        <div className=" font-bold text-sm text-red-600">
-                          {errors.distrito}
-                        </div>
-                      )}
+                      setChange={setDistritos}
+                      value="3"
+                      ubigeo={provincias}
                     />
-                  </div>
+                  )}
 
                   <div className="flex flex-col my-2">
                     <span className="font-medium">Direccion: </span>

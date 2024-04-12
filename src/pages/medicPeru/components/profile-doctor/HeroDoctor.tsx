@@ -1,8 +1,22 @@
 import { IoIosStar } from "react-icons/io";
 import { UserPersona } from "../../../../assets";
 import { TestimonialItem } from "./TestimonialItem";
+import { DataDoctor } from "../../../../interfaces/medicPeru.interface";
+import { useEffect, useState } from "react";
+import { dataPrueba } from "../../../../data";
 
-export const HeroDoctor = () => {
+export const HeroDoctor = ({ dni }: { dni: string }) => {
+  const [doctor, setDoctor] = useState<DataDoctor>();
+
+  useEffect(() => {
+    getDoctor();
+  }, []);
+
+  const getDoctor = () => {
+    const dataDoctor = dataPrueba.find((doctor) => doctor.dni === dni);
+    setDoctor(dataDoctor);
+  };
+
   return (
     <>
       <div className="bg-white rounded-md w-11/12">
@@ -17,9 +31,11 @@ export const HeroDoctor = () => {
                 </div>
               </div>
               <h2 className="mt-5 font-semibold text-gray-500 text-xl">
-                Alexander Doctor
+                {doctor?.nombres}
               </h2>
-              <span className="text-sm text-gray-400">Dr. Pediatra</span>
+              <span className="text-sm text-gray-400">
+                {doctor?.especialidad}
+              </span>
               <span className="flex gap-2 mt-1 items-center text-sm  text-gray-500">
                 <IoIosStar color="red" size={15} />
                 4.7 (Puntacion)
@@ -28,7 +44,7 @@ export const HeroDoctor = () => {
           </div>
           {/* info */}
           <div className="w-2/3 h-80">
-            <div className="p-3 flex flex-col  w-full h-full flex-1 ">
+            <div className="p-3 flex flex-col justify-between w-full h-full flex-1 ">
               <div className="my-2">
                 <h3 className=" text-gray-500 text-md font-semibold">
                   Biografia
@@ -41,25 +57,24 @@ export const HeroDoctor = () => {
               <div className="flex justify-between my-4">
                 <div className="w-1/2 mr-10">
                   <h3 className=" text-gray-500 text-md font-semibold">
-                    Experiencia
+                    Centro de Salud
                   </h3>
-                  <p>
-                    Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolorLorem
-                    ipsum dolor
-                  </p>
+                  <p>{doctor?.lugarDeTrabajo}</p>
                 </div>
                 <div className="w-1/2">
                   <h3 className=" text-gray-500 text-md font-semibold">
-                    Idiomas
+                    Colegiatura
                   </h3>
-                  <p>Lorem ipsum dolor </p>
+                  <p>{doctor?.numColegiatura} </p>
                 </div>
               </div>
               <div className="my-2">
                 <h3 className=" text-gray-500 text-md font-semibold">
-                  Contacto
+                  Contactos
                 </h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p>Celular: {doctor?.celular}</p>
+                <p>Email: {doctor?.email}</p>
+                <p>Direccion: {doctor?.direccion}</p>
               </div>
             </div>
           </div>
