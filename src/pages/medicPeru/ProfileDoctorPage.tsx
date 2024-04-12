@@ -7,7 +7,8 @@ export const ProfileDoctorPage = () => {
 
   return (
     <>
-      <div className="w-full h-screen justify-center flex overflow-hidden montserrat-regular pr-8">
+      r
+      <div className="w-full h-screen justify-center flex overflow-hidden montserrat-regular p-8">
         <div className="w-3/4 h-full items-center flex flex-col py-10 ">
           <HeroDoctor dni={dniDoctor!} />
           <MapLocation />

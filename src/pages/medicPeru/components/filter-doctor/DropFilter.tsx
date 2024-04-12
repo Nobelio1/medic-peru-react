@@ -16,8 +16,8 @@ export const DropFilter = ({ tipo, dataDoctor }: DropFilterProps) => {
 
   return (
     <>
-      <div className="flex flex-col my-5 mx-2 border-solid border-black px-4 py-2  border rounded-md">
-        <label className="font-semibold  text-lg text-gray-600 mb-2">
+      <div className="flex flex-col my-5 mx-2 border-solid border-black px-4 py-2 border rounded-md">
+        <label className="font-semibold text-md text-gray-600 mb-2">
           Seleccionar {tipo}
         </label>
         <div className="flex gap-1">
@@ -26,9 +26,7 @@ export const DropFilter = ({ tipo, dataDoctor }: DropFilterProps) => {
             className="select select-ghost w-full max-w-xs"
             onChange={(e) => onSpecialty(e.target.value)}
           >
-            <option selected value="">
-              Seleciona una opcion
-            </option>
+            <option value="">Seleciona una opcion</option>
             {especialidad.map((item) => (
               <option key={item.id} value={item.name}>
                 {item.name}

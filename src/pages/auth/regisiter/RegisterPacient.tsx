@@ -77,7 +77,6 @@ export const RegisterPacient = () => {
             return errores;
           }}
           onSubmit={(onFormValues: RegisterUser, { resetForm }) => {
-            resetForm();
             onRegisterUser(onFormValues);
             console.log(onFormValues);
           }}
