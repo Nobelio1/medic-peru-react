@@ -4,7 +4,6 @@ import { DropFilter } from "./components/filter-doctor/DropFilter";
 import { CardInfoDoctor } from "./components/filter-doctor/CardInfoDoctor";
 import { Field, Form, Formik } from "formik";
 import { DataDoctor } from "../../interfaces/medicPeru.interface";
-// import { getDoctor } from "../../api/medicPeru/medicPeruService";
 import { dataPrueba } from "../../data";
 import { getDoctorByDni } from "../../helpers/getDoctorByDni";
 import { useState } from "react";

@@ -31,7 +31,7 @@ export default function Sidebar({ children }: SidebarProps) {
   //!-------------------------------------------------------------------------------------------------------
 
   return (
-    <aside className="h-screen  mr-5">
+    <aside className="h-screen mr-5">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm">
         <div className="p-4 pb-2 flex justify-between items-center mt-3">
           <img
@@ -54,10 +54,10 @@ export default function Sidebar({ children }: SidebarProps) {
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3 mt-3">{children}</ul>
+          <ul className="flex-1 px-3 mt-3 z-10">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="flex p-3 ml-2">
+        <div className="flex p-3 ml-2 z-20">
           <img
             src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
             alt=""
@@ -86,7 +86,7 @@ export default function Sidebar({ children }: SidebarProps) {
 
 //!-------------------------------------------------------------------------------------------------------
 
-export function SidebarItem({ icon, text, active, alert }: SidebarItemProps) {
+export function SidebarItem({ icon, text, active }: SidebarItemProps) {
   const { expanded } = useContext(SidebarContext);
 
   //!-------------------------------------------------------------------------------------------------------
@@ -112,13 +112,6 @@ export function SidebarItem({ icon, text, active, alert }: SidebarItemProps) {
       >
         {text}
       </span>
-      {alert && (
-        <div
-          className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
-            expanded ? "" : "top-2"
-          }`}
-        />
-      )}
 
       {!expanded && (
         <div

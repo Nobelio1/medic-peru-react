@@ -25,22 +25,21 @@ export default function SidebarItems() {
         <SidebarItem
           icon={<LayoutDashboard size={30} />}
           text="Dashboard"
-          alert
           active={location.pathname === "/dashboard"}
         />
       </NavLink>
-      <NavLink to={"/medic-peru/profile"}>
+      <NavLink to={"/medic-peru/filter-pacientes"}>
         <SidebarItem
           icon={<BarChart3 size={30} />}
           text="Pacientes"
-          active={location.pathname === "/profile"}
+          active={location.pathname === "/medic-peru/filter-pacientes"}
         />
       </NavLink>
       <NavLink to={"/medic-peru/filter-doctor"}>
         <SidebarItem
           icon={<BarChart3 size={30} />}
           text="Doctores"
-          active={location.pathname === "/profile"}
+          active={location.pathname === "/filter-pacientes"}
         />
       </NavLink>
       <NavLink to={"/medic-peru/chat"}>
@@ -68,7 +67,6 @@ export default function SidebarItems() {
         <SidebarItem
           icon={<Package size={30} />}
           text="Historia Medica"
-          alert
           active={location.pathname === "/medical-history"}
         />
       </NavLink>

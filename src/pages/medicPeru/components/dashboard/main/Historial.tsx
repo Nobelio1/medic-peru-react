@@ -6,7 +6,7 @@ export const Historial = () => {
     <div className="mt-8">
       <div className="flex justify-between">
         <h3 className="montserrat-bold">Historial de Citas</h3>
-        <Link to={"/profile"}>
+        <Link to={"/medic-peru/filter-pacientes"}>
           <p className="montserrat-medium"> Ver todo</p>
         </Link>
       </div>

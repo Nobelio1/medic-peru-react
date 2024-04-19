@@ -16,6 +16,8 @@ import Phone from "./img/phone.svg";
 import PointDir from "./img/map-ubi.svg";
 import Gender from "./img/persons.svg";
 import Calendar from "./img/calendar.svg";
+import Download from "./img/download-icon.svg";
+import Edit from "./img/editsvg.svg";
 
 export { Logo };
 export { DNI };
@@ -35,3 +37,5 @@ export { Phone };
 export { PointDir };
 export { Gender };
 export { Calendar };
+export { Download };
+export { Edit };

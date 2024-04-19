@@ -70,3 +70,15 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.height-per {
+  height: 55.5rem;
+}
+
+.height-per2 {
+  height: 51rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

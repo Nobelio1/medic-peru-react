@@ -1,11 +1,28 @@
 import { SlArrowLeft } from "react-icons/sl";
 import { FaFilter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { DataPaciente } from "../../../../data/pacientes";
+import { Dispatch, SetStateAction } from "react";
+import { getPacienteByDni } from "../../../../helpers/getPacienteByDni";
+import { Field, Form, Formik } from "formik";
 
-export const HearderCita = () => {
+interface HeaderCitaProps {
+  setDataPaciente: Dispatch<SetStateAction<DataPaciente[]>>;
+}
+
+interface DniPaciente {
+  dni: string;
+}
+
+export const HearderCita = ({ setDataPaciente }: HeaderCitaProps) => {
+  const onSearchSubmit = ({ dni }: { dni: string }) => {
+    let filterPaciente = getPacienteByDni({ dni: dni });
+    setDataPaciente(filterPaciente);
+  };
+
   return (
     <>
-      <div className="navbar bg-base-100">
+      <header className="navbar bg-base-100 mb-4">
         <div className="flex-1">
           <Link className="btn btn-ghost text-lg" to={"/medic-peru"}>
             <SlArrowLeft />
@@ -13,28 +30,41 @@ export const HearderCita = () => {
           </Link>
         </div>
         <div className="flex-none gap-2">
-          <label className="input rounded-full bg-purple-50 flex items-center gap-2">
-            <input
-              type="text"
-              className="grow placeholder:text-indigo-600 placeholder:font-medium "
-              placeholder="Search"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="rgb(79, 70, 229)"
-              strokeWidth="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className="lucide lucide-search"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-          </label>
+          <Formik
+            initialValues={{
+              dni: "",
+            }}
+            onSubmit={(values: DniPaciente) => {
+              onSearchSubmit({ dni: values.dni });
+            }}
+          >
+            <Form>
+              <label className="input rounded-full bg-purple-50 flex items-center gap-2">
+                <Field
+                  type="text"
+                  className="grow placeholder:text-indigo-600 placeholder:font-medium "
+                  placeholder="Search"
+                  name="dni"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="rgb(79, 70, 229)"
+                  strokeWidth="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  className="lucide lucide-search"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+              </label>
+            </Form>
+          </Formik>
+          {/* BOTON DE FILTRO ---- TODO: POR REVISAR */}
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost ">
               <div className="rounded-full flex items-center gap-3">
@@ -57,7 +87,7 @@ export const HearderCita = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </header>
     </>
   );
 };

@@ -1,8 +1,13 @@
 import { UserPersona } from "../../../../assets";
 import { SlArrowRight } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import { DataPaciente } from "../../../../data/pacientes";
 
-export const CitaCard = () => {
+interface CitaCardProps {
+  paciente: DataPaciente;
+}
+
+export const CitaCard = ({ paciente }: CitaCardProps) => {
   return (
     <>
       <tr className="bg-white ">
@@ -16,20 +21,20 @@ export const CitaCard = () => {
             alt="user-name"
           />
           <div className="pl-4">
-            <div className="text-base font-semibold">Carlos Barrera</div>
-            <div className="font-normal text-gray-500">Vacunacion</div>
+            <div className="text-base font-semibold">{paciente.nombre}</div>
+            <div className="font-normal text-gray-500">{paciente.consulta}</div>
           </div>
         </td>
-        <td className="px-6 py-4 font-semibold">87654321</td>
-        <td className="px-6 py-4 font-semibold">33366699</td>
-        <td className="px-6 py-4 font-semibold">Lima - Breña</td>
+        <td className="px-6 py-4 font-semibold">{paciente.dni}</td>
+        <td className="px-6 py-4 font-semibold">{paciente.celular}</td>
+        <td className="px-6 py-4 font-semibold">{paciente.ubicacion}</td>
         <td scope="row">
           <div className="ps-3 ">
-            <div className="text-base font-semibold">14/Marzo/2024</div>
+            <div className="text-base font-semibold">{paciente.fecha}</div>
             <div className="font-normal text-gray-500">13:00 PM</div>
           </div>
         </td>
-        <td className="px-6 py-4 font-semibold">30 minutos</td>
+        <td className="px-6 py-4 font-semibold">{paciente.tiempoCita}</td>
 
         <td className="px-6 py-4">
           <Link to={"/medical-history"}>
