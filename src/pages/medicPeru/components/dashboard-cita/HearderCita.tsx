@@ -22,10 +22,13 @@ export const HearderCita = ({ setDataPaciente }: HeaderCitaProps) => {
 
   return (
     <>
-      <header className="navbar bg-base-100 mb-4">
+      <header className="navbar bg-base-100 mb-4 rounded-md border-2 border-blue-300">
         <div className="flex-1">
-          <Link className="btn btn-ghost text-lg" to={"/medic-peru"}>
-            <SlArrowLeft />
+          <Link
+            className="btn btn-ghost text-lg flex items-center justify-center "
+            to={"/medic-peru"}
+          >
+            <SlArrowLeft color="#1e3a8a" size={15} />
             Volver a Inicio
           </Link>
         </div>
@@ -42,7 +45,7 @@ export const HearderCita = ({ setDataPaciente }: HeaderCitaProps) => {
               <label className="input rounded-full bg-purple-50 flex items-center gap-2">
                 <Field
                   type="text"
-                  className="grow placeholder:text-indigo-600 placeholder:font-medium "
+                  className="grow placeholder:text-blue-600 placeholder:font-medium "
                   placeholder="Search"
                   name="dni"
                 />
@@ -68,7 +71,8 @@ export const HearderCita = ({ setDataPaciente }: HeaderCitaProps) => {
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost ">
               <div className="rounded-full flex items-center gap-3">
-                <FaFilter /> <span className="text-lg">Filtro</span>
+                <FaFilter color="#1e3a8a" />{" "}
+                <span className="text-lg text-blue-900">Filtro</span>
               </div>
             </div>
             <ul

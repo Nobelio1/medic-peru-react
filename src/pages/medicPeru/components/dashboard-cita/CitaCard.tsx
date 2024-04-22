@@ -23,7 +23,7 @@ export const CitaCard = ({ paciente }: CitaCardProps) => {
       <tr className="bg-white ">
         <td
           scope="row"
-          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+          className="flex items-center px-6 py-4 whitespace-nowrap "
         >
           <img
             className="w-10 h-10 rounded-full"
@@ -52,7 +52,7 @@ export const CitaCard = ({ paciente }: CitaCardProps) => {
               onClick={onPacienteHistory}
               className="btn bg-transparent border-none shadow-none"
             >
-              <SlArrowRight />
+              <SlArrowRight color="#1e3a8a" size={20} />
             </button>
           </Link>
         </td>

@@ -12,10 +12,8 @@ export const DetailMedical = () => {
 
   const dateDetail: HistorialClinica = getCitaDetalleById({ id: detail });
 
-  console.log(dateDetail);
-
   return (
-    <main className="bg-white w-full height-per border-2 rounded-2xl border-gray-300 px-9 py-10 mt-4 overflow-y-auto space-y-8">
+    <main className="bg-white w-full height-per border-2 rounded-2xl border-blue-300 px-9 py-10 mt-4 overflow-y-auto space-y-8">
       <HeaderDetail cita={dateDetail} />
       <BodyDetail detalle={dateDetail.detalleClinico} />
       <RecipeTable recetario={dateDetail.recetario} />

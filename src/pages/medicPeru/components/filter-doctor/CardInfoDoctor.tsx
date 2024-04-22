@@ -17,11 +17,11 @@ export const CardInfoDoctor = ({ doctor }: CardInfoDoctorProps) => {
 
   return (
     <>
-      <div className="border border-black hover:bg-gray-200 border-solid rounded-md px-3 py-2 grid grid-cols-5">
+      <div className="border-2 border-blue-300 hover:bg-blue-100 border-solid rounded-md px-3 py-2 grid grid-cols-5">
         {/* Revisar border R */}
         <div className="col-span-2 flex gap-4 ">
           <div className="avatar">
-            <div className="rounded-full w-36 border-solid border-blue-300 border-8">
+            <div className="rounded-full w-36">
               <img src={UserPhoto} alt="user-prueba" />
             </div>
           </div>

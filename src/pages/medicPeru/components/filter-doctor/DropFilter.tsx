@@ -16,14 +16,15 @@ export const DropFilter = ({ tipo, dataDoctor }: DropFilterProps) => {
 
   return (
     <>
-      <div className="flex flex-col my-5 mx-2 border-solid border-black px-4 py-2 border rounded-md">
-        <label className="font-semibold text-md text-gray-600 mb-2">
+      <div className="flex flex-col my-5 mx-2 px-4 rounded-md">
+        <label className="font-semibold text-md text-blue-700 mb-2">
           Seleccionar {tipo}
         </label>
-        <div className="flex gap-1">
+        <div className="flex gap-1 border border-blue-300 rounded-md py-3 px-2">
+          {/* CAMBIARLE DE COLOR */}
           <img src={MapPoint} className="w-5" />
           <select
-            className="select select-ghost w-full max-w-xs"
+            className="w-full max-w-xs "
             onChange={(e) => onSpecialty(e.target.value)}
           >
             <option value="">Seleciona una opcion</option>

@@ -19,12 +19,12 @@ export const HeroDoctor = ({ dni }: { dni: string }) => {
 
   return (
     <>
-      <div className="bg-white rounded-md w-11/12">
+      <div className="bg-white rounded-md border-2 border-blue-300 w-11/12">
         {/* user y info */}
-        <div className="flex border-b-2 border-gray-200">
+        <div className="flex border-b-2 border-blue-200">
           {/* user */}
           <div className="w-1/3 h-80">
-            <div className="border-r-2 h-full justify-center flex flex-col items-center border-gray-200">
+            <div className="border-r-2 h-full justify-center flex flex-col items-center border-blue-200">
               <div className="avatar">
                 <div className="w-40 border-solid border-4 border-sky-500 rounded-full">
                   <img src={UserPersona} />

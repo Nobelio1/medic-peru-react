@@ -3,7 +3,7 @@ import { MapPoint } from "../../../../assets";
 export const SidebarDate = () => {
   return (
     <>
-      <div className="w-full bg-white rounded-md flex flex-col py-8 px-3 ">
+      <div className="w-full bg-white rounded-md border-2 border-blue-300 flex flex-col py-8 px-3 ">
         <h1 className="font-semibold text-lg mb-3 text-gray-600 text-center">
           Agender Cita
         </h1>

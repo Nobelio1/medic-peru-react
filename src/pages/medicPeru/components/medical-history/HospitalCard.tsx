@@ -8,11 +8,10 @@ interface HospitalCardProps {
 
 export const HospitalCard = ({ visita }: HospitalCardProps) => {
   const { id } = useParams();
-  console.log(id);
 
   return (
     <>
-      <article className="grid grid-cols-5 border-2 rounded-2xl border-gray-300 w-full hover:bg-gray-200">
+      <article className="grid grid-cols-5 border-2 rounded-2xl border-blue-300 w-full hover:bg-blue-100">
         <section className="flex justify-center  ">
           <img src={Logo} width={150} />
         </section>
@@ -25,15 +24,15 @@ export const HospitalCard = ({ visita }: HospitalCardProps) => {
             {visita.nombre}
           </Link>
           <div className="text-gray-500">
-            <span className="text-gray-700 font-semibold">Dia: </span>
+            <span className="text-amber-500 font-semibold">Dia: </span>
             {visita.fecha}
           </div>
           <div className="text-gray-500">
-            <span className="text-gray-700 font-semibold">Hora: </span>
+            <span className="text-violet-500 font-semibold">Hora: </span>
             {visita.hora}
           </div>
           <div className="text-gray-500">
-            <span className="text-gray-700 font-semibold">ID: </span>{" "}
+            <span className="text-emerald-500 font-semibold">ID: </span>{" "}
             {visita.id}
           </div>
         </section>

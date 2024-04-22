@@ -10,7 +10,7 @@ export const RecipeTable = ({ recetario }: RecipeTableProps) => {
       <h2 className="text-2xl font-bold mb-4">Recetario</h2>
       <div className="relative overflow-x-auto">
         <table className="w-full text-lg text-center border-separate border-spacing-y-4">
-          <thead className="bg-gray-200  ">
+          <thead className="bg-blue-300  ">
             <tr>
               <th scope="col" className="py-2 rounded-s-lg">
                 Nombre
@@ -23,7 +23,7 @@ export const RecipeTable = ({ recetario }: RecipeTableProps) => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-gray-100 py-3">
+          <tbody className="bg-blue-100 py-3">
             {recetario.map((receta) => (
               <tr>
                 <td className="py-2 rounded-s-lg">{receta.nombre}</td>

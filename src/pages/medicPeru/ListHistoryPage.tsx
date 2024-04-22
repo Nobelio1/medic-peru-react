@@ -12,7 +12,7 @@ export const ListHistoryPage = () => {
   return (
     <>
       <HeaderHistory setHistorial={setHistorial} />
-      <main className="bg-white w-full height-per2 border-2 rounded-2xl border-gray-300 px-3 py-5 mt-4 overflow-y-auto space-y-2">
+      <main className="bg-white w-full height-per2 border-2 rounded-md border-blue-300 px-3 py-3 mt-4 overflow-y-auto space-y-2">
         {historial.map((consulta) => (
           <HospitalCard key={consulta.id} visita={consulta} />
         ))}

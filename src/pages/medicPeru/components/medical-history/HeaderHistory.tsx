@@ -32,8 +32,8 @@ export const HeaderHistory = ({ setHistorial }: HeaderHistoryProps) => {
           </Link>
         </div>
       </div>
-      <div className="navbar mt-2 bg-base-100  rounded-xl">
-        <div className="flex-1">
+      <header className="navbar mt-2 bg-base-100 rounded-md border-2 border-blue-300">
+        <div className="flex-1 flex items-center">
           <h1 className="text-3xl font-bold ml-4">Historia Clinica</h1>
         </div>
         <div className="flex-none gap-2">
@@ -72,7 +72,7 @@ export const HeaderHistory = ({ setHistorial }: HeaderHistoryProps) => {
             </Form>
           </Formik>
         </div>
-      </div>
+      </header>
     </>
   );
 };

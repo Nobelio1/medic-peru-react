@@ -59,7 +59,15 @@
   background-color: #f5f5f5;
 }
 
-/* PARA QUITARE EL INCREMENTADOR DE LOS TIPO INPUT NUMBER */
+.height-per {
+  height: 55.5rem;
+}
+
+.height-per2 {
+  height: 51rem;
+}
+
+/* CAMBIOS EN LAS HERRAMIENTAS DE LOS NAVEGADORES */
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -69,14 +77,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
-}
-
-.height-per {
-  height: 55.5rem;
-}
-
-.height-per2 {
-  height: 51rem;
 }
 
 ::-webkit-scrollbar {

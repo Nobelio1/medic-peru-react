@@ -10,9 +10,10 @@ export const HeaderDetail = ({ cita }: HeaderDetailProps) => {
     <section className="w-full ">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">
-          Cita Medica <span className="font-bold">#{cita.id}</span>
+          Cita Medica{" "}
+          <span className="font-bold text-blue-800">#{cita.id}</span>
         </h1>
-        <button className="btn bg-teal-500 text-lg text-white">
+        <button className="btn bg-blue-500 text-lg text-white">
           Descargar ficha
           <img src={Download} alt="download-icon" className="w-6 h-6" />
         </button>

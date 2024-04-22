@@ -22,11 +22,11 @@ export const FilterDoctorPage = () => {
   };
 
   return (
-    <div className=" w-full h-screen py-3 overflow-hidden">
-      <div className="border overflow-hidden h-full  bg-white border-solid border-black rounded-md  p-4 ">
+    <div className="w-full h-screen py-6 px-3 overflow-hidden">
+      <div className="overflow-hidden h-full bg-white border-2 border-blue-300 rounded-md p-4 ">
         {/* Parametros  */}
         <nav className="flex-1 ">
-          <Link className="btn btn-ghost text-lg" to={""}>
+          <Link className="btn btn-ghost text-lg" to={"/medic-peru/"}>
             <SlArrowLeft />
             Volver
           </Link>
@@ -75,9 +75,9 @@ export const FilterDoctorPage = () => {
               </Form>
             </Formik>
           </section>
-          <section className="overflow-y-auto pb-16 h-screen">
+          <section className="overflow-y-auto pb-20 h-screen">
             {/* Card */}
-            <div className="mt-4 flex flex-col  gap-4">
+            <div className="mt-4 flex flex-col gap-4">
               {dataDoctor.map((doctor) => (
                 <CardInfoDoctor key={doctor.id} doctor={doctor} />
               ))}
