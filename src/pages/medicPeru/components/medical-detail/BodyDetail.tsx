@@ -1,9 +1,18 @@
-export const BodyDetail = () => {
+interface BodyDetailProps {
+  detalle: string;
+}
+
+export const BodyDetail = ({ detalle }: BodyDetailProps) => {
   return (
     <section>
       <h1 className="text-2xl font-bold">Detalle Clinico</h1>
-      <p className="text-gray-500 text-lg">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem
+      <p className="text-gray-500 text-lg">{detalle}</p>
+    </section>
+  );
+};
+
+/*
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem
         tempore corporis possimus quasi, illum dignissimos distinctio
         necessitatibus, sunt suscipit quibusdam libero eius fugiat vel aut
         incidunt ab reiciendis atque. Itaque laborum molestiae quibusdam id
@@ -15,7 +24,4 @@ export const BodyDetail = () => {
         quis ex facere id sit impedit! Veniam ipsa molestiae, obcaecati animi
         eum maxime iure minima, ducimus libero minus pariatur. Nemo, magni
         aperiam.
-      </p>
-    </section>
-  );
-};
+        */

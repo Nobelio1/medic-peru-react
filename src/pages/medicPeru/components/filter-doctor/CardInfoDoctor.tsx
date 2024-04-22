@@ -12,7 +12,7 @@ export const CardInfoDoctor = ({ doctor }: CardInfoDoctorProps) => {
 
   const handleProfileDoctor = () => {
     localStorage.setItem("doctor_dni", doctor.dni);
-    navigate("/medic-peru/profile-doctor");
+    navigate(`/medic-peru/profile-doctor/${doctor.dni}`);
   };
 
   return (

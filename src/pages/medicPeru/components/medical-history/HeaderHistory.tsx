@@ -61,8 +61,8 @@ export const HeaderHistory = ({ setHistorial }: HeaderHistoryProps) => {
                   fill="none"
                   stroke="rgb(79, 70, 229)"
                   strokeWidth="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="lucide lucide-search"
                 >
                   <circle cx="11" cy="11" r="8" />

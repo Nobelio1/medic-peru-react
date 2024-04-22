@@ -1,4 +1,10 @@
-export const RecipeTable = () => {
+import { Recetario } from "../../../../data/historialClinica";
+
+interface RecipeTableProps {
+  recetario: Recetario[];
+}
+
+export const RecipeTable = ({ recetario }: RecipeTableProps) => {
   return (
     <section>
       <h2 className="text-2xl font-bold mb-4">Recetario</h2>
@@ -18,21 +24,13 @@ export const RecipeTable = () => {
             </tr>
           </thead>
           <tbody className="bg-gray-100 py-3">
-            <tr>
-              <td className="py-2 rounded-s-lg">Paracetamol</td>
-              <td className="py-2">7 días</td>
-              <td className="py-2 rounded-e-lg">2 veces / 8hrs</td>
-            </tr>
-            <tr>
-              <td className="py-2 rounded-s-lg">Paracetamol</td>
-              <td className="py-2">7 días</td>
-              <td className="py-2 rounded-e-lg">2 veces / 8hrs</td>
-            </tr>
-            <tr>
-              <td className="py-2 rounded-s-lg">Paracetamol</td>
-              <td className="py-2">7 días</td>
-              <td className="py-2 rounded-e-lg">2 veces / 8hrs</td>
-            </tr>
+            {recetario.map((receta) => (
+              <tr>
+                <td className="py-2 rounded-s-lg">{receta.nombre}</td>
+                <td className="py-2">{receta.tiempoCon}</td>
+                <td className="py-2 rounded-e-lg">{receta.CantPorDia}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

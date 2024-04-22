@@ -3,12 +3,14 @@ import SidebarItems from "../medicPeru/components/sidebar/SidebarItems";
 import Sidebar from "../medicPeru/components/sidebar/Sidebar";
 
 const WithSidebar = () => {
+  //PREDETERMINADO EN DOCTOR
+
   return (
     <div className="flex w-full h-screen">
-      <div className="bg-green-100">
-        <Sidebar children={<SidebarItems />} />
+      <div>
+        <Sidebar children={<SidebarItems isDoctor={true} />} />
       </div>
-      <div className="container mx-auto bg-orange-100 ">
+      <div className="container mx-auto ">
         <Outlet />
       </div>
     </div>

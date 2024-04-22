@@ -4,8 +4,15 @@ import { FaUserFriends } from "react-icons/fa";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { TbBuildingHospital } from "react-icons/tb";
 import { BsJournalMedical } from "react-icons/bs";
+import { getPacienteByDni } from "../../../../helpers/getPacienteByDni";
 
-export const SidebarPatient = () => {
+interface SidebarPatientProps {
+  dni?: string;
+}
+
+export const SidebarPatient = ({ dni }: SidebarPatientProps) => {
+  const dataPaciente = getPacienteByDni({ dni: dni! });
+
   return (
     <>
       <aside className="p-5 w-full h-full flex flex-col items-center gap-3 bg-white border-2 rounded-lg border-gray-300">
@@ -16,7 +23,9 @@ export const SidebarPatient = () => {
               <img src={UserPersona} alt="user-photo" className="" />
             </div>
           </div>
-          <h2 className="text-2xl mt-4 text-gray-500">Carlos Barrera</h2>
+          <h2 className="text-2xl mt-4 text-gray-500">
+            {dataPaciente[0].nombre || "Alexander"}
+          </h2>
         </div>
         {/* INFO */}
         <div className="w-full px-2 mb-36">
@@ -30,7 +39,9 @@ export const SidebarPatient = () => {
                 <span className="text-lg text-gray-600 font-bold">
                   Reside en
                 </span>
-                <p className="text-gray-400 text-md mb-1">Comas</p>
+                <p className="text-gray-400 text-md mb-1">
+                  {dataPaciente[0].ubicacion || "Comas"}
+                </p>
               </div>
             </div>
             <div className="flex flex-row gap-3 item-center mb-2">

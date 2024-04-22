@@ -1,19 +1,23 @@
 import {
-  BarChart3,
-  Boxes,
+  BookUser,
+  BotMessageSquare,
+  BriefcaseMedical,
   LayoutDashboard,
-  LifeBuoy,
-  LogOut,
-  Package,
+  MessageSquareMore,
   Settings,
-  UserCircle,
 } from "lucide-react";
 import { SidebarItem } from "./Sidebar";
 import { NavLink, useLocation } from "react-router-dom";
 
 //!-------------------------------------------------------------------------------------------------------
 
-export default function SidebarItems() {
+interface SidebarItemProps {
+  isDoctor: boolean;
+}
+
+// ItemsPaciente
+
+export default function SidebarItems({ isDoctor }: SidebarItemProps) {
   const location = useLocation();
 
   //!-------------------------------------------------------------------------------------------------------
@@ -25,58 +29,44 @@ export default function SidebarItems() {
         <SidebarItem
           icon={<LayoutDashboard size={30} />}
           text="Dashboard"
-          active={location.pathname === "/dashboard"}
+          active={location.pathname === "/medic-peru"}
         />
       </NavLink>
-      <NavLink to={"/medic-peru/filter-pacientes"}>
-        <SidebarItem
-          icon={<BarChart3 size={30} />}
-          text="Pacientes"
-          active={location.pathname === "/medic-peru/filter-pacientes"}
-        />
-      </NavLink>
-      <NavLink to={"/medic-peru/filter-doctor"}>
-        <SidebarItem
-          icon={<BarChart3 size={30} />}
-          text="Doctores"
-          active={location.pathname === "/filter-pacientes"}
-        />
-      </NavLink>
+      {isDoctor && (
+        <NavLink to={"/medic-peru/filter-pacientes"}>
+          <SidebarItem
+            icon={<BookUser size={30} />}
+            text="Pacientes"
+            active={location.pathname === "/medic-peru/filter-pacientes"}
+          />
+        </NavLink>
+      )}
+      {!isDoctor && (
+        <NavLink to={"/medic-peru/filter-doctor"}>
+          <SidebarItem
+            icon={<BriefcaseMedical size={30} />}
+            text="Doctores"
+            active={location.pathname === "/medic-peru/filter-doctor"}
+          />
+        </NavLink>
+      )}
       <NavLink to={"/medic-peru/chat"}>
         <SidebarItem
-          icon={<UserCircle size={30} />}
+          icon={<MessageSquareMore size={30} />}
           text="Chats"
-          active={location.pathname === "/chat"}
+          active={location.pathname === "/medic-peru/chat"}
         />
       </NavLink>
-      <NavLink to={"/medic-peru/profile-doctor"}>
-        <SidebarItem
-          icon={<UserCircle size={30} />}
-          text="Perfil Doctor"
-          active={location.pathname === "/chat"}
-        />
-      </NavLink>
+
       <NavLink to={"/medic-peru/chat-ia"}>
         <SidebarItem
-          icon={<Boxes size={30} />}
+          icon={<BotMessageSquare size={30} />}
           text="ChatIA"
-          active={location.pathname === "/chat-ia"}
+          active={location.pathname === "/medic-peru/chat-ia"}
         />
       </NavLink>
-      <NavLink to={"/medic-peru/medical-history"}>
-        <SidebarItem
-          icon={<Package size={30} />}
-          text="Historia Medica"
-          active={location.pathname === "/medical-history"}
-        />
-      </NavLink>
-      {/* <SidebarItem icon={<Receipt size={30} />} text="Pagos" /> */}
       <hr className="my-3 border border-gray-400 " />
       <SidebarItem icon={<Settings size={30} />} text="Configuracion" />
-      <SidebarItem icon={<LifeBuoy size={30} />} text="Ayuda" />
-      <NavLink to={"/"}>
-        <SidebarItem icon={<LogOut size={30} />} text="Cerrar Sesión" />
-      </NavLink>
     </main>
   );
 }

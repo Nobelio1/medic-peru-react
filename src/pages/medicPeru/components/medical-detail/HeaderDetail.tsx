@@ -1,11 +1,16 @@
 import { Download } from "../../../../assets";
+import { HistorialClinica } from "../../../../data/historialClinica";
 
-export const HeaderDetail = () => {
+interface HeaderDetailProps {
+  cita: HistorialClinica;
+}
+
+export const HeaderDetail = ({ cita }: HeaderDetailProps) => {
   return (
     <section className="w-full ">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">
-          Cita Medica <span className="font-bold">#4333H</span>
+          Cita Medica <span className="font-bold">#{cita.id}</span>
         </h1>
         <button className="btn bg-teal-500 text-lg text-white">
           Descargar ficha
@@ -14,23 +19,21 @@ export const HeaderDetail = () => {
       </div>
       <div className="space-y-2">
         <h3 className="text-lg">
-          <span className="font-bold ">Centro Clinico:</span> Hospital Cayetano
-          Heredia
+          <span className="font-bold ">Centro Clinico:</span> {cita.nombre}
         </h3>
         <div className="flex gap-4">
           <h3 className="text-lg">
-            <span className="font-bold ">Fecha:</span> 24/02/2024{" "}
+            <span className="font-bold ">Fecha:</span> {cita.fecha}{" "}
           </h3>
           <h3 className="text-lg">
-            <span className="font-bold ">Hora:</span> 16:00 PM
+            <span className="font-bold ">Hora:</span> {cita.hora}
           </h3>
         </div>
         <h3 className="text-lg">
-          <span className="font-bold ">Sala:</span> H
+          <span className="font-bold ">Sala:</span> {cita.sala}
         </h3>
         <h3 className="text-lg">
-          <span className="font-bold ">Motivo:</span> Afeccion del odio
-          izquierdo{" "}
+          <span className="font-bold ">Motivo:</span> {cita.motivo}
         </h3>
       </div>
     </section>

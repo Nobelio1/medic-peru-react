@@ -15,9 +15,7 @@ export const SidebarDate = () => {
           <div className="flex gap-1">
             <img src={MapPoint} className="w-5" />
             <select className="select select-ghost w-full max-w-xs">
-              <option disabled selected>
-                Seleccione la direccion
-              </option>
+              <option value="">Seleccione la direccion</option>
               <option>Calle 2</option>
               <option>Calle 3</option>
               <option>Calle 4</option>
