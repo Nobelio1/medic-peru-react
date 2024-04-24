@@ -1,20 +1,31 @@
 import { IoIosStar } from "react-icons/io";
 import { UserPersona } from "../../../../assets";
 import { TestimonialItem } from "./TestimonialItem";
-import { DataDoctor } from "../../../../interfaces/medicPeru.interface";
+import {
+  DataDoctor,
+  idOpinions,
+} from "../../../../interfaces/medicPeru.interface";
 import { useEffect, useState } from "react";
 import { dataPrueba } from "../../../../data";
+import { getOpinionsByDni } from "../../../../helpers/getOpinionsByDni";
 
 export const HeroDoctor = ({ dni }: { dni: string }) => {
   const [doctor, setDoctor] = useState<DataDoctor>();
+  const [opinion, setOpinion] = useState<idOpinions>();
 
   useEffect(() => {
     getDoctor();
+    getOpionions();
   }, []);
 
   const getDoctor = () => {
     const dataDoctor = dataPrueba.find((doctor) => doctor.dni === dni);
     setDoctor(dataDoctor);
+  };
+
+  const getOpionions = () => {
+    const opiniones = getOpinionsByDni({ dni: dni });
+    setOpinion(opiniones);
   };
 
   return (
@@ -80,7 +91,7 @@ export const HeroDoctor = ({ dni }: { dni: string }) => {
           </div>
         </div>
         {/* Opiniones */}
-        <div className="h-80">
+        <div className="h-80 ">
           <div className="flex justify-between p-3 mt-3 mx-4 items-center">
             <span className="text-lg font-medium text-gray-600">Opiniones</span>
             <button className="text-sm transition-all ease-in-out delay-150 hover:underline duration-300">
@@ -88,11 +99,10 @@ export const HeroDoctor = ({ dni }: { dni: string }) => {
             </button>
           </div>
           <div className="flex flex-col items-center justify-center w-full gap-4 mt-3  mb-8 md:flex-row md:mb-0 flex-between">
-            {/* FALTA DATA PARA SER DINAMICO */}
-            <TestimonialItem />
-            <TestimonialItem />
-            <TestimonialItem />
-          </div>
+            {opinion?.opiniones.map((opinion) => (
+              <TestimonialItem key={opinion.author} opinion={opinion} />
+            ))}
+          </div>{" "}
         </div>
       </div>
     </>

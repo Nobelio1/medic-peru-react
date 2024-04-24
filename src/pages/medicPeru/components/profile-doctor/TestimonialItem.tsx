@@ -1,15 +1,16 @@
 import { UserPhoto } from "../../../../assets";
+import { Opinions } from "../../../../interfaces/medicPeru.interface";
 
-export const TestimonialItem = () => {
+interface TestimonialItemProps {
+  opinion: Opinions;
+}
+
+export const TestimonialItem = ({ opinion }: TestimonialItemProps) => {
   return (
     <>
       <div>
         <div className="bg-gray-100 w-72 shadow-lg mx-auto rounded-xl p-4">
-          <p className="text-gray-600">
-            To get social media testimonials like these, keep your customers
-            engaged with your social media accounts by posting regularly
-            yourself
-          </p>
+          <p className="text-gray-600">{opinion.comment}</p>
           <div className="flex items-center mt-4">
             <a href="#" className="relative block">
               <img
@@ -20,10 +21,10 @@ export const TestimonialItem = () => {
             </a>
             <div className="flex flex-col justify-between ml-2">
               <span className="text-sm font-semibold text-gray-600">
-                Jean Miguel
+                {opinion.author}
               </span>
               <span className="flex items-center text-xs dark:text-gray-400">
-                Hace 3 días
+                {opinion.lastDay}
                 <img src="/icons/rocket.svg" className="w-4 h-4 ml-2" />
               </span>
             </div>

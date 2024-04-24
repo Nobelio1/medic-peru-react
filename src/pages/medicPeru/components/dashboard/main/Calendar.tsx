@@ -13,6 +13,8 @@ export const Calendar = () => {
   const [today, setToday] = useState(currentDate);
   const [selectDate, setSelectDate] = useState(currentDate);
 
+  // console.log(selectDate.format("DD/MM/YYYY"));
+
   return (
     <div className="mt-8 gap-10 justify-center items-center bg-white p-10 rounded-xl">
       <div>

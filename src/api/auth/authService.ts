@@ -100,6 +100,8 @@ export const loginUser = async ({ user }: LoginUserProps) => {
       return response.message;
     }
 
+    localStorage.setItem("token", response.data.accessToken);
+
     return response.code;
   } catch (error) {
     console.log(error);

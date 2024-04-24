@@ -25,3 +25,20 @@ export interface DataDoctor {
   fecNac: string;
   apellidos: string;
 }
+
+export interface Opinions {
+  author: string;
+  lastDay: string;
+  comment: string;
+}
+
+export interface idOpinions {
+  id: string;
+  opiniones: Opinions[];
+}
+
+export interface Ubigeo {
+  idUbigeo: string;
+  nombre: string;
+  idPadre: string;
+}

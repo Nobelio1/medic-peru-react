@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { DropFilter } from "./components/filter-doctor/DropFilter";
 import { CardInfoDoctor } from "./components/filter-doctor/CardInfoDoctor";
 import { Field, Form, Formik } from "formik";
-import { DataDoctor } from "../../interfaces/medicPeru.interface";
+import { DataDoctor, Ubigeo } from "../../interfaces/medicPeru.interface";
 import { dataPrueba } from "../../data";
 import { getDoctorByDni } from "../../helpers/getDoctorByDni";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getDepartamentos } from "../../api/medicPeru/medicPeruService";
+import { DropFilterGeneric } from "./components/filter-doctor/DropFilterGeneric";
 
 interface DniDoctor {
   dni: string;
@@ -14,11 +16,24 @@ interface DniDoctor {
 
 export const FilterDoctorPage = () => {
   const [dataDoctor, setDataDoctor] = useState<DataDoctor[]>(dataPrueba);
-  //todo: crer funcion para llamar al servicio
+  const [departamentos, setDepartamentos] = useState<Ubigeo[]>([]);
+  const [provincias, setProvincias] = useState<Ubigeo[]>([]);
+  const [distritos, setDistritos] = useState<Ubigeo[]>([]);
+
+  useEffect(() => {
+    getDtpo();
+  }, []);
+
+  console.log(distritos);
 
   const onSearchSubmit = async ({ dni }: { dni: string }) => {
     let filterDoctor = getDoctorByDni({ dni: dni });
     setDataDoctor(filterDoctor);
+  };
+
+  const getDtpo = async () => {
+    const dpto = await getDepartamentos();
+    setDepartamentos(dpto);
   };
 
   return (
@@ -33,10 +48,23 @@ export const FilterDoctorPage = () => {
         </nav>
 
         <main>
-          <section className="grid grid-cols-4 gap-4 items-center">
-            <DropFilter dataDoctor={setDataDoctor} tipo={"Especialidad"} />
-            <DropFilter dataDoctor={setDataDoctor} tipo={"Departamento"} />
-            <DropFilter dataDoctor={setDataDoctor} tipo={"Distrito"} />
+          <section className="grid grid-cols-5  items-center">
+            <DropFilterGeneric
+              dataDoctor={setDataDoctor}
+              tipo={"Especialidad"}
+            />
+            <DropFilter
+              ubigeo={departamentos}
+              dataProvincia={setProvincias}
+              dataDistritos={setDistritos}
+              tipo={"Departamento"}
+            />
+            <DropFilter
+              ubigeo={provincias}
+              dataDistritos={setDistritos}
+              tipo={"Provincia"}
+            />
+            <DropFilter ubigeo={distritos} tipo={"Distrito"} />
 
             <Formik
               initialValues={{
