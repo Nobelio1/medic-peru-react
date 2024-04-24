@@ -53,6 +53,7 @@ export const FilterDoctorPage = () => {
               dataDoctor={setDataDoctor}
               tipo={"Especialidad"}
             />
+
             <DropFilter
               ubigeo={departamentos}
               dataProvincia={setProvincias}

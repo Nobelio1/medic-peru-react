@@ -1,52 +1,50 @@
 import { Field, useField } from "formik";
 import { MapPoint } from "../../../assets";
-import { useEffect, useMemo } from "react";
-import { departamentos } from "../../../data/departamentos";
-import { provincias } from "../../../data/provincias";
-import { distritos } from "../../../data/distritos";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { Ubigeo } from "../../../interfaces/medicPeru.interface";
+import {
+  getProvincias,
+  getDistritos,
+} from "../../../api/medicPeru/medicPeruService";
 
 interface selectUbigeoProp {
+  tipo: string;
+  ubigeo?: Ubigeo[];
   name: string;
-  setChange: React.Dispatch<React.SetStateAction<string>>;
-  ubigeo?: string;
-  value: string;
+  dataProvincia?: Dispatch<SetStateAction<Ubigeo[]>>;
+  dataDistritos?: Dispatch<SetStateAction<Ubigeo[]>>;
 }
 
+const resetArray: Ubigeo[] = [];
+
 export const SelectUbigeo = ({
-  name,
-  setChange,
-  value,
+  tipo,
   ubigeo,
+  name,
+  dataProvincia,
+  dataDistritos,
 }: selectUbigeoProp) => {
   const [meta] = useField(name);
 
-  const data = useMemo(() => {
-    let newData = departamentos;
-
-    if (ubigeo !== "") {
-      if (value === "2") {
-        newData = provincias[ubigeo!];
-      }
-      if (value === "3") {
-        newData = distritos[ubigeo!];
-      }
+  const onValueUbigeo = async (id: string, ubigeo: Ubigeo[]) => {
+    if (tipo == "Departamento") {
+      const prov = await getProvincias({ idDep: id });
+      dataProvincia!(prov);
+      dataDistritos!(resetArray);
     }
-
-    return newData;
-  }, [ubigeo, value]);
-
-  const isUbigeoValid = () => {
-    // if (meta.value === "") {
-    //   setChange("");
-    //   ubigeo = "";
-    //   return;
-    // }
-    setChange(meta.value);
+    if (tipo == "Provincia") {
+      const prov = ubigeo.filter((prov) => prov.idUbigeo === id);
+      const dis = await getDistritos({
+        idDep: prov[0].idPadre,
+        idPro: prov[0].idUbigeo,
+      });
+      dataDistritos!(dis);
+    }
   };
 
   useEffect(() => {
-    isUbigeoValid();
-  }, [meta]);
+    onValueUbigeo(meta.value, ubigeo!);
+  }, [meta.value]);
 
   return (
     <div className="flex flex-col my-2">
@@ -56,14 +54,18 @@ export const SelectUbigeo = ({
 
       <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
         <img src={MapPoint} alt="Logo" className="w-5 mr-2" />
-        <Field as="select" name={name} className="flex-1 focus:outline-none">
-          <option value="">--Selecione--</option>
-          {data.map((item) => (
-            <option key={item.id_ubigeo} value={item.id_ubigeo}>
-              {item.nombre_ubigeo}
-            </option>
-          ))}
-        </Field>
+        {ubigeo ? (
+          <Field as="select" name={name} className="flex-1 focus:outline-none">
+            <option value="">--Selecione--</option>
+            {ubigeo!.map((item) => (
+              <option key={item.idUbigeo} value={item.idUbigeo}>
+                {item.nombre}
+              </option>
+            ))}
+          </Field>
+        ) : (
+          <p>cargando</p>
+        )}
       </label>
     </div>
   );

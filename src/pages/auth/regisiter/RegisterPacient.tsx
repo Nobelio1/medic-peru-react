@@ -7,17 +7,17 @@ import {
   Phone,
   PointDir,
   Gender,
-  Calendar,
 } from "../../../assets/index";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { RegisterUser } from "../../../interfaces/auth.inteface";
 import { authRegisterValidator } from "../../../utils/auth/authValidator";
-import { MyDatePicker } from "../../../utils/DatePicker";
 import { generos } from "../../../data";
 import { registerUser } from "../../../api/auth/authService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SelectUbigeo } from "../components/SelectUbigeo";
+import { getDepartamentos } from "../../../api/medicPeru/medicPeruService";
+import { Ubigeo } from "../../../interfaces/medicPeru.interface";
 
 //!----------------------------------------------------------------------------
 
@@ -35,7 +35,8 @@ const initialValues: RegisterUser = {
   distrito: "",
   sexo: "Mujer",
   edad: "",
-  fecNac: new Date().toLocaleDateString(),
+  // fecNac: new Date().toLocaleDateString(),
+  fecNac: "01/01/1999",
 };
 
 //!----------------------------------------------------------------------------
@@ -46,9 +47,10 @@ export const RegisterPacient = () => {
   const [isValidad, setIsValidad] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [departamento, setDepartamento] = useState("");
-  const [provincias, setProvincias] = useState("");
-  const [distritos, setDistritos] = useState("");
+  const [departamentos, setDepartamentos] = useState<Ubigeo[]>([]);
+  const [provincias, setProvincias] = useState<Ubigeo[]>([]);
+  const [distritos, setDistritos] = useState<Ubigeo[]>([]);
+
   //*-------------------------------------------------
 
   const onRegisterUser = async (user: RegisterUser) => {
@@ -62,6 +64,15 @@ export const RegisterPacient = () => {
     }
     navigate("/auth/register-code");
   };
+
+  const getDtpo = async () => {
+    const dpto = await getDepartamentos();
+    setDepartamentos(dpto);
+  };
+
+  useEffect(() => {
+    getDtpo();
+  }, []);
 
   //!----------------------------------------------------------------------------
 
@@ -77,6 +88,7 @@ export const RegisterPacient = () => {
             return errores;
           }}
           onSubmit={(onFormValues: RegisterUser, { resetForm }) => {
+            resetForm();
             onRegisterUser(onFormValues);
             console.log(onFormValues);
           }}
@@ -241,28 +253,25 @@ export const RegisterPacient = () => {
                   </div>
 
                   <SelectUbigeo
+                    ubigeo={departamentos}
+                    dataProvincia={setProvincias}
+                    dataDistritos={setDistritos}
+                    tipo={"Departamento"}
                     name="departamento"
-                    setChange={setDepartamento}
-                    value="1"
                   />
 
-                  {departamento && (
-                    <SelectUbigeo
-                      name="provincia"
-                      setChange={setProvincias}
-                      value="2"
-                      ubigeo={departamento}
-                    />
-                  )}
+                  <SelectUbigeo
+                    ubigeo={provincias}
+                    dataDistritos={setDistritos}
+                    tipo={"Provincia"}
+                    name="provincia"
+                  />
 
-                  {provincias && (
-                    <SelectUbigeo
-                      name="distrito"
-                      setChange={setDistritos}
-                      value="3"
-                      ubigeo={provincias}
-                    />
-                  )}
+                  <SelectUbigeo
+                    ubigeo={distritos}
+                    tipo={"Distrito"}
+                    name="distrito"
+                  />
 
                   <div className="flex flex-col my-2">
                     <span className="font-medium">Direccion: </span>
@@ -313,14 +322,14 @@ export const RegisterPacient = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col my-2">
+                  {/* <div className="flex flex-col my-2">
                     <span className="font-medium">Fecha de Nacimiento: </span>
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
                       <img src={Calendar} alt="Logo" className="w-5 mr-2" />
 
                       <MyDatePicker name="fecNac" />
                     </label>
-                  </div>
+                  </div> */}
 
                   <div className="flex flex-col my-2">
                     <span className="font-medium">Edad: </span>

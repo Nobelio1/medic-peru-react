@@ -61,7 +61,6 @@ export const DropFilter = ({
           Seleccionar {tipo}
         </label>
         <div className="flex gap-1 border border-blue-300 rounded-md py-3 px-2">
-          {/* CAMBIARLE DE COLOR */}
           <img src={MapPoint} className="w-5" />
           {ubigeo ? (
             <select
