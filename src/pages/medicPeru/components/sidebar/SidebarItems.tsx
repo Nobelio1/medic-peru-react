@@ -2,6 +2,7 @@ import {
   BookUser,
   BotMessageSquare,
   BriefcaseMedical,
+  ClipboardPlus,
   LayoutDashboard,
   MessageSquareMore,
   Settings,
@@ -42,13 +43,22 @@ export default function SidebarItems({ isDoctor }: SidebarItemProps) {
         </NavLink>
       )}
       {!isDoctor && (
-        <NavLink to={"/medic-peru/filter-doctor"}>
-          <SidebarItem
-            icon={<BriefcaseMedical size={30} />}
-            text="Doctores"
-            active={location.pathname === "/medic-peru/filter-doctor"}
-          />
-        </NavLink>
+        <div>
+          <NavLink to={"/medic-peru/filter-doctor"}>
+            <SidebarItem
+              icon={<BriefcaseMedical size={30} />}
+              text="Doctores"
+              active={location.pathname === "/medic-peru/filter-doctor"}
+            />
+          </NavLink>
+          <NavLink to={"/medic-peru/cita-medica"}>
+            <SidebarItem
+              icon={<ClipboardPlus size={30} />}
+              text="Citas"
+              active={location.pathname === "/medic-peru/cita-medica"}
+            />
+          </NavLink>
+        </div>
       )}
       <NavLink to={"/medic-peru/chat"}>
         <SidebarItem

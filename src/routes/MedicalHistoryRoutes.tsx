@@ -9,7 +9,10 @@ export const MedicalHistoryRoutes = () => {
       <Routes>
         <Route element={<MedicalHistoryPage />}>
           <Route path="/" element={<ListHistoryPage />} />
-          <Route path="/detail/:detail" element={<HistoryDetailPage />} />
+          <Route
+            path="/detail/:detail"
+            element={<HistoryDetailPage isDoctor={true} />}
+          />
 
           <Route path="/*" element={<Navigate to="/" />} />
         </Route>

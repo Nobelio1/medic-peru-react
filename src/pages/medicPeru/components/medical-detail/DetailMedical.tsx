@@ -5,12 +5,28 @@ import { RecipeTable } from "./RecipeTable";
 import { getCitaDetalleById } from "../../../../helpers/getCitaById";
 import { HistorialClinica } from "../../../../data/historialClinica";
 
-export const DetailMedical = () => {
-  const { detail } = useParams();
+interface DetailMedicalProps {
+  isDoctor: boolean;
+}
 
-  if (!detail) return; //todo: Colocar caso de error
+export const DetailMedical = ({ isDoctor }: DetailMedicalProps) => {
+  let idCita: string = "";
 
-  const dateDetail: HistorialClinica = getCitaDetalleById({ id: detail });
+  if (isDoctor) {
+    const { detail } = useParams();
+    if (!detail) return; //todo: Colocar caso de error
+
+    idCita = detail;
+  }
+
+  if (!isDoctor) {
+    const { id } = useParams();
+    if (!id) return; //todo: Colocar caso de error
+
+    idCita = id;
+  }
+
+  const dateDetail: HistorialClinica = getCitaDetalleById({ id: idCita });
 
   return (
     <main className="bg-white w-full height-per border-2 rounded-2xl border-blue-300 px-9 py-10 mt-4 overflow-y-auto space-y-8">

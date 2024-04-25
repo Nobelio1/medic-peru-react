@@ -6,6 +6,8 @@ import { FilterDoctorPage } from "../pages/medicPeru/FilterDoctorPage";
 import { FilterPacientePage } from "../pages/medicPeru/FilterPacientePage";
 import { EditProfilePage } from "../pages/medicPeru/EditProfilePage";
 import { MedicalHistoryRoutes } from "./MedicalHistoryRoutes";
+import { CitasPages } from "../pages/medicPeru/CitasPages";
+import { CitaDetallePage } from "../pages/medicPeru/CitaDetallePage";
 
 export const MedicPeruRoutes = () => {
   return (
@@ -22,6 +24,8 @@ export const MedicPeruRoutes = () => {
           />
           <Route path="/profile-doctor/:id" element={<ProfileDoctorPage />} />
           <Route path="/filter-doctor" element={<FilterDoctorPage />} />
+          <Route path="/cita-medica" element={<CitasPages />} />
+          <Route path="/cita-detalle/:id" element={<CitaDetallePage />} />
           <Route path="/edit-paciente" element={<EditProfilePage />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Route>
@@ -29,5 +33,3 @@ export const MedicPeruRoutes = () => {
     </>
   );
 };
-
-// medical-history/:id/*
