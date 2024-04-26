@@ -88,14 +88,15 @@ export const Calendar = () => {
           )}
         </div>
       </div>
-      <div className="mt-5">
+
+      {/* <div className="mt-5">
         <h1 className=" font-semibold">
           Citas para {selectDate.format("dddd, D [de] MMMM [de] YYYY")}
         </h1>
         <p className="text-gray-400 mt-3">
           No tiene citas establecidas en esta fecha
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };
