@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import { DropFilter } from "./components/filter-doctor/DropFilter";
 import { CardInfoDoctor } from "./components/filter-doctor/CardInfoDoctor";
 import { Field, Form, Formik } from "formik";
-import { DataDoctor, Ubigeo } from "../../interfaces/medicPeru.interface";
+import {
+  DataDoctor,
+  Especialidades,
+  Ubigeo,
+} from "../../interfaces/medicPeru.interface";
 import { dataPrueba } from "../../data";
 import { getDoctorByDni } from "../../helpers/getDoctorByDni";
 import { useEffect, useState } from "react";
-import { getDepartamentos } from "../../api/medicPeru/medicPeruService";
+import {
+  getDepartamentos,
+  getListarEspecialidad,
+} from "../../api/medicPeru/medicPeruService";
 import { DropFilterGeneric } from "./components/filter-doctor/DropFilterGeneric";
 
 interface DniDoctor {
@@ -19,9 +26,11 @@ export const FilterDoctorPage = () => {
   const [departamentos, setDepartamentos] = useState<Ubigeo[]>([]);
   const [provincias, setProvincias] = useState<Ubigeo[]>([]);
   const [distritos, setDistritos] = useState<Ubigeo[]>([]);
+  const [especialidad, setEspecialidad] = useState<Especialidades[]>([]);
 
   useEffect(() => {
     getDtpo();
+    getEspecialidades();
   }, []);
 
   console.log(distritos);
@@ -34,6 +43,11 @@ export const FilterDoctorPage = () => {
   const getDtpo = async () => {
     const dpto = await getDepartamentos();
     setDepartamentos(dpto);
+  };
+
+  const getEspecialidades = async () => {
+    const esp = await getListarEspecialidad();
+    setEspecialidad(esp);
   };
 
   return (
@@ -50,6 +64,7 @@ export const FilterDoctorPage = () => {
         <main>
           <section className="grid grid-cols-5  items-center">
             <DropFilterGeneric
+              especialidades={especialidad}
               dataDoctor={setDataDoctor}
               tipo={"Especialidad"}
             />
@@ -107,9 +122,15 @@ export const FilterDoctorPage = () => {
           <section className="overflow-y-auto pb-20 h-screen">
             {/* Card */}
             <div className="mt-4 flex flex-col gap-4">
-              {dataDoctor.map((doctor) => (
-                <CardInfoDoctor key={doctor.id} doctor={doctor} />
-              ))}
+              {dataDoctor.length === 0 ? (
+                <div className="w-full text-center mt-20">
+                  <h1 className="text-2xl font-bold">NO EXISTE REGISTRO :(</h1>
+                </div>
+              ) : (
+                dataDoctor.map((doctor) => (
+                  <CardInfoDoctor key={doctor.id} doctor={doctor} />
+                ))
+              )}
             </div>
           </section>
         </main>

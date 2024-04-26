@@ -6,7 +6,7 @@ const WithSidebar = () => {
   return (
     <div className="flex w-full h-screen bg-sky-100">
       <div>
-        <Sidebar children={<SidebarItems isDoctor={false} />} />
+        <Sidebar children={<SidebarItems isDoctor={true} />} />
       </div>
       <div className="container mx-auto">
         <Outlet />

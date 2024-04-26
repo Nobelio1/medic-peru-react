@@ -1,16 +1,20 @@
 import { MapPoint } from "../../../../assets";
-import { especialidad } from "../../../../data/especialidades";
 import { getDoctorBySpec } from "../../../../helpers/getDoctorBySpec";
-import { DataDoctor } from "../../../../interfaces/medicPeru.interface";
+import {
+  DataDoctor,
+  Especialidades,
+} from "../../../../interfaces/medicPeru.interface";
 
 interface DropFilterGenericProps {
   tipo: string;
   dataDoctor: React.Dispatch<React.SetStateAction<DataDoctor[]>>;
+  especialidades: Especialidades[];
 }
 
 export const DropFilterGeneric = ({
   tipo,
   dataDoctor,
+  especialidades,
 }: DropFilterGenericProps) => {
   const onSpecialty = (specialty: string) => {
     const filterSpecialty = getDoctorBySpec({ spec: specialty });
@@ -31,9 +35,9 @@ export const DropFilterGeneric = ({
             onChange={(e) => onSpecialty(e.target.value)}
           >
             <option value="">Seleciona una opcion</option>
-            {especialidad.map((item) => (
-              <option key={item.id} value={item.name}>
-                {item.name}
+            {especialidades.map((item) => (
+              <option key={item.codigo} value={item.nombre}>
+                {item.nombre}
               </option>
             ))}
           </select>

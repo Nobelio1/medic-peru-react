@@ -1,11 +1,14 @@
-import { InfoDoctor, Ubigeo } from "../../interfaces/medicPeru.interface";
+import {
+  Especialidades,
+  InfoDoctor,
+  Ubigeo,
+} from "../../interfaces/medicPeru.interface";
 import { environment } from "../environment";
 
 const token = localStorage.getItem("token");
 
 export const getDoctor = async ({ dni }: { dni: string }) => {
   try {
-    console.log(dni);
     const request = await fetch(
       `${environment.API_MASTER}/doctor/buscarPorDni/${dni}`,
       {
@@ -88,6 +91,26 @@ export const getDistritos = async ({
     );
 
     const response: Ubigeo[] = await request.json();
+
+    return response;
+  } catch (error) {
+    throw new Error("EXPLOSION");
+  }
+};
+
+export const getListarEspecialidad = async () => {
+  try {
+    const request = await fetch(
+      `${environment.API_MASTER}/especialidad/listar`,
+      {
+        method: "GET",
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+      }
+    );
+
+    const response: Especialidades[] = await request.json();
 
     return response;
   } catch (error) {

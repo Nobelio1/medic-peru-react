@@ -42,3 +42,8 @@ export interface Ubigeo {
   nombre: string;
   idPadre: string;
 }
+
+export interface Especialidades {
+  codigo: string;
+  nombre: string;
+}
