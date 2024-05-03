@@ -11,19 +11,20 @@
 .montserrat-regular {
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 400;
-  font-style: normal;
 }
 
 .montserrat-medium {
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 500;
-  font-style: normal;
 }
 
 .montserrat-bold {
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 700;
-  font-style: normal;
+}
+
+.roboto-thin {
+  font-family: "Montserrat", sans-serif;
 }
 
 .background-landing {
@@ -59,12 +60,31 @@
   background-color: #f5f5f5;
 }
 
+.height-per3 {
+  height: 50rem;
+}
+
 .height-per {
   height: 55.5rem;
 }
 
+.height-sm {
+  height: 43rem;
+}
+
 .height-per2 {
   height: 51rem;
+}
+
+.imagen-operacion {
+  width: 36rem;
+}
+
+.barra-sep {
+  width: 80px;
+  height: 2px;
+  background-color: #000;
+  margin-bottom: 23px;
 }
 
 /* CAMBIOS EN LAS HERRAMIENTAS DE LOS NAVEGADORES */

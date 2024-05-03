@@ -4,7 +4,7 @@ import Sidebar from "../medicPeru/components/sidebar/Sidebar";
 
 const WithSidebar = () => {
   return (
-    <div className="flex w-full h-screen bg-sky-100">
+    <div className="flex w-full h-screen roboto-thin bg-sky-100">
       <div>
         <Sidebar children={<SidebarItems isDoctor={true} />} />
       </div>

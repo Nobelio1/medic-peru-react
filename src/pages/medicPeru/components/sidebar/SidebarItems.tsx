@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   MessageSquareMore,
   Settings,
+  Stethoscope,
 } from "lucide-react";
 import { SidebarItem } from "./Sidebar";
 import { NavLink, useLocation } from "react-router-dom";
@@ -56,6 +57,13 @@ export default function SidebarItems({ isDoctor }: SidebarItemProps) {
               icon={<ClipboardPlus size={30} />}
               text="Citas"
               active={location.pathname === "/medic-peru/cita-medica"}
+            />
+          </NavLink>
+          <NavLink to={"/medic-peru/specialties"}>
+            <SidebarItem
+              icon={<Stethoscope size={30} />}
+              text="Especialidades"
+              active={location.pathname === "/medic-peru/specialties"}
             />
           </NavLink>
         </div>
