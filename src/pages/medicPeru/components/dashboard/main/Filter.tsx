@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Filter = () => {
   return (
     <div className="mt-4 w-full ">
@@ -25,12 +27,12 @@ export const Filter = () => {
                 <path d="M20 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
               </svg>
             </div>
-            <p className="montserrat-bold">Doctores</p>
+            <Link to="/medic-peru/filter-doctor">
+              <p className="montserrat-bold">Doctores</p>
+            </Link>
           </div>
 
-          <p className="mt-4 montserrat-medium">
-            Encuentra tu experto en salud
-          </p>
+          <p className="mt-4 ">Encuentra tu experto en salud</p>
         </div>
         <div className="filtro-color-box-2 rounded-3xl p-3 flex-1 py-4">
           <div className="flex items-center">

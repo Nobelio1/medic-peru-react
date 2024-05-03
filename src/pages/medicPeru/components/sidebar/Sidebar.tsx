@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Logo } from "../../../../assets";
 import { LogOut } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //!-------------------------------------------------------------------------------------------------------
 
@@ -25,8 +26,10 @@ export default function Sidebar({ children }: SidebarProps) {
     <aside className="h-screen mr-5">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm">
         <div className="p-4 pb-2 flex items-center justify-center mt-3 gap-2 ">
-          <img src={Logo} alt="logo-icon" className="w-12" />
-          <h3 className="font-bold text-2xl montserrat-bold">MediPeru</h3>
+          <Link to="/medic-peru" className="flex items-center gap-1">
+            <img src={Logo} alt="logo-icon" className="w-12" />
+            <h3 className="font-bold text-2xl montserrat-bold">MedicPeru</h3>
+          </Link>
         </div>
 
         <ul className="flex-1 px-3 mt-3 z-10">{children}</ul>
