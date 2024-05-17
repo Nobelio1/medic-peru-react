@@ -20,12 +20,12 @@ export const DetailServicePage = () => {
   if (!service) throw new Error(`No se encontro servicio con id ${id}`);
 
   return (
-    <div className="w-auto h-screen  py-2 px-2 ">
+    <div className="w-auto py-2 px-2 ">
       <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/specialties/list/A001"}>
           <SlArrowLeft />
           Volver
         </Link>
-      <div className="h-full overflow-y-auto bg-white border-2 rounded-md p-4">
+      <div className="bg-white border-2 rounded-md p-4">
         <main className=" flex flex-col items-center ">
           <div className="flex items-center justify-center">
             <span className="barra-sep"></span>
@@ -36,12 +36,12 @@ export const DetailServicePage = () => {
           <section className=" bg-slate-100 p-2 rounded-md">
 
             {/* seccion uno */}
-            <div className="w-auto h-auto flex gap-8 ">
-              <div className="imagen-operacion">
+            <div className="w-full grid md:grid-cols-2 gap-8 ">
+              <div className="">
                 <img
                   src={service.image}
                   alt="imagen-de-operacion"
-                  className="w-full h-full"
+                  className="w-full"
                 />
               </div>
               {/* seccion 2 */}
