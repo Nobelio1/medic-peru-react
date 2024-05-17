@@ -3,7 +3,6 @@ import { SlArrowLeft } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { HistorialClinica } from "../../../../data/historialClinica";
 import { Field, Form, Formik } from "formik";
-import { getCitaById } from "../../../../helpers/getCitaById";
 
 interface HeaderHistoryProps {
   setHistorial: Dispatch<SetStateAction<HistorialClinica[]>>;
@@ -15,8 +14,8 @@ interface IdCita {
 
 export const HeaderHistory = ({ setHistorial }: HeaderHistoryProps) => {
   const onSearchSubmit = ({ id }: { id: string }) => {
-    let filterPaciente = getCitaById({ id: id });
-    setHistorial(filterPaciente);
+    // let filterPaciente = getCitaById({ id: id });
+    // setHistorial(filterPaciente);
   };
 
   return (

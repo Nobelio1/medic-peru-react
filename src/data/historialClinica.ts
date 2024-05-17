@@ -1,6 +1,9 @@
+import { Result } from "../interfaces/medicPeru.interface";
+
 export interface HistorialClinica {
-  id: string;
-  nombre: string;
+  dniPaciente: string;
+  idHistoria: string;
+  nombreHospital: string;
   fecha: string;
   hora: string;
   motivo: string;
@@ -10,11 +13,40 @@ export interface HistorialClinica {
 }
 
 export interface Recetario {
-  nombre: string;
+  medicamento: string;
   tiempoCon: string;
-  CantPorDia: string;
+  cantPorDia: string;
 }
 
+export interface ListEnfermedades extends Result {
+  data: Enfermedades[];
+}
+
+export interface Enfermedades {
+  idEnf?: number;
+  idEnfPr: number;
+  nombre: string;
+  descripcion: string;
+}
+
+export interface HistoriaResponse extends Result {
+  data: HistorialClinica[];
+}
+
+export interface Documento extends Result {
+  data: DocumentoResponse;
+}
+
+export interface DocumentoResponse {
+  nombreArchivo: string;
+  archivoEncriptado: Blob;
+}
+
+export interface DetalleHistoriaResponse extends Result {
+  data: HistorialClinica;
+}
+
+/*
 export const historialClinica: HistorialClinica[] = [
   {
     id: "43224CH",
@@ -145,3 +177,5 @@ export const historialClinica: HistorialClinica[] = [
     ],
   },
 ];
+
+*/

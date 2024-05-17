@@ -1,3 +1,4 @@
+/*
 import { Citas, dataCitas } from "../data/citas";
 import { HistorialClinica, historialClinica } from "../data/historialClinica";
 
@@ -27,3 +28,4 @@ export const getCitaPacienteById = ({ id }: { id: string }): Citas[] => {
 
   return dataCitas.filter((visita) => visita.idCita.includes(id))!;
 };
+*/

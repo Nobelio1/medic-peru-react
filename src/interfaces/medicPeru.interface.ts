@@ -3,6 +3,17 @@ export interface Result {
   message: string;
 }
 
+export interface ListDocument extends Result {
+  data: Documentos[];
+}
+
+export interface Documentos {
+  id: string;
+  idArchivo: number;
+  filename: string;
+  content: Blob;
+}
+
 export interface InfoDoctor extends Result {
   data: DataDoctor[];
 }

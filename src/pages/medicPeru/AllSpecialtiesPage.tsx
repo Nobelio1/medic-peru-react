@@ -18,7 +18,7 @@ export const AllSpecialtiesPage = () => {
         </section>
         <section className="pb-4">
           <h2 className="text-2xl font-medium ">Especialidades</h2>
-          <div className="grid gap-3 grid-cols-3 px-10 mt-6 height-sm overflow-y-scroll">
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 px-10 mt-6 height-sm overflow-y-scroll">
             {allSpecialties.map((spec) => (
               <CardSpecialties key={spec.id} specialties={spec} />
             ))}

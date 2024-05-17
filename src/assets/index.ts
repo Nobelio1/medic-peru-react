@@ -19,6 +19,8 @@ import Calendar from "./img/calendar.svg";
 import Download from "./img/download-icon.svg";
 import Edit from "./img/editsvg.svg";
 import LogoNombre from "./img/Logo-nombre.png";
+import HospitalLogo from "./img/hospital.jpg";
+import LogoIa from "./img/logo-ia.png";
 
 export { Logo };
 export { DNI };
@@ -41,3 +43,5 @@ export { Calendar };
 export { Download };
 export { Edit };
 export { LogoNombre };
+export { HospitalLogo };
+export { LogoIa };

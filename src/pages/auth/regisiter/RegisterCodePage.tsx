@@ -33,8 +33,6 @@ export const RegisterCodePage = () => {
       let data: Result = await res.json();
 
       if (data.code !== "000") {
-        console.log(email);
-        console.log("sucedio un error");
         return;
       }
     } catch (error) {

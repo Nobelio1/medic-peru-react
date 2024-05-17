@@ -4,7 +4,6 @@ import { Formik, Field, Form } from "formik";
 import { FaFilter } from "react-icons/fa";
 import { SlArrowLeft } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import { getCitaPacienteById } from "../../../../helpers/getCitaById";
 
 interface HeaderCitaPacienteProps {
   setDataCita: Dispatch<SetStateAction<Citas[]>>;
@@ -18,9 +17,9 @@ export const HeaderCitaPaciente = ({
   setDataCita,
 }: HeaderCitaPacienteProps) => {
   const onSearchSubmit = ({ id }: { id: string }) => {
-    let filterPaciente = getCitaPacienteById({ id: id });
-    console.log(filterPaciente);
-    setDataCita(filterPaciente);
+    // let filterPaciente = getCitaPacienteById({ id: id });
+    // console.log(filterPaciente);
+    // setDataCita(filterPaciente);
   };
 
   return (

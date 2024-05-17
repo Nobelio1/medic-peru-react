@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { Logo } from "../../../../assets";
+import { HospitalLogo } from "../../../../assets";
 import { HistorialClinica } from "../../../../data/historialClinica";
 
 interface HospitalCardProps {
@@ -12,16 +12,20 @@ export const HospitalCard = ({ visita }: HospitalCardProps) => {
   return (
     <>
       <article className="grid grid-cols-5 border-2 rounded-2xl border-blue-300 w-full hover:bg-blue-100">
-        <section className="flex justify-center  ">
-          <img src={Logo} width={150} />
+        <section className="flex justify-center py-2">
+          <img
+            src={HospitalLogo}
+            width={150}
+            className=" rounded-full w-32 h-32"
+          />
         </section>
 
         <section className="col-span-2 w-full h-full text-left flex flex-col justify-start py-3">
           <Link
             className="font-bold text-xl text-gray-700 mb-2"
-            to={`/medic-peru/medical-history/${id}/detail/${visita.id}`}
+            to={`/medic-peru/medical-history/${id}/detail/${visita.idHistoria}`}
           >
-            {visita.nombre}
+            {visita.nombreHospital}
           </Link>
           <div className="text-gray-500">
             <span className="text-amber-500 font-semibold">Dia: </span>
@@ -33,7 +37,7 @@ export const HospitalCard = ({ visita }: HospitalCardProps) => {
           </div>
           <div className="text-gray-500">
             <span className="text-emerald-500 font-semibold">ID: </span>{" "}
-            {visita.id}
+            {visita.idHistoria}
           </div>
         </section>
 
