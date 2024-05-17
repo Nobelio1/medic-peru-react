@@ -11,7 +11,7 @@ export const CardSpecialties = ({ specialties }: CardSpecialtiesProps) => {
   return (
     <button
       onClick={() => nagivate(`/medic-peru/specialties/list/${specialties.id}`)}
-      className="flex flex-col items-center gap-4 m-2 cursor-pointer py-2 px-6 hover:border-blue-300 hover:border-2 rounded-md "
+      className="flex flex-col items-center gap-2 m-2 cursor-pointer py-2  hover:border-blue-300 hover:border-2 rounded-md "
     >
       <img
         src={specialties.image}
@@ -21,7 +21,7 @@ export const CardSpecialties = ({ specialties }: CardSpecialtiesProps) => {
       <p className="text-lg font-medium hover:text-blue-400">
         {specialties.onTitle}
       </p>
-      <p className="text-start text-sm">{specialties.content}</p>
+      <p className="text-start ">{specialties.content}</p>
     </button>
   );
 };

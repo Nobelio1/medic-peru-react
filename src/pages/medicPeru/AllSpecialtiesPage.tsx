@@ -3,13 +3,14 @@ import { CardSpecialties } from "./components/all-specialties/CardSpecialties";
 
 export const AllSpecialtiesPage = () => {
   return (
-    <div className="w-full h-screen py-6 px-3 overflow-hidden">
-      <main className="overflow-hidden h-full bg-white border-2 border-blue-300 rounded-md px-10 ">
-        <section className=" mb-8 py-1">
-          <h1 className="text-2xl font-semibold mt-5 mb-4">
+    <div className="w-full py-6 px-3  bg-slate-300">
+      <button className="btn mb-2 max-w-screen-lg bg-white mt-4">VOLVER</button>
+      <main className="  bg-white     rounded-md px-10 ">
+        <section className=" mb-3 py-1">
+          <h1 className="text-2xl text-center font-semibold mt-5 mb-4">
             Conozca a Nuestros Especialistas
           </h1>
-          <p className="text-lg">
+          <p className="text-center">
             Los mejores cirujanos especialistas con equipo está formado por
             profesionales expertos en el sector sanitario, lo que garantiza la
             excelencia en el servicio, la atención personalizada y la seguridad

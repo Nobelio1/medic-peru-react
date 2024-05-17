@@ -6,7 +6,7 @@ export const ChatIAPage = () => {
     <>
       <div className="w-full h-screen flex overflow-hidden ">
         <div className="w-3/4 h-full  py-6  px-2 ">
-          <ChatBody />
+          {/* <ChatBody /> */}
         </div>
         <aside className="w-1/4 ml-14 py-6 px-2">
           <SidebarChatIa />

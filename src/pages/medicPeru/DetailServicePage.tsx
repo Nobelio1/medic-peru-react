@@ -19,7 +19,7 @@ export const DetailServicePage = () => {
   if (!service) throw new Error(`No se encontro servicio con id ${id}`);
 
   return (
-    <div className="w-full h-screen  py-6 px-3 ">
+    <div className="w-auto h-screen  py-6 px-3 ">
       <div className="h-full overflow-y-auto bg-white border-2 border-blue-300 rounded-md p-4">
         <main className=" flex flex-col items-center ">
           <div className="flex items-center justify-center">
@@ -27,15 +27,19 @@ export const DetailServicePage = () => {
             <h1 className="text-2xl font-semibold mb-6 px-2">{service.desc}</h1>
             <span className="barra-sep"></span>
           </div>
-          <section className="bg-slate-100 p-2 rounded-md">
+
+          <section className=" bg-slate-100 p-2 rounded-md">
+          
+            {/* seccion uno */}
             <div className="w-auto h-auto flex gap-8 ">
               <div className="imagen-operacion">
                 <img
                   src={service.image}
                   alt="imagen-de-operacion"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full"
                 />
               </div>
+            {/* seccion 2 */}
               <div>
                 <h3 className="text-lg font-bold mb-2">Precio</h3>
                 <div className="pb-4">
@@ -81,8 +85,10 @@ export const DetailServicePage = () => {
                 </div>
               </div>
             </div>
+            
           </section>
-          <section className="pt-16 flex flex-col  px-36">
+
+          <section className="pt-16 flex flex-col  px-4">
             <div className="pb-10">
               <div className="flex items-center justify-center">
                 <span className="barra-sep"></span>

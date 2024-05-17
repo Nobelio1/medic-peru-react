@@ -11,7 +11,12 @@ export const CardServicesSpec = ({ service, type }: CardServicesSpecProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-between w-full h-auto bg-slate-100 rounded-md overflow-hidden  ">
+    <div className="flex flex-col justify-between  w-full h-auto bg-slate-100 rounded-md overflow-hidden  ">
+      <button
+          onClick={() =>
+            navigate(`/medic-peru/specialties/servicie/${type}/${service.id}`)
+          }
+        >
       <img
         src={service.image}
         alt="imagen-operacion"
@@ -24,14 +29,10 @@ export const CardServicesSpec = ({ service, type }: CardServicesSpecProps) => {
             {service.price}
           </p>
         </div>
-        <button
-          onClick={() =>
-            navigate(`/medic-peru/specialties/servicie/${type}/${service.id}`)
-          }
-        >
-          <BsChevronCompactRight size={25} />
-        </button>
+          <BsChevronCompactRight size={30} />
+        
       </div>
+      </button>
     </div>
   );
 };
