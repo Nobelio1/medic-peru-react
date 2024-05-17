@@ -53,7 +53,7 @@ export const FilterDoctorPage = () => {
   return (
     <div className="w-full px-4">
       <div className="bg-white rounded-md px-2">
-        <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/"}>
+        <Link className="btn btn-ghost text-lg" to={"/medic-peru/"}>
           <SlArrowLeft />
           Volver
         </Link>

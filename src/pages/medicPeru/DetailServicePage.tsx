@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { servicesSpecialties } from "../../data/typeSpecialties";
+import { SlArrowLeft } from "react-icons/sl";
 
 export const DetailServicePage = () => {
   const { type, id } = useParams();
@@ -19,8 +20,12 @@ export const DetailServicePage = () => {
   if (!service) throw new Error(`No se encontro servicio con id ${id}`);
 
   return (
-    <div className="w-auto h-screen  py-6 px-3 ">
-      <div className="h-full overflow-y-auto bg-white border-2 border-blue-300 rounded-md p-4">
+    <div className="w-auto py-2 px-2 ">
+      <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/specialties/list/A001"}>
+          <SlArrowLeft />
+          Volver
+        </Link>
+      <div className="bg-white border-2 rounded-md p-4">
         <main className=" flex flex-col items-center ">
           <div className="flex items-center justify-center">
             <span className="barra-sep"></span>
@@ -29,17 +34,17 @@ export const DetailServicePage = () => {
           </div>
 
           <section className=" bg-slate-100 p-2 rounded-md">
-          
+
             {/* seccion uno */}
-            <div className="w-auto h-auto flex gap-8 ">
-              <div className="imagen-operacion">
+            <div className="w-full grid md:grid-cols-2 gap-8 ">
+              <div className="">
                 <img
                   src={service.image}
                   alt="imagen-de-operacion"
-                  className="w-full h-full"
+                  className="w-full"
                 />
               </div>
-            {/* seccion 2 */}
+              {/* seccion 2 */}
               <div>
                 <h3 className="text-lg font-bold mb-2">Precio</h3>
                 <div className="pb-4">
@@ -61,28 +66,9 @@ export const DetailServicePage = () => {
                     <p>Laparoscópica</p>
                   </div>
                 </div>
-                <div className="flex w-full items-center">
-                  <p className="pr-3">SEDES</p>
-                  <select
-                    className="w-3/4 py-2 px-1 border border-gray-300  rounded-md"
-                    name="sedes"
-                  >
-                    <option value="default">Elige una opcion</option>
-                    <option value="a1">Sede 1</option>
-                    <option value="a2">Sede 2</option>
-                    <option value="a3">Sede 3</option>
-                  </select>
-                </div>
-                <div className="pt-4 flex gap-4">
-                  <div className="flex flex-row gap-2 border border-gray-100 w-14 justify-center py-1 px-10">
-                    <button className="text-gray-400 font-semibold">-</button>
-                    <span className="px-2 text-gray-400 font-semibold">1</span>
-                    <button className="text-gray-400 font-semibold">+</button>
-                  </div>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded-md">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded-md">
                     Reservar
                   </button>
-                </div>
               </div>
             </div>
             

@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom";
 import { allSpecialties } from "../../data/specialties";
 import { CardSpecialties } from "./components/all-specialties/CardSpecialties";
+import { SlArrowLeft } from "react-icons/sl";
 
 export const AllSpecialtiesPage = () => {
   return (
-    <div className="w-full py-6 px-3  bg-slate-300">
-      <button className="btn mb-2 max-w-screen-lg bg-white mt-4">VOLVER</button>
+    <div className="w-full py-2 px-4  ">
+      <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/"}>
+          <SlArrowLeft />
+          Volver
+        </Link>
       <main className="  bg-white     rounded-md px-10 ">
         <section className=" mb-3 py-1">
           <h1 className="text-2xl text-center font-semibold mt-5 mb-4">
