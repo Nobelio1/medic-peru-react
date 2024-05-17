@@ -11,7 +11,7 @@ export const CardSpecialties = ({ specialties }: CardSpecialtiesProps) => {
   return (
     <button
       onClick={() => nagivate(`/medic-peru/specialties/list/${specialties.id}`)}
-      className="flex flex-col items-center gap-2 m-2 cursor-pointer py-2  hover:border-blue-300 hover:border-2 rounded-md "
+      className="flex flex-col items-center gap-2 m-2 cursor-pointer py-2   hover:border-2 rounded-md "
     >
       <img
         src={specialties.image}
