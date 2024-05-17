@@ -56,7 +56,7 @@ export const DropFilter = ({
 
   return (
     <>
-      <div className="flex flex-col my-5 mx-2 px-4 rounded-md">
+      <div className="flex flex-col px-2 rounded-md">
         <label className="font-semibold text-md text-blue-700 mb-2">
           Seleccionar {tipo}
         </label>

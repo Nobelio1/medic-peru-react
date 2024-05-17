@@ -9,7 +9,7 @@ export const TestimonialItem = ({ opinion }: TestimonialItemProps) => {
   return (
     <>
       <div>
-        <div className="bg-gray-100 w-72 shadow-lg mx-auto rounded-xl p-4">
+        <div className="bg-sky-100 w-80 shadow-lg mx-auto rounded-xl p-4">
           <p className="text-gray-600">{opinion.comment}</p>
           <div className="flex items-center mt-4">
             <a href="#" className="relative block">
