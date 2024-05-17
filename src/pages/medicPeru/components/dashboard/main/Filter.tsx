@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 
 export const Filter = () => {
   return (
-    <div className="mt-4 w-full ">
-      <div className="flex justify-between space-x-5 text-white">
-        <div className="filtro-color-box-1 rounded-3xl p-3 flex-1 py-4">
+    <div className="mt-4 w-full">
+      <div className="grid gap-3 text-white">
+        {/* item-1 */}
+        <div className="flex justify-between items-center filtro-color-box-1 rounded-xl px-3 py-4">
           <div className="flex items-center">
             <div className="bg-white rounded-2xl p-2 mr-3">
               <svg
@@ -28,13 +29,16 @@ export const Filter = () => {
               </svg>
             </div>
             <Link to="/medic-peru/filter-doctor">
-              <p className="montserrat-bold">Doctores</p>
+              <p className="text-xl">Doctores disponibles</p>
             </Link>
           </div>
-
-          <p className="mt-4 ">Encuentra tu experto en salud</p>
+          <div className="text-4xl pr-2">
+            <p>112</p>
+          </div>
         </div>
-        <div className="filtro-color-box-2 rounded-3xl p-3 flex-1 py-4">
+
+        {/* item-2 */}
+        <div className="flex justify-between items-center filtro-color-box-2 rounded-xl p-3 py-4">
           <div className="flex items-center">
             <div className="bg-white rounded-2xl p-2 mr-3">
               <svg
@@ -56,15 +60,15 @@ export const Filter = () => {
                 <path d="M6 10h4m-2 -2v4" />
               </svg>
             </div>
-
-            <p className="montserrat-bold">Clinicas</p>
+            <p className="text-xl">Clinicas disponibles</p>
           </div>
-
-          <p className="mt-4 montserrat-medium">
-            Descubre el cuidado personalizado
-          </p>
+          <div className="text-4xl pr-2">
+            <p>30</p>
+          </div>
         </div>
-        <div className="filtro-color-box-3 rounded-3xl p-3 flex-1    py-4">
+
+        {/* item-3 */}
+        <div className=" flex justify-between items-center filtro-color-box-3 rounded-xl p-3 flex-1 py-4">
           <div className="flex items-center">
             <div className="bg-white rounded-2xl p-2 mr-3">
               <svg
@@ -88,11 +92,14 @@ export const Filter = () => {
               </svg>
             </div>
 
-            <p className="montserrat-bold">Hospitales</p>
+            <p className="text-xl">Hospitales disponibles</p>
           </div>
-
-          <p className="mt-4 montserrat-medium">Centros de excelencia medica</p>
+          <div className="text-4xl pr-2">
+            <p>54</p>
+          </div>
         </div>
+
+        {/* ---- */}
       </div>
     </div>
   );

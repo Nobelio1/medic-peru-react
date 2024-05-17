@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
 import { UserPhoto } from "../../../../assets";
 import { Citas } from "../../../../data/citas";
-import { BsChevronCompactRight } from "react-icons/bs";
 
 interface HistoryCardLargeProps {
   cita: Citas;
@@ -9,27 +7,30 @@ interface HistoryCardLargeProps {
 
 export const HistoryCardLarge = ({ cita }: HistoryCardLargeProps) => {
   return (
-    <div className="mt-3">
-      <div className="grid grid-cols-7 items-center bg-white px-2 py-3 gap-2 rounded-md border-2 border-blue-300 hover:bg-blue-300">
-        <img
-          src={UserPhoto}
-          alt="Logo"
-          className="w-20 h-20  rounded-full bg-slate-600"
-        />
-        <div>
-          <h3 className="montserrat-bold">Dr. {cita.name}</h3>
-          <p className="montserrat-medium ">{cita.especialidad}</p>
+    <div className="mt-3 border-b-2">
+      <div className="grid grid-cols-3 items-center place-content-center bg-white px-2 py-3 gap-2">
+        <div className="flex flex-col items-center justify-center">
+          <img src={UserPhoto} alt="Logo" className="w-20 rounded-full mb-1" />
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-center font-semibold text-gray-600 roboto-thin">
+              Dr. {cita.name}
+            </p>
+            <p className="text-sm text-gray-500 roboto-thin">
+              {cita.especialidad}
+            </p>
+          </div>
         </div>
-        <h2 className="montserrat-bold text-sm">{cita.clinicalCenter}</h2>
-        <h2 className="montserrat-bold">{cita.fecha}</h2>
-        <h2 className="montserrat-bold">{cita.hora}</h2>
-        <h2 className="montserrat-bold">{cita.estado}</h2>
-        <div className="">
-          <Link to={`/medic-peru/cita-detalle/${cita.idCita}`}>
-            <button className="btn btn-ghost">
-              <BsChevronCompactRight />
-            </button>
-          </Link>
+
+        <div className="justify-self-center">
+          <p className="text-center text-sm roboto-thin">
+            {cita.clinicalCenter}
+          </p>
+        </div>
+
+        <div className="justify-self-center">
+          <p className="montserrat-bold text-lg text-blue-800 font-medium roboto-thin">
+            {cita.fecha}
+          </p>
         </div>
       </div>
     </div>
