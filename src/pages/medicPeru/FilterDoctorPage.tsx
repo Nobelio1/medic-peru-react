@@ -29,8 +29,8 @@ export const FilterDoctorPage = () => {
   const [especialidad, setEspecialidad] = useState<Especialidades[]>([]);
 
   useEffect(() => {
-    getDtpo();
-    getEspecialidades();
+    // getDtpo();
+    // getEspecialidades();
   }, []);
 
   console.log(distritos);
@@ -51,51 +51,52 @@ export const FilterDoctorPage = () => {
   };
 
   return (
-    <div className="w-full h-screen py-6 px-3 overflow-hidden">
-      <div className="overflow-hidden h-full bg-white border-2 border-blue-300 rounded-md p-4 ">
+    <div className="w-full px-4">
+      <div className="bg-white rounded-md px-2">
+        <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/"}>
+          <SlArrowLeft />
+          Volver
+        </Link>
+
         {/* Parametros  */}
-        <nav className="flex-1 ">
-          <Link className="btn btn-ghost text-lg" to={"/medic-peru/"}>
-            <SlArrowLeft />
-            Volver
-          </Link>
-        </nav>
+        <section className="grid gap-2 md:grid-cols-5 items-center">
+          <DropFilterGeneric
+            especialidades={especialidad}
+            dataDoctor={setDataDoctor}
+            tipo={"Especialidad"}
+          />
 
-        <main>
-          <section className="grid grid-cols-5  items-center">
-            <DropFilterGeneric
-              especialidades={especialidad}
-              dataDoctor={setDataDoctor}
-              tipo={"Especialidad"}
-            />
+          <DropFilter
+            ubigeo={departamentos}
+            dataProvincia={setProvincias}
+            dataDistritos={setDistritos}
+            tipo={"Departamento"}
+          />
+          <DropFilter
+            ubigeo={provincias}
+            dataDistritos={setDistritos}
+            tipo={"Provincia"}
+          />
+          <DropFilter ubigeo={distritos} tipo={"Distrito"} />
 
-            <DropFilter
-              ubigeo={departamentos}
-              dataProvincia={setProvincias}
-              dataDistritos={setDistritos}
-              tipo={"Departamento"}
-            />
-            <DropFilter
-              ubigeo={provincias}
-              dataDistritos={setDistritos}
-              tipo={"Provincia"}
-            />
-            <DropFilter ubigeo={distritos} tipo={"Distrito"} />
-
-            <Formik
-              initialValues={{
-                dni: "",
-              }}
-              onSubmit={(values: DniDoctor) => {
-                onSearchSubmit({ dni: values.dni });
-              }}
-            >
-              <Form>
-                <label className="input input-bordered flex items-center gap-2">
+          <Formik
+            initialValues={{
+              dni: "",
+            }}
+            onSubmit={(values: DniDoctor) => {
+              onSearchSubmit({ dni: values.dni });
+            }}
+          >
+            <Form>
+              <div className="px-2">
+                <label className="font-semibold text-md text-blue-700 mb-2">
+                  Buscar:
+                </label>
+                <label className="input input-bordered border-blue-300 flex items-center gap-2">
                   <Field
                     type="text"
-                    className="grow"
-                    placeholder="Search"
+                    className="grow px"
+                    placeholder="Buscar por Nombre"
                     name="dni"
                   />
                   <button
@@ -116,24 +117,26 @@ export const FilterDoctorPage = () => {
                     </svg>
                   </button>
                 </label>
-              </Form>
-            </Formik>
-          </section>
-          <section className="overflow-y-auto pb-20 h-screen">
-            {/* Card */}
-            <div className="mt-4 flex flex-col gap-4">
-              {dataDoctor.length === 0 ? (
-                <div className="w-full text-center mt-20">
-                  <h1 className="text-2xl font-bold">NO EXISTE REGISTRO :(</h1>
-                </div>
-              ) : (
-                dataDoctor.map((doctor) => (
-                  <CardInfoDoctor key={doctor.id} doctor={doctor} />
-                ))
-              )}
-            </div>
-          </section>
-        </main>
+              </div>
+            </Form>
+          </Formik>
+        </section>
+
+        {/* Lista de doctoress */}
+        <section className="mt-4 px-2">
+          {/* Card */}
+          <div className="grid md:grid-cols-2 gap-4">
+            {dataDoctor.length === 0 ? (
+              <div className="w-full text-center mt-20">
+                <h1 className="text-2xl font-bold">NO EXISTE REGISTRO :(</h1>
+              </div>
+            ) : (
+              dataDoctor.map((doctor) => (
+                <CardInfoDoctor key={doctor.id} doctor={doctor} />
+              ))
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );
