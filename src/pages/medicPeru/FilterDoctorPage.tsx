@@ -29,8 +29,8 @@ export const FilterDoctorPage = () => {
   const [especialidad, setEspecialidad] = useState<Especialidades[]>([]);
 
   useEffect(() => {
-    // getDtpo();
-    // getEspecialidades();
+    getDtpo();
+    getEspecialidades();
   }, []);
 
   console.log(distritos);

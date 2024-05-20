@@ -13,14 +13,12 @@ interface IdDoctor {
   id: string;
 }
 
-export const HeaderCitaPaciente = ({
-  setDataCita,
-}: HeaderCitaPacienteProps) => {
-  const onSearchSubmit = ({ id }: { id: string }) => {
-    // let filterPaciente = getCitaPacienteById({ id: id });
-    // console.log(filterPaciente);
-    // setDataCita(filterPaciente);
-  };
+export const HeaderCitaPaciente = ({}: HeaderCitaPacienteProps) => {
+  //const onSearchSubmit = ({ id }: { id: string }) => {
+  // let filterPaciente = getCitaPacienteById({ id: id });
+  // console.log(filterPaciente);
+  // setDataCita(filterPaciente);
+  //};
 
   return (
     <>
@@ -40,7 +38,8 @@ export const HeaderCitaPaciente = ({
               id: "",
             }}
             onSubmit={(values: IdDoctor) => {
-              onSearchSubmit({ id: values.id });
+              console.log(values);
+              // onSearchSubmit({ id: values.id });
             }}
           >
             <Form>

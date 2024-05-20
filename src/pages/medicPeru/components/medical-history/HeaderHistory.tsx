@@ -12,11 +12,11 @@ interface IdCita {
   id: string;
 }
 
-export const HeaderHistory = ({ setHistorial }: HeaderHistoryProps) => {
-  const onSearchSubmit = ({ id }: { id: string }) => {
-    // let filterPaciente = getCitaById({ id: id });
-    // setHistorial(filterPaciente);
-  };
+export const HeaderHistory = ({}: HeaderHistoryProps) => {
+  //const onSearchSubmit = ({ id }: { id: string }) => {
+  // let filterPaciente = getCitaById({ id: id });
+  // setHistorial(filterPaciente);
+  //};
 
   return (
     <>
@@ -41,7 +41,7 @@ export const HeaderHistory = ({ setHistorial }: HeaderHistoryProps) => {
               id: "",
             }}
             onSubmit={(values: IdCita) => {
-              onSearchSubmit({ id: values.id });
+              console.log(values);
             }}
           >
             <Form>

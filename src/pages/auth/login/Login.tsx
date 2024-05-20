@@ -19,14 +19,13 @@ export const Login = () => {
   const [message, setMessage] = useState("");
 
   const onLogin = async (value: LoginIn) => {
+    navigate("/medic-peru");
     const accessUser = await loginUser({ user: value });
 
     if (accessUser !== "000") {
       setIsValidad(true);
       setMessage(accessUser);
-      return;
     }
-    navigate("/medic-peru");
   };
 
   //!---------------------------------------------------------------------------------!//

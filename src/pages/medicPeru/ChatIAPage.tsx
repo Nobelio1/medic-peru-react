@@ -1,4 +1,4 @@
-import { ChatBody } from "./components/chat-ia/ChatBody";
+// import { ChatBody } from "./components/chat-ia/ChatBody";
 import { SidebarChatIa } from "./components/chat-ia/SidebarChatIa";
 
 export const ChatIAPage = () => {
