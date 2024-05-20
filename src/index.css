@@ -41,9 +41,9 @@
   color: #b5b5c3;
 }
 
-.background-principal {
+/* .background-principal {
   background-color: #e4e4e4;
-}
+} */
 
 .height-per3 {
   height: 50rem;
@@ -65,11 +65,30 @@
   width: 36rem;
 }
 
+.color-prubea {
+  background-color: #00cec8;
+}
+
 .barra-sep {
   width: 80px;
   height: 2px;
   background-color: #000;
   margin-bottom: 23px;
+}
+
+.rotating-element {
+  animation: rotate 10s linear infinite; /* La animación dura 2 segundos, se ejecuta de manera lineal y es infinita */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); /* Comienza la rotación desde 0 grados */
+  }
+  to {
+    transform: rotate(
+      360deg
+    ); /* Termina la rotación en 360 grados (una vuelta completa) */
+  }
 }
 
 /* CAMBIOS EN LAS HERRAMIENTAS DE LOS NAVEGADORES */

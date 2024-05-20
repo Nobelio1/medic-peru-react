@@ -19,7 +19,7 @@ const WithSidebar = () => {
   return (
     <div className="drawer">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      <div className="drawer-content bg-slate-200 min-h-screen">
         <header className="block h-16 bg-white mb-4 px-4">
           <nav className="h-full flex items-center">
             <label htmlFor="my-drawer" className=" drawer-button pr-3">

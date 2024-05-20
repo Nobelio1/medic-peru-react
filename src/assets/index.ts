@@ -21,6 +21,10 @@ import Edit from "./img/editsvg.svg";
 import LogoNombre from "./img/Logo-nombre.png";
 import HospitalLogo from "./img/hospital.jpg";
 import LogoIa from "./img/logo-ia.png";
+import MedicalLogo from "./img/medical-logo.png";
+import DoctorCitaLogo from "./img/doctor-cita-logo.png";
+import ChatIALogo from "./img/chat-ia-logo.png";
+import Maintenance from "./img/mantenimiento-2-logo.png";
 
 export { Logo };
 export { DNI };
@@ -45,3 +49,7 @@ export { Edit };
 export { LogoNombre };
 export { HospitalLogo };
 export { LogoIa };
+export { MedicalLogo };
+export { DoctorCitaLogo };
+export { ChatIALogo };
+export { Maintenance };
