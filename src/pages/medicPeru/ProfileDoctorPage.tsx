@@ -19,7 +19,7 @@ export const ProfileDoctorPage = () => {
           <MapLocation />
         </div>
         <div className="mt-4">
-          <button className="btn bg-blue-500 w-full text-white text-xl">
+          <button className="btn bg-blue-700 w-full hover:bg-blue-900 text-white text-xl">
             Agendar cita
           </button>
         </div>

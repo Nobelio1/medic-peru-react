@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { AllSpecialtiesPage } from "../pages/medicPeru/AllSpecialtiesPage";
 import { DetailServicePage } from "../pages/medicPeru/DetailServicePage";
 import { ListOfServicesPage } from "../pages/medicPeru/ListOfServicesPage";
+import { DetalleCompraPage } from "../pages/medicPeru/DetalleCompraPage";
 
 export const EspecilidadesRoutes = () => {
   return (
@@ -10,6 +11,7 @@ export const EspecilidadesRoutes = () => {
         <Route path="/" element={<AllSpecialtiesPage />} />
         <Route path="/list/:id" element={<ListOfServicesPage />} />
         <Route path="/servicie/:type/:id" element={<DetailServicePage />} />
+        <Route path="/servicie/buy" element={<DetalleCompraPage />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </>

@@ -1,9 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { servicesSpecialties } from "../../data/typeSpecialties";
 import { SlArrowLeft } from "react-icons/sl";
 
 export const DetailServicePage = () => {
   const { type, id } = useParams();
+  const nagivate = useNavigate();
 
   if (!id) throw new Error("No se encontro el id en los parametros");
   if (!type) throw new Error("No se encontro el type en los parametros");
@@ -17,24 +18,31 @@ export const DetailServicePage = () => {
 
   const service = typeService.services.find((service) => service.id === id);
 
+  const handleBuy = () => {
+    localStorage.setItem("service", JSON.stringify(service));
+    nagivate("/medic-peru/specialties/servicie/buy");
+  };
+
   if (!service) throw new Error(`No se encontro servicio con id ${id}`);
 
   return (
     <div className="w-auto py-2 px-2 ">
-      <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/specialties/list/A001"}>
-          <SlArrowLeft />
-          Volver
-        </Link>
+      <Link
+        className="btn btn-ghost text-lg my-2"
+        to={"/medic-peru/specialties/list/A001"}
+      >
+        <SlArrowLeft />
+        Volver
+      </Link>
       <div className="bg-white border-2 rounded-md p-4">
         <main className=" flex flex-col items-center ">
           <div className="flex items-center justify-center">
-            <span className="barra-sep"></span>
-            <h1 className="text-2xl font-semibold mb-6 px-2">{service.desc}</h1>
-            <span className="barra-sep"></span>
+            <h1 className="text-2xl text-center font-semibold mb-6 px-2">
+              {service.desc}
+            </h1>
           </div>
 
           <section className=" bg-slate-100 p-2 rounded-md">
-
             {/* seccion uno */}
             <div className="w-full grid md:grid-cols-2 gap-8 ">
               <div className="">
@@ -66,12 +74,8 @@ export const DetailServicePage = () => {
                     <p>Laparoscópica</p>
                   </div>
                 </div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded-md">
-                    Reservar
-                  </button>
               </div>
             </div>
-            
           </section>
 
           <section className="pt-16 flex flex-col  px-4">
@@ -104,7 +108,7 @@ export const DetailServicePage = () => {
               <p className="text-gray-500 text-justify pb-2 ">
                 Requisitos para evaluar el diagnóstico del paciente.
               </p>
-              <ul className="list-disc flex flex-col gap-2">
+              <ul className="flex flex-col gap-2 text-gray-500">
                 <li>
                   Consulta Médica <span>(s/. 50.00)</span>
                 </li>
@@ -121,8 +125,11 @@ export const DetailServicePage = () => {
               </ul>
             </div>
             <div className=" mt-10 w-full h-full flex justify-center">
-              <button className=" bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-md">
-                Solcitar Cita
+              <button
+                onClick={handleBuy}
+                className="w-full text-lg bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded-md"
+              >
+                Reservar
               </button>
             </div>
           </section>
