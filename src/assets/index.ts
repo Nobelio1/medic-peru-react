@@ -25,6 +25,7 @@ import MedicalLogo from "./img/medical-logo.png";
 import DoctorCitaLogo from "./img/doctor-cita-logo.png";
 import ChatIALogo from "./img/chat-ia-logo.png";
 import Maintenance from "./img/mantenimiento-2-logo.png";
+import Tarjetas from "./img/tarjetas.png";
 
 export { Logo };
 export { DNI };
@@ -52,4 +53,4 @@ export { LogoIa };
 export { MedicalLogo };
 export { DoctorCitaLogo };
 export { ChatIALogo };
-export { Maintenance };
+export { Maintenance, Tarjetas };
