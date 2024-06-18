@@ -13,14 +13,17 @@ export const ListOfServicesPage = () => {
 
   return (
     <div className="h-full w-full py-2 px-3 ">
-      <Link className="btn btn-ghost text-2xl my-2" to={"/medic-peru/specialties"}>
-          <SlArrowLeft />
-          Volver
-        </Link>
+      <Link
+        className="btn btn-ghost text-2xl my-2"
+        to={"/medic-peru/specialties"}
+      >
+        <SlArrowLeft />
+        Volver
+      </Link>
       <div className=" bg-white  rounded-md py-2 px-4">
         <main className="px-2 py-2">
           <h1 className="mb-10 text-2xl font-medium">
-            Nuestro servicios para{" "}
+            Nuestro servicios para
             <span className="text-blue-700 text-3xl font-bold uppercase">
               {titleSpec?.onTitle}
             </span>

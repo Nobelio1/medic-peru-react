@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { TypeSpecialties } from "../../data/typeSpecialties";
 import { CardService } from "./components/detalle-compra/CardService";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+export interface DetalleServicio {
+  desc: string;
+  price: string;
+}
 
 export const DetalleCompraPage = () => {
   const [priceBuy, setPriceBuy] = useState("");
+  const navigate = useNavigate();
 
   const localService = localStorage.getItem("service");
 
@@ -50,6 +56,16 @@ export const DetalleCompraPage = () => {
   const priceSelected = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPriceBuy(e.target.value);
     localStorage.setItem("price", e.target.value);
+  };
+
+  const goToPayment = () => {
+    const service: TypeSpecialties = JSON.parse(localService);
+    const obj: DetalleServicio = {
+      desc: service.desc,
+      price: priceBuy,
+    };
+    localStorage.setItem("service", JSON.stringify(obj));
+    navigate("/medic-peru/specialties/servicie/payment");
   };
 
   useEffect(() => {
@@ -123,12 +139,12 @@ export const DetalleCompraPage = () => {
             <p className="font-bold text-xl">S/ {priceBuy}</p>
           </div>
           <div className="mt-2">
-            <Link
+            <button
               className="btn w-full bg-blue-500 hover:bg-blue-800 text-white"
-              to={"/medic-peru/specialties/servicie/payment"}
+              onClick={goToPayment}
             >
               Ir a pagar
-            </Link>
+            </button>
           </div>
         </div>
       </div>

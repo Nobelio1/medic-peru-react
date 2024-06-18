@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 android
-.env
+config.ts
 
 capacitor.config.ts
 
