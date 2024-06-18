@@ -136,6 +136,7 @@ export const upload = async ({ file, id }: { file: any; id: number }) => {
       `${environment.API_MASTER}/archivo/upload/${id}`,
       {
         method: "POST",
+
         body: formData,
       }
     );

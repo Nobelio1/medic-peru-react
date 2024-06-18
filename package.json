@@ -13,6 +13,7 @@
     "@capacitor/android": "^6.0.0",
     "@capacitor/core": "^6.0.0",
     "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
     "formik": "^2.4.5",
     "lucide-react": "^0.363.0",
     "openai": "^4.44.0",
