@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { TypeSpecialties } from "../../../../data/typeSpecialties";
 
 export const CardService = () => {
@@ -11,10 +10,6 @@ export const CardService = () => {
   }
 
   const service: TypeSpecialties = JSON.parse(localService);
-
-  useEffect(() => {
-    console.log(service);
-  }, []);
 
   return (
     <div className="flex my-4 bg-sky-100 rounded-md overflow-hidden">
