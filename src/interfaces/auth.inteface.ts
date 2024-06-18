@@ -1,21 +1,9 @@
 export interface RegisterUser {
-  username: string;
-  password: string;
-  email: string;
-  dni: string;
+  rol?: string;
   nombres: string;
   apellido: string;
-  celular: string;
-  direccion: string;
-  departamento: string;
-  provincia: string;
-  distrito: string;
-  sexo: string;
-  edad: string;
-  fecNac: any;
-  //registro interno
-  apellidos?: string;
-  rol?: string;
+  email: string;
+  password: string;
 }
 
 export interface RegisterDoctor extends RegisterUser {

@@ -23,7 +23,6 @@ export const registerUser = async ({ user }: RegisterUserProps) => {
   user.rol = "Paciente";
   user.nombres = user.nombres.replace(/\b\w/g, (item) => item.toUpperCase());
   user.apellido = user.apellido.replace(/\b\w/g, (item) => item.toUpperCase());
-  user.apellidos = user.apellido.trim().split(" ")[0];
 
   try {
     const request = await fetch(`${environment.API_MASTER}/user/createUser`, {
