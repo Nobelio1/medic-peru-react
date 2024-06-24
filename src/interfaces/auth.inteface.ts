@@ -1,23 +1,22 @@
-export interface RegisterUser {
-  rol?: string;
-  nombres: string;
-  apellido: string;
+import { Result } from "./medicPeru.interface";
+
+export interface RegisterUserIn {
+  ape_Materno: string;
+  ape_Paterno: string;
   email: string;
+  nombres: string;
   password: string;
+  rol: number;
 }
 
-export interface RegisterDoctor extends RegisterUser {
-  lugarDeTrabajo: string;
-  numColegiatura: string;
-  especialidad: string;
-}
-
-export interface Token {
-  accessToken: string;
-  tokenType: string;
+export interface RegisterUserOut extends Result {
+  data: string;
 }
 
 export interface LoginIn {
   username: string;
   password: string;
+}
+export interface LoginOut extends Result {
+  data: string;
 }

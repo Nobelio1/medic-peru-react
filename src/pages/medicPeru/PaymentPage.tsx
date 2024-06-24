@@ -58,7 +58,7 @@ export const PaymentPage = () => {
     const payment: PaymentToken = {
       amount: values.amount,
       description: values.description,
-      order_id: "oid-00055", // lo trae el backend, buscando como generarlo temporalmente
+      order_id: "oid-00056", // lo trae el backend, buscando como generarlo temporalmente
       source_id: id_token,
       method: "card",
       currency: "PEN",
@@ -192,7 +192,6 @@ export const PaymentPage = () => {
             </div>
             <div className=" text-center mt-6">
               <button
-                // to={"/medic-peru/specialties/servicie/success"}
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-bold text-xl"
               >
