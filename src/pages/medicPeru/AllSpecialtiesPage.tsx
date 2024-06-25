@@ -1,9 +1,29 @@
 import { Link } from "react-router-dom";
-import { allSpecialties } from "../../data/specialties";
 import { CardSpecialties } from "./components/all-specialties/CardSpecialties";
 import { SlArrowLeft } from "react-icons/sl";
+import { useEffect, useState } from 'react';
+import { Especialidades } from "../../interfaces/especialidades.interface";
+import { listarEspecialidades } from "../../api/medicPeru/MedicPeruEspecialidades";
 
 export const AllSpecialtiesPage = () => {
+
+  const [especialidad, setEspecialidad] = useState<Especialidades[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const listaEspecialidad = async () => {
+    setLoading(true)
+    const especialidades: Especialidades[] = await listarEspecialidades()
+    if(especialidades){
+      setEspecialidad(especialidades)
+    }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    listaEspecialidad()
+  }, [])
+  
+
   return (
     <div className="w-full py-2 px-4  ">
       <Link className="btn btn-ghost text-lg my-2" to={"/medic-peru/"}>
@@ -22,12 +42,18 @@ export const AllSpecialtiesPage = () => {
             médica.
           </p>
         </section>
-        <section className="pb-4">
+        <section className="pb-4">  
           <h2 className="text-2xl font-medium ">Especialidades</h2>
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 px-10 mt-6 height-sm overflow-y-scroll">
-            {allSpecialties.map((spec) => (
-              <CardSpecialties key={spec.id} specialties={spec} />
-            ))}
+            {loading ? (
+              <>
+                <span className="text-center">CARGANDO...</span> 
+              </>
+            ) : (
+              especialidad.map((spec) => (
+                <CardSpecialties key={spec.id_especialidad} specialties={spec} />
+              ))
+            )}
           </div>
         </section>
       </main>
