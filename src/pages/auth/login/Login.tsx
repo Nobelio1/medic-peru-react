@@ -2,9 +2,9 @@ import { Facebook, Google, Apple, Mail, PadLock } from "../../../assets/index";
 import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { LoginIn } from "../../../interfaces/auth.inteface";
-import { loginUser } from "../../../api/auth/authService";
 import { useState } from "react";
 import { authLoginValidator } from "../../../utils/auth/authValidator";
+import { useAppStore } from "../../../store/useAppStore";
 
 //!---------------------------------------------------------------------------------!//
 
@@ -14,13 +14,15 @@ const initialValues: LoginIn = {
 };
 
 export const Login = () => {
+
+  const onLogin = useAppStore((state) => state.onLogin)
+
   const navigate = useNavigate();
   const [isValidad, setIsValidad] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onLogin = async (value: LoginIn) => {
-    const accessUser = await loginUser({ user: value });
-
+  const submitUser = async (value: LoginIn) => {
+    const accessUser = await onLogin(value)
     if (accessUser !== "1") {
       setIsValidad(true);
       setMessage(accessUser);
@@ -57,7 +59,7 @@ export const Login = () => {
           return errores;
         }}
         onSubmit={(values: LoginIn) => {
-          onLogin(values);
+          submitUser(values);
         }}
       >
         {({ errors }) => (

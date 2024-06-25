@@ -2,18 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { User, Mail, PadLock } from "../../../assets/index";
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { RegisterUser } from "../../../interfaces/auth.inteface";
 import { authRegisterValidator } from "../../../utils/auth/authValidator";
 import { registerUser } from "../../../api/auth/authService";
 import { useState } from "react";
+import { RegisterUserIn } from "../../../interfaces/auth.inteface";
 
 //!----------------------------------------------------------------------------
 
-const initialValues: RegisterUser = {
-  nombres: "",
-  apellido: "",
+const initialValues: RegisterUserIn = {
+  ape_Materno: "",
+  ape_Paterno: "",
   email: "",
+  nombres: "",
   password: "",
+  rol:0,
 };
 
 //!----------------------------------------------------------------------------
@@ -26,15 +28,15 @@ export const RegisterPacient = () => {
 
   //*-------------------------------------------------
 
-  const onRegisterUser = async (user: RegisterUser) => {
+  const onRegisterUser = async (user: RegisterUserIn) => {
     const accessUser = await registerUser({ user: user });
 
-    if (accessUser !== "000") {
+    if (accessUser !== "1") {
       setIsValidad(true);
       setMessage(accessUser);
       return;
     }
-    navigate("/auth/register-code");
+    navigate("/medic-peru");
   };
 
   //!----------------------------------------------------------------------------
@@ -44,13 +46,13 @@ export const RegisterPacient = () => {
       <main>
         <Formik
           initialValues={initialValues}
-          validate={(onFormValues: RegisterUser) => {
+          validate={(onFormValues: RegisterUserIn) => {
             const errores = authRegisterValidator({
               registerPaciente: onFormValues,
             });
             return errores;
           }}
-          onSubmit={(onFormValues: RegisterUser, { resetForm }) => {
+          onSubmit={(onFormValues: RegisterUserIn, { resetForm }) => {
             resetForm();
             onRegisterUser(onFormValues);
             console.log(onFormValues);
@@ -83,21 +85,42 @@ export const RegisterPacient = () => {
                   </div>
 
                   <div className="flex flex-col my-2">
-                    <span className="font-medium">Apellidos: </span>
+                    <span className="font-medium">Apellidos Paternos: </span>
                     <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
                       <img src={User} alt="Logo" className="w-6 mr-2" />
                       <Field
                         type="text"
                         placeholder="Ingrese sus Apellidos"
-                        name="apellido"
+                        name="ape_Paterno"
                         className="flex-1 focus:outline-none"
                       />
                     </label>
                     <ErrorMessage
-                      name="apellido"
+                      name="ape_Paterno"
                       component={() => (
                         <div className=" font-bold text-sm text-red-600">
-                          {errors.apellido}
+                          {errors.ape_Paterno}
+                        </div>
+                      )}
+                    />
+                  </div>
+
+                  <div className="flex flex-col my-2">
+                    <span className="font-medium">Apellidos Materno: </span>
+                    <label className="flex items-center bg-white mb-1 py-3 pl-2 rounded-md border-solid border-2 border-gray-300 w-full">
+                      <img src={User} alt="Logo" className="w-6 mr-2" />
+                      <Field
+                        type="text"
+                        placeholder="Ingrese sus Apellidos"
+                        name="ape_Materno"
+                        className="flex-1 focus:outline-none"
+                      />
+                    </label>
+                    <ErrorMessage
+                      name="ape_Materno"
+                      component={() => (
+                        <div className=" font-bold text-sm text-red-600">
+                          {errors.ape_Materno}
                         </div>
                       )}
                     />

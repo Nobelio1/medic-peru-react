@@ -1,7 +1,7 @@
-import { LoginIn, RegisterUser } from "../../interfaces/auth.inteface";
+import { LoginIn, RegisterUserIn } from "../../interfaces/auth.inteface";
 
 interface authValidatorProp {
-  registerPaciente: RegisterUser;
+  registerPaciente: RegisterUserIn;
 }
 
 interface authValidatorLoginProp {
@@ -20,9 +20,15 @@ export const authRegisterValidator = ({
     errores.nombres = "Los nombres solo pueden contener letras y espacios";
   }
 
-  if (!registerPaciente.apellido) {
+  if (!registerPaciente.ape_Materno) {
     errores.apellido = "Por favor ingrese sus apellidos";
-  } else if (!/^[a-zA-Z\s]+$/.test(registerPaciente.apellido)) {
+  } else if (!/^[a-zA-Z\s]+$/.test(registerPaciente.ape_Materno)) {
+    errores.apellido = "Los apellidos solo pueden contener letras y espacios";
+  }
+
+  if (!registerPaciente.ape_Paterno) {
+    errores.apellido = "Por favor ingrese sus apellidos";
+  } else if (!/^[a-zA-Z\s]+$/.test(registerPaciente.ape_Paterno)) {
     errores.apellido = "Los apellidos solo pueden contener letras y espacios";
   }
 
