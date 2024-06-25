@@ -1,24 +1,39 @@
 import { StateCreator } from "zustand";
 import { LoginIn } from "../interfaces/auth.inteface";
 import { loginUser } from "../api/auth/authService";
+import { logoutFirebase } from "../firebase/providerGoogle";
+
+export interface User {
+  displayName: string,
+  email: string,
+  uid: string
+}
 
 export interface AuthSliceProps {
-  usuario: string
+  usuario: User
+  checking: boolean
   logged: boolean
-  setUser: (usuario: string) => void
-  logout: () => void
+  setUser: (usuario: User) => void
+  logout: () => Promise<boolean>
   onLogin: (user: LoginIn) => Promise<string>
 }
 
 export const createAuthSlice: StateCreator<AuthSliceProps> = (set,get) => ({
-  usuario: '',
+  usuario: {} as User,
+  checking: false,
   logged: false,
   onLogin: async (user: LoginIn) => {
     const res = await loginUser({ user })
-    
-    get().setUser(user.username)
+    // get().setUser(user.username)
     return res
   },
-  setUser: (usuario: string) => set({ usuario, logged: true }),
-  logout: () => set({ usuario: '', logged: false }),
+  setUser: (usuario: User) => set({ usuario, logged: true }),
+  logout: async () =>{
+    const logout = await logoutFirebase()
+    set({ 
+      usuario: {} as User, 
+      logged: logout 
+    })
+    return get().logged
+  } 
 })

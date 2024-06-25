@@ -5,6 +5,8 @@ import { LoginIn } from "../../../interfaces/auth.inteface";
 import { useState } from "react";
 import { authLoginValidator } from "../../../utils/auth/authValidator";
 import { useAppStore } from "../../../store/useAppStore";
+import { singInWithGoogle } from "../../../firebase/providerGoogle";
+import { User } from "../../../store/authSlice";
 
 //!---------------------------------------------------------------------------------!//
 
@@ -16,6 +18,7 @@ const initialValues: LoginIn = {
 export const Login = () => {
 
   const onLogin = useAppStore((state) => state.onLogin)
+  const setUser = useAppStore((state) => state.setUser)
 
   const navigate = useNavigate();
   const [isValidad, setIsValidad] = useState(false);
@@ -31,17 +34,28 @@ export const Login = () => {
     navigate("/medic-peru");
   };
 
+  const handleGoogle = async () => {
+    const result: User   = await singInWithGoogle();
+
+    if (result.uid === '') {
+      setMessage("Error al iniciar sesión con Google");
+      return;
+    }
+    setUser(result);
+    navigate("/medic-peru");
+  }
+
   //!---------------------------------------------------------------------------------!//
 
   return (
     <div className="flex flex-col w-full items-center animate__animated animate__fast animate__fadeInRight">
       <div className="flex flex-col gap-2 w-80 mt-20">
-        <button className="btn bg-blue-600 text-white">
-          <img src={Facebook} alt="logo-fb" className="w-6" />
+        <button className="btn bg-blue-600 text-white" >
+          <img src={Facebook} alt="logo-fb" className="w-6"/>
           <span>Continuar con Facebook</span>
         </button>
-        <button className="btn bg-white">
-          <img src={Google} alt="logo-fb" className="w-6" />
+        <button className="btn bg-white" onClick={handleGoogle}>
+          <img src={Google} alt="logo-fb" className="w-6"  />
           <span>Continuar con Google </span>
         </button>
         <button className="btn bg-black text-white">
