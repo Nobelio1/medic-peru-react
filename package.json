@@ -10,8 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.7.10",
     "@capacitor/android": "^6.0.0",
     "@capacitor/core": "^6.0.0",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.11.15",
+    "@mui/x-date-pickers": "^6.0.3",
+    "date-fns": "^2.21.2",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.2",

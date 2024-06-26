@@ -1,4 +1,3 @@
-import { BsChevronCompactRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { EspecialidadesId } from "../../../../interfaces/especialidades.interface";
 
@@ -21,13 +20,10 @@ export const CardServicesSpec = ({ service }: CardServicesSpecProps) => {
         alt="imagen-operacion"
         className="w-full h-auto"
       />
-      <div className="flex mt-2 items-center px-3 pb-2 justify-between ">
+      <div className="py-2">
         <div>
-          <p className="text-md font-medium">{service.nombre}</p>
-
+          <p className="text-md font-medium text-center">{service.nombre}</p>
         </div>
-          <BsChevronCompactRight size={30} />
-        
       </div>
       </button>
     </div>

@@ -27,7 +27,6 @@ export const MedicPeruRoutes = () => {
           <Route path="/profile-doctor/:id" element={<ProfileDoctorPage />} />
           <Route path="/filter-doctor" element={<FilterDoctorPage />} />
           <Route path="/cita-medica" element={<CitasPages />} />
-          <Route path="/cita-medica" element={<ChatPage />} />
           <Route path="/cita-detalle/:id" element={<CitaDetallePage />} />
           <Route path="/edit-paciente" element={<EditProfilePage />} />
           <Route path="/*" element={<Navigate to="/" />} />

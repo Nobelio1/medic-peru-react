@@ -45,7 +45,9 @@ export const AllSpecialtiesPage = () => {
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-3 mt-6 ">
           {loading ? (
             <>
-              <span className="text-center">CARGANDO...</span>
+              <div className="flex justify-center col-span-2 mt-6">
+                <span className="loading loading-spinner text-info loading-lg"></span>
+              </div>
             </>
           ) : (
             especialidad.map((spec) => (

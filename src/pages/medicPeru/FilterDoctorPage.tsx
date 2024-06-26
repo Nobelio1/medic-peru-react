@@ -24,10 +24,10 @@ export const FilterDoctorPage = () => {
 
       <section className="mt-4 px-2">
         {/* Card */}
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           {loading ? (
-            <div className="w-full text-center mt-20 pb-10">
-              <h1 className="text-2xl font-bold">Cargando Doctores...</h1>
+            <div className="flex justify-center col-span-2 mt-6">
+              <span className="loading loading-spinner text-info loading-lg"></span>
             </div>
           ) : (
             doctores.map((doctor) => (

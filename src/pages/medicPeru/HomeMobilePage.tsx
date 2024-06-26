@@ -67,7 +67,3 @@ export const HomeMobilePage = () => {
     </div>
   );
 };
-
-//BIENVENIDA
-//SERVICIOS
-//IA - SIGUIENTE

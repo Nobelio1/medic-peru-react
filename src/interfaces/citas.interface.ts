@@ -1,6 +1,7 @@
 import { Result } from "./medicPeru.interface";
 
 export interface CitasIn {
+  id_usuario?: string //cambiar a obligatorio cuando sea necesario
   descripcion: string;
   email_paciente: string;
   fecha: Date;

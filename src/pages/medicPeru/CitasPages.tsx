@@ -1,18 +1,14 @@
-import { useState } from "react";
-import { HeaderCitaPaciente } from "./components/citas-page/HeaderCitaPaciente";
-import { TableCitaPaciente } from "./components/citas-page/TableCitaPaciente";
-import { Citas, dataCitas } from "../../data/citas";
+import { CalendarioEventos } from "../../utils/CalendarioEventos";
 
 export const CitasPages = () => {
-  const [dataCita, setDataCita] = useState<Citas[]>(dataCitas);
   return (
     <>
-      <div className="w-full h-screen py-3 px-2">
-        <HeaderCitaPaciente setDataCita={setDataCita} />
-        <div className=" height-per overflow-y-scroll">
-          <TableCitaPaciente dataCita={dataCita} />
+      <div className=" flex justify-center mb-5 ">
+        <div className="w-5/6 bg-white px-2 py-3 rounded-md shadow-sm">
+          <h1 className="text-center text-2xl font-bold">Mis Citas</h1>
         </div>
       </div>
+      <CalendarioEventos />
     </>
   );
 };
