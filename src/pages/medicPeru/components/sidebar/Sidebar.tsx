@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Logo } from "../../../../assets";
 import { LogOut } from "lucide-react";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppStore } from '../../../../store/useAppStore';
 
 //!-------------------------------------------------------------------------------------------------------
 
@@ -21,6 +21,16 @@ interface SidebarItemProps {
 
 export default function Sidebar({ children }: SidebarProps) {
   //!-------------------------------------------------------------------------------------------------------
+  const navigate = useNavigate()
+  const logout = useAppStore(state => state.logout)
+
+  const onLogout = async () => {
+    console.log("logout")
+    const state =  await logout();
+    if(!state){
+      navigate("/auth/login");
+    }
+  }
 
   return (
     <aside className="h-screen mr-5">
@@ -46,9 +56,9 @@ export default function Sidebar({ children }: SidebarProps) {
               <span className="text-sm text-gray-600">#41412P</span>
             </div>
           </div>
-          <NavLink to={"/auth/login"} className={"ml-4"}>
+          <button onClick={onLogout} className={"ml-4"}>
             <LogOut size={25} color="red" />
-          </NavLink>
+          </button>
         </div>
       </nav>
     </aside>
