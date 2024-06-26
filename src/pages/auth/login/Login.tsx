@@ -20,6 +20,8 @@ export const Login = () => {
   const onLogin = useAppStore((state) => state.onLogin);
   const setUser = useAppStore((state) => state.setUser);
 
+  const checking = useAppStore((state) => state.checking);
+
   const navigate = useNavigate();
   const [isValidad, setIsValidad] = useState(false);
   const [message, setMessage] = useState("");
@@ -153,12 +155,21 @@ export const Login = () => {
                   </span>
                 </div>
               )}
-              <button
-                className="btn my-2 p-3 rounded-full bg-blue-500 hover:bg-blue-700 w-full h-16"
-                type="submit"
-              >
-                <span className="font-bold text-xl text-white">Ingresar</span>
-              </button>
+                  {checking ? (
+                    <div className="flex justify-center col-span-2 mt-6">
+                      <span className="loading loading-spinner text-info loading-lg"></span>
+                    </div>
+                  ) : (
+                    <button
+                      className="btn my-2 p-3 rounded-full bg-blue-500 hover:bg-blue-700 w-full h-16"
+                      type="submit"
+
+                    >
+                      <span className="font-bold text-xl text-white">
+                        "Ingresar"
+                      </span>
+                    </button>
+                  )}
             </div>
           </Form>
         )}
