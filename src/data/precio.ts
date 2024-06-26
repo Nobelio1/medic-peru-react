@@ -22,13 +22,13 @@ export const precio: Precio[] = [
   {
     id_servicio: 1,
     id_especialidad: 1,
-    id_sede: Sedes.Sede1,
+    id_sede: Sedes.Sede2,
     precio: 400,
   },
   {
     id_servicio: 1,
     id_especialidad: 1,
-    id_sede: Sedes.Sede1,
+    id_sede: Sedes.Sede3,
     precio: 700,
   },
   {

@@ -1,12 +1,13 @@
 import { StateCreator } from "zustand";
-import { LoginIn } from "../interfaces/auth.inteface";
+import { LoginRes, LoginIn } from "../interfaces/auth.inteface";
 import { loginUser } from "../api/auth/authService";
 import { logoutFirebase } from "../firebase/providerGoogle";
 
 export interface User {
   displayName: string,
   email: string,
-  uid: string
+  uid?: string,
+  rol?: string
 }
 
 export interface AuthSliceProps {
@@ -15,7 +16,7 @@ export interface AuthSliceProps {
   logged: boolean
   setUser: (usuario: User) => void
   logout: () => Promise<boolean>
-  onLogin: (user: LoginIn) => Promise<string>
+  onLogin: (user: LoginIn) => Promise<LoginRes>  
 }
 
 export const createAuthSlice: StateCreator<AuthSliceProps> = (set,get) => ({
@@ -23,9 +24,8 @@ export const createAuthSlice: StateCreator<AuthSliceProps> = (set,get) => ({
   checking: false,
   logged: false,
   onLogin: async (user: LoginIn) => {
-    const res = await loginUser({ user })
-    // get().setUser(user.username)
-    return res
+    const res: LoginRes[] = await loginUser({ user })
+    return res[0]
   },
   setUser: (usuario: User) => set({ usuario, logged: true }),
   logout: async () =>{

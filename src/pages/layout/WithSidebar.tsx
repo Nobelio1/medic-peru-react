@@ -29,7 +29,7 @@ const WithSidebar = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <Sidebar children={<SidebarItems isDoctor={false} />} />
+        <Sidebar children={<SidebarItems/>} />
       </div>
     </div>
   );

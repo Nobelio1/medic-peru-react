@@ -1,4 +1,5 @@
 import {
+  LoginRes,
   LoginIn,
   LoginOut,
   RegisterUserIn,
@@ -55,9 +56,9 @@ export const loginUser = async ({ user }: LoginUserProps) => {
     let response: LoginOut = await request.json();
 
     if (response.code !== "000") {
-      return response.message;
+      const res: LoginRes[] = []
+      return res
     }
-
     return response.data;
   } catch (error) {
     console.log(error);

@@ -1,76 +1,89 @@
 import { useEffect, useState } from "react";
-import { TypeSpecialties } from "../../data/typeSpecialties";
 import { CardService } from "./components/detalle-compra/CardService";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "../../store/useAppStore";
+import { EspecialidadesId } from "../../interfaces/especialidades.interface";
+import { especialidadPorId } from "../../api/medicPeru/MedicPeruEspecialidades";
+import { listarDoctoresPorEsp } from "../../api/medicPeru/doctoresServices";
+import { Doctores } from "../../interfaces/doctores.interface";
+import { Precio, precio } from "../../data/precio";
 
 export interface DetalleServicio {
   desc: string;
   price: string;
 }
 
+const sedes = [
+  {
+    id: 1,
+    name: "Clínica Monte Sinai",
+  },
+  {
+    id: 2,
+    name: "Clínica Santa Lucía",
+  },
+  {
+    id: 3,
+    name: "Clínica San Borja Salud",
+  },
+];
+
 export const DetalleCompraPage = () => {
-  const [priceBuy, setPriceBuy] = useState("");
+  const [servicioAct, setServicioAct] = useState<EspecialidadesId>(
+    {} as EspecialidadesId
+  );
+  const [doctores, setDoctores] = useState<Doctores[]>([]);
+  const [listaPrecios, setListaPrecios] = useState<Precio[]>([]);
+  const [precioSld, setPrecioSld] = useState(0);
+  const [sede, setSede] = useState<boolean>(true);
+
+
   const navigate = useNavigate();
+  const citaActiva = useAppStore((state) => state.citaActiva);
+  const { id_servico, id_especialidad } = citaActiva;
 
-  const localService = localStorage.getItem("service");
-
-  if (!localService) {
-    throw new Error(
-      "Hubo un error al tratar de encontrar el servicio a comprar"
+  const getServicio = async () => {
+    const servicios: EspecialidadesId[] = await especialidadPorId({
+      id: id_servico,
+    });
+    const servicioActivo = servicios.find(
+      (servicio) => servicio.id_especialidad === id_servico
     );
-  }
+    setServicioAct(servicioActivo!);
+  };
 
-  const service: TypeSpecialties = JSON.parse(localService);
+  const doctoresDisponibles = async () => {
+    const doctoresDis: Doctores[] = await listarDoctoresPorEsp(id_especialidad);
+    if (doctoresDis.length === 0) {
+      setDoctores([]);
+    } else {
+      setDoctores(doctoresDis);
+    }
+  };
 
-  let prices = service.price
-    .replaceAll("S/", "")
-    .replace("-", "")
-    .replaceAll(",", "")
-    .split(" ");
-  prices = prices.filter((price) => price !== "");
+  const precioDisponibles = () => {
+    const precios = precio.filter((p) => p.id_servicio === id_servico);
+    console.log(precios)
 
-  const doctores = [
-    { name: "Dr. Julio", id: 1 },
-    { name: "Dr. Oscar", id: 2 },
-    { name: "Dr. Roberto", id: 3 },
-  ];
+    if(!!!precios[0].id_sede){
+      setSede(false);
+    }
+    setListaPrecios(precios);
+  };
 
-  const sedes = [
-    {
-      id: 1,
-      name: "Clínica Santa Lucía",
-      price: prices.length > 1 ? Number(prices[0]) + 100 : Number(prices[0]),
-    },
-    {
-      id: 2,
-      name: "Clínica Monte Sinai",
-      price: prices.length > 1 ? Number(prices[0]) + 200 : Number(prices[0]),
-    },
-    {
-      id: 3,
-      name: "Clínica San Borja Salud",
-      price: prices.length > 1 ? Number(prices[0]) + 300 : Number(prices[0]),
-    },
-  ];
-
-  const priceSelected = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPriceBuy(e.target.value);
-    localStorage.setItem("price", e.target.value);
+  const precioActual = (e: any) => {
+    const precioAct = listaPrecios.find((p) => p.id_sede === +e.target.value);
+    setPrecioSld(precioAct?.precio!);
   };
 
   const goToPayment = () => {
-    const service: TypeSpecialties = JSON.parse(localService);
-    const obj: DetalleServicio = {
-      desc: service.desc,
-      price: priceBuy,
-    };
-    localStorage.setItem("service", JSON.stringify(obj));
     navigate("/medic-peru/specialties/servicie/payment");
   };
 
   useEffect(() => {
-    setPriceBuy(String(Number(prices[0]) + 100));
-    localStorage.setItem("price", String(Number(prices[0]) + 100));
+    getServicio();
+    doctoresDisponibles();
+    precioDisponibles();
   }, []);
 
   return (
@@ -80,7 +93,7 @@ export const DetalleCompraPage = () => {
           <h1 className="text-center pt-2 text-xl font-bold uppercase">
             Detalle de la Cita
           </h1>
-          <CardService />
+          <CardService user={servicioAct} />
 
           <div className="my-2">
             <label htmlFor="fecha">Elige la fecha:</label>
@@ -90,35 +103,47 @@ export const DetalleCompraPage = () => {
               className="border mt-1 border-gray-300 rounded-md block w-full py-0.5 px-2"
             />
           </div>
-          <div className="my-2">
-            <label htmlFor="doctor">Elige el doctor:</label>
-            <select
-              name="doctor"
-              id="doctor"
-              className="mt-1 select select-bordered select-sm w-full"
-            >
-              {doctores.map((doctor) => (
-                <option key={doctor.id} value={doctor.id}>
-                  {doctor.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="my-2">
-            <label htmlFor="centro-medico">Elige el centro medico:</label>
-            <select
-              name="centro-medico"
-              id="centro-medico"
-              className="mt-1 select select-bordered select-sm w-full"
-              onChange={(e) => priceSelected(e)}
-            >
-              {sedes.map((sede) => (
-                <option key={sede.id} value={sede.price}>
-                  {sede.name}
-                </option>
-              ))}
-            </select>
-          </div>
+
+          {doctores.length !== 0 && (
+            <div className="my-2">
+              <label htmlFor="doctor">Elige el doctor:</label>
+              <select
+                name="doctor"
+                id="doctor"
+                className="mt-1 select select-bordered select-sm w-full"
+              >
+                {doctores.map((doctor) => (
+                  <option
+                    key={doctor.id_especialidad}
+                    value={doctor.id_especialidad}
+                  >
+                    {doctor.nombre_doctor}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+ 
+          {
+            sede && (
+              <div className="my-2">
+                <label htmlFor="centro-medico">Elige el centro medico:</label>
+                <select
+                  name="centro-medico"
+                  id="centro-medico"
+                  className="mt-1 select select-bordered select-sm w-full"
+                  onChange={(e) => precioActual(e)}
+                >
+                  {sedes.map((sede) => (
+                    <option key={sede.id} value={sede.id}>
+                      {sede.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )
+          }
+
           <div className="my-2">
             <p className="pb-2">Selecionne su horario:</p>
             <div className="flex justify-around">
@@ -136,7 +161,7 @@ export const DetalleCompraPage = () => {
 
           <div className="mt-52 flex items-center w-full bg-sky-200 justify-between py-2 px-4 rounded-md">
             <p className="font-bold">Total:</p>
-            <p className="font-bold text-xl">S/ {priceBuy}</p>
+            <p className="font-bold text-xl">S/ {sede ? precioSld: listaPrecios[0].precio}</p>
           </div>
           <div className="mt-2">
             <button

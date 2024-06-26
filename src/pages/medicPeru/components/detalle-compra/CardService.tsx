@@ -1,22 +1,17 @@
-import { TypeSpecialties } from "../../../../data/typeSpecialties";
+import { EspecialidadesId } from "../../../../interfaces/especialidades.interface";
 
-export const CardService = () => {
-  const localService = localStorage.getItem("service");
+interface CardServiceProps {
+  user: EspecialidadesId
+}
 
-  if (!localService) {
-    throw new Error(
-      "Hubo un error al tratar de encontrar el servicio a comprar"
-    );
-  }
-
-  const service: TypeSpecialties = JSON.parse(localService);
+export const CardService = ({user}: CardServiceProps) => {
+ 
 
   return (
     <div className="flex my-4 bg-sky-100 rounded-md overflow-hidden">
-      <img src={service.image} alt="imagen-servicio" className="w-24" />
+      <img src={user.imagen_url} alt="imagen-servicio" className="w-24" />
       <div className="pl-4 flex flex-col justify-center gap-2">
-        <p className="text-sm font-bold text-gray-800">{service.desc}</p>
-        <p className="text-lg font-bold text-blue-900">{service.price}</p>
+        <p className="text-sm font-bold text-gray-800">{user.nombre}</p>
       </div>
     </div>
   );

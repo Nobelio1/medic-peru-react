@@ -1,44 +1,42 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { servicesSpecialties } from "../../data/typeSpecialties";
+import { useNavigate, useParams } from "react-router-dom";
 import { SlArrowLeft } from "react-icons/sl";
+import { useAppStore } from "../../store/useAppStore";
+import { CitaActiva } from "../../store/citasSlice";
 
 export const DetailServicePage = () => {
   const { type, id } = useParams();
   const nagivate = useNavigate();
+  const setCitaActiva = useAppStore((state) => state.setCitaActiva);
 
   if (!id) throw new Error("No se encontro el id en los parametros");
   if (!type) throw new Error("No se encontro el type en los parametros");
 
-  const typeService = servicesSpecialties.find(
-    (services) => services.codigo === type
-  );
+  const service: CitaActiva = {
+    id_especialidad: Number(type),
+    id_servico: Number(id),
+  };
+  setCitaActiva(service);
 
-  if (!typeService)
-    throw new Error(`No se encontro especialidad con id ${type}`);
-
-  const service = typeService.services.find((service) => service.id === id);
+  const backPage = () => {
+    nagivate(-1);
+  };
 
   const handleBuy = () => {
-    localStorage.setItem("service", JSON.stringify(service));
     nagivate("/medic-peru/specialties/servicie/buy");
   };
 
-  if (!service) throw new Error(`No se encontro servicio con id ${id}`);
-
   return (
     <div className="w-auto py-2 px-2 ">
-      <Link
-        className="btn btn-ghost text-lg my-2"
-        to={"/medic-peru/specialties/list/A001"}
-      >
-        <SlArrowLeft />
-        Volver
-      </Link>
       <div className="bg-white border-2 rounded-md p-4">
+        <button onClick={backPage} className="btn btn-ghost text-lg ">
+          <SlArrowLeft />
+          Volver
+        </button>
         <main className=" flex flex-col items-center ">
           <div className="flex items-center justify-center">
             <h1 className="text-2xl text-center font-semibold mb-6 px-2">
-              {service.desc}
+              {/* {service.desc}  */}
+              hola mundo
             </h1>
           </div>
 
@@ -46,18 +44,14 @@ export const DetailServicePage = () => {
             {/* seccion uno */}
             <div className="w-full grid md:grid-cols-2 gap-8 ">
               <div className="">
-                <img
-                  src={service.image}
-                  alt="imagen-de-operacion"
-                  className="w-full"
-                />
+                <img src="" alt="imagen-de-operacion" className="w-full" />
               </div>
               {/* seccion 2 */}
               <div>
                 <h3 className="text-lg font-bold mb-2">Precio</h3>
                 <div className="pb-4">
                   <p className="text-blue-400 text-medium  text-xl ">
-                    {service.price}
+                    hola mundo
                   </p>
                 </div>
                 <div className="pt-4 pb-8">

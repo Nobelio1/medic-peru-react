@@ -1,26 +1,23 @@
 import {
   BookUser,
-  BotMessageSquare,
   BriefcaseMedical,
   ClipboardPlus,
   LayoutDashboard,
-  MessageSquareMore,
   Settings,
   Stethoscope,
 } from "lucide-react";
 import { SidebarItem } from "./Sidebar";
 import { NavLink, useLocation } from "react-router-dom";
+import { useAppStore } from "../../../../store/useAppStore";
 
 //!-------------------------------------------------------------------------------------------------------
 
-interface SidebarItemProps {
-  isDoctor: boolean;
-}
-
 // ItemsPaciente
 
-export default function SidebarItems({ isDoctor }: SidebarItemProps) {
+export default function SidebarItems() {
   const location = useLocation();
+
+  const usuario = useAppStore((state) => state.usuario);
 
   //!-------------------------------------------------------------------------------------------------------
 
@@ -34,16 +31,14 @@ export default function SidebarItems({ isDoctor }: SidebarItemProps) {
           active={location.pathname === "/medic-peru"}
         />
       </NavLink>
-      {isDoctor && (
-        <NavLink to={"/medic-peru/filter-pacientes"}>
-          <SidebarItem
-            icon={<BookUser size={30} />}
-            text="Pacientes"
-            active={location.pathname === "/medic-peru/filter-pacientes"}
-          />
-        </NavLink>
-      )}
-      {!isDoctor && (
+      <NavLink to={"/medic-peru/cita-medica"}>
+        <SidebarItem
+          icon={<ClipboardPlus size={30} />}
+          text="Citas"
+          active={location.pathname === "/medic-peru/cita-medica"}
+        />
+      </NavLink>
+      {usuario.rol !== "1" && (
         <div>
           <NavLink to={"/medic-peru/filter-doctor"}>
             <SidebarItem
@@ -52,13 +47,7 @@ export default function SidebarItems({ isDoctor }: SidebarItemProps) {
               active={location.pathname === "/medic-peru/filter-doctor"}
             />
           </NavLink>
-          <NavLink to={"/medic-peru/cita-medica"}>
-            <SidebarItem
-              icon={<ClipboardPlus size={30} />}
-              text="Citas"
-              active={location.pathname === "/medic-peru/cita-medica"}
-            />
-          </NavLink>
+
           <NavLink to={"/medic-peru/specialties"}>
             <SidebarItem
               icon={<Stethoscope size={30} />}
@@ -68,7 +57,7 @@ export default function SidebarItems({ isDoctor }: SidebarItemProps) {
           </NavLink>
         </div>
       )}
-      <NavLink to={"/medic-peru/chat"}>
+      {/* <NavLink to={"/medic-peru/chat"}>
         <SidebarItem
           icon={<MessageSquareMore size={30} />}
           text="Chats"
@@ -82,7 +71,7 @@ export default function SidebarItems({ isDoctor }: SidebarItemProps) {
           text="ChatIA"
           active={location.pathname === "/medic-peru/chat-ia"}
         />
-      </NavLink>
+      </NavLink> */}
       <hr className="my-3 border border-gray-400 " />
       <SidebarItem icon={<Settings size={30} />} text="Configuracion" />
     </main>

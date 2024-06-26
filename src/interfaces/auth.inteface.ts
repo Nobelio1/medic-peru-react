@@ -17,6 +17,16 @@ export interface LoginIn {
   username: string;
   password: string;
 }
+
+export interface LoginRes {
+  ape_Materno: string;
+  ape_Paterno: string;
+  email:       string;
+  nombres:     string;
+  rol:         string;
+}
+
+
 export interface LoginOut extends Result {
-  data: string;
+  data: LoginRes[];
 }
