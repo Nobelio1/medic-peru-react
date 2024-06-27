@@ -9,6 +9,7 @@ import {
 } from "../../interfaces/customers.interface";
 import { createToken } from "../../api/payment/token.services";
 import { paymentByToken } from "../../api/payment/payment.services";
+import { useAppStore } from "../../store/useAppStore";
 
 const initialValues: DatosServicio = {
   card_number: "",
@@ -31,6 +32,9 @@ const initialValues: DatosServicio = {
 };
 
 export const PaymentPage = () => {
+  const orderId = useAppStore((state) => state.orderId);
+  const precio = useAppStore((state) => state.precio);
+
   const price = localStorage.getItem("price");
   const nagivate = useNavigate();
   const retrocer = () => {
@@ -56,9 +60,9 @@ export const PaymentPage = () => {
     const id_token: string | undefined = await createToken({ token: token });
 
     const payment: PaymentToken = {
-      amount: values.amount,
+      amount: precio,
       description: values.description,
-      order_id: "oid-00056", // lo trae el backend, buscando como generarlo temporalmente
+      order_id: orderId,
       source_id: id_token,
       method: "card",
       currency: "PEN",
@@ -103,8 +107,7 @@ export const PaymentPage = () => {
           onSubmit={(values) => {
             values.amount = Number(price);
             let desc: any = localStorage.getItem("service");
-            desc = JSON.parse(desc);
-            values.description = desc.desc;
+            values.description = "";
             values.country_code = "PE";
             values.holder_name = `${values.name} ${values.last_name}`;
             values.state = `${values.city}`;
@@ -190,17 +193,26 @@ export const PaymentPage = () => {
                 name="postal_code"
               />
             </div>
-            <div className=" text-center mt-6">
+            <div className="text-center mt-16">
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-bold text-xl"
               >
-                Pagar S/ {price}
+                Pagar S/ {precio}
               </button>
+              <p className="mt-4 text-xss">
+                Lee nuestros{" "}
+                <a
+                  href="https://clinicaespecialista24horas.blogspot.com/2024/06/terminos-y-condiciones-de-politica-y.html"
+                  target="_blank"
+                  className="text-indigo-500"
+                >
+                  Terminos y condionces
+                </a>
+              </p>
             </div>
           </Form>
         </Formik>
-
         <div className="flex justify-between mt-14 px-5">
           <img src={Logo} alt="img-medic-peru" className="w-10 object-cover" />
           <img src={Tarjetas} alt="img-tarjeta" className="w-32" />

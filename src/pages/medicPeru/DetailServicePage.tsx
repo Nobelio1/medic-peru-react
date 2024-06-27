@@ -79,12 +79,6 @@ export const DetailServicePage = () => {
               </div>
               {/* seccion 2 */}
               <div>
-                <h3 className="text-lg font-bold mb-2">Precio</h3>
-                <div className="pb-4">
-                  <p className="text-blue-400 text-medium  text-xl ">
-                    hola mundo
-                  </p>
-                </div>
                 <div className="pt-4 pb-8">
                   <div className="grid grid-cols-2 grid-rows-5 gap-y-3">
                     <p className="font-medium">Hospitalización:</p>

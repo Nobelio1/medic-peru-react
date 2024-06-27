@@ -2,13 +2,15 @@ import { User } from './../store/authSlice';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FirebaseAuth } from "./credenciales";
 
+const doctorGoogleProvider = new GoogleAuthProvider();
+doctorGoogleProvider.addScope('https://www.googleapis.com/auth/calendar');
+doctorGoogleProvider.addScope('https://www.googleapis.com/auth/calendar.events');
 
-const googleProvider =  new GoogleAuthProvider()
 
 export const singInWithGoogle = async () => {
 
   try {
-    const result = await signInWithPopup(FirebaseAuth, googleProvider);
+    const result = await signInWithPopup(FirebaseAuth, doctorGoogleProvider);
     const user = result.user;
     const resultUser: User = {
       displayName: user.displayName || '',
@@ -17,7 +19,10 @@ export const singInWithGoogle = async () => {
       token: user.refreshToken || '',
     }
 
-    localStorage.setItem('token', (await result.user.getIdTokenResult()).token)
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const accessToken2 = credential ? credential.accessToken : null;
+
+    localStorage.setItem('token', accessToken2!)
 
     return resultUser;
   } catch (error) {

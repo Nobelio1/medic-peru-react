@@ -22,7 +22,7 @@ interface ObtenerDisponibilidadProps {
 export const generarCita = async ({ cita }: CitasProps) => {
   try {
     const req = await fetch(
-      `${environment.API_MASTER}/data/listarEspecialidades`,
+      `${environment.API_MASTER}/citas/crearCita`,
       {
         method: "POST",
         headers: {
@@ -37,7 +37,6 @@ export const generarCita = async ({ cita }: CitasProps) => {
     if (res.code !== "000") {
       throw new Error(res.message);
     }
-
     return res.data;
   } catch (error) {
     console.error(error);

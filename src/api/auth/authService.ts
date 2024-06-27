@@ -71,7 +71,7 @@ export const loginUser = async ({ user }: LoginUserProps) => {
 export const loginDoctor = async (email: string ,token: string) => {
   try {
     const request = await fetch(
-      `${environment.API_MASTER}/sesion/loginGoogle/${email}/${token}`,
+      `${environment.API_MASTER}/sesion/loginDoctor/${email}/${token}`,
       {
         method: "POST",
         headers: {
