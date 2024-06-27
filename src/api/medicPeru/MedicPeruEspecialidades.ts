@@ -1,4 +1,5 @@
 import {
+  DetalleServicioEspOut,
   EspecialidadesIdOut,
   EspecialidadesOut,
 } from "../../interfaces/especialidades.interface";
@@ -26,7 +27,7 @@ export const listarEspecialidades = async () => {
   }
 };
 
-export const especialidadPorId = async ({ id }: { id: number }) => {
+export const especialidadPorId = async (id:number) => {
   try {
     const request = await fetch(
       `${environment.API_MASTER}/data/listarServicioPorEsp/${id}`,
@@ -45,5 +46,28 @@ export const especialidadPorId = async ({ id }: { id: number }) => {
   } catch (error) {
     console.error(error);
     throw new Error("Error al intentar conectar al id");
+  }
+};
+
+
+export const detalleServicio = async (id:number) => {
+  try {
+    const request = await fetch(
+      `${environment.API_MASTER}/data/obtenerDetalleSrvc/${id}`,
+      {
+        method: "GET",
+      }
+    );
+
+    const response: DetalleServicioEspOut = await request.json();
+
+    if (response.code !== "000") {
+      throw new Error("Error al traer la data del servicio");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al intentar conectar con el servicio de detalleServicio");
   }
 };

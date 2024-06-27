@@ -43,9 +43,7 @@ export const DetalleCompraPage = () => {
   const { id_servico, id_especialidad } = citaActiva;
 
   const getServicio = async () => {
-    const servicios: EspecialidadesId[] = await especialidadPorId({
-      id: id_servico,
-    });
+    const servicios: EspecialidadesId[] = await especialidadPorId(id_servico);
     const servicioActivo = servicios.find(
       (servicio) => servicio.id_especialidad === id_servico
     );

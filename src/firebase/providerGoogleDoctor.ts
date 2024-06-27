@@ -1,5 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FirebaseAuth } from "./credenciales";
+import { loginDoctor } from "../api/auth/authService";
 
 const doctorGoogleProvider = new GoogleAuthProvider();
 doctorGoogleProvider.addScope('https://www.googleapis.com/auth/calendar');
@@ -13,18 +14,13 @@ export const signInDoctorWithGoogle = async () => {
     const tokenResult = await user.getIdTokenResult();
     const accessToken = tokenResult.token;
 
-    await fetch('http://localhost:8080/api/save-doctor-token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ accessToken })
-    });
+    await loginDoctor(user.email!, accessToken);
 
     return {
       displayName: user.displayName || '',
       email: user.email || '',
-      uid: user.uid || ''
+      uid: user.uid || '',
+      token: user.refreshToken || '',
     };
   } catch (error) {
     console.log(error);

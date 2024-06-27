@@ -1,5 +1,4 @@
 import {
-  BookUser,
   BriefcaseMedical,
   ClipboardPlus,
   LayoutDashboard,
@@ -31,13 +30,16 @@ export default function SidebarItems() {
           active={location.pathname === "/medic-peru"}
         />
       </NavLink>
-      <NavLink to={"/medic-peru/cita-medica"}>
-        <SidebarItem
-          icon={<ClipboardPlus size={30} />}
-          text="Citas"
-          active={location.pathname === "/medic-peru/cita-medica"}
-        />
-      </NavLink>
+      {usuario.rol === "1" && (
+        <NavLink to={"/medic-peru/cita-medica"}>
+          <SidebarItem
+            icon={<ClipboardPlus size={30} />}
+            text="Citas"
+            active={location.pathname === "/medic-peru/cita-medica"}
+          />
+        </NavLink>
+      )}
+
       {usuario.rol !== "1" && (
         <div>
           <NavLink to={"/medic-peru/filter-doctor"}>

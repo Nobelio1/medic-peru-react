@@ -8,6 +8,7 @@ export interface User {
   email: string,
   uid?: string,
   rol?: string
+  token?: string
 }
 
 export interface AuthSliceProps {
@@ -16,7 +17,7 @@ export interface AuthSliceProps {
   logged: boolean
   setUser: (usuario: User) => void
   logout: () => Promise<boolean>
-  onLogin: (user: LoginIn) => Promise<LoginRes>  
+  onLogin: (user: LoginIn) => Promise<LoginRes>
 }
 
 export const createAuthSlice: StateCreator<AuthSliceProps> = (set, get) => ({

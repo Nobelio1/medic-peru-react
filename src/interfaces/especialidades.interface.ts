@@ -20,3 +20,18 @@ export interface EspecialidadesId {
 export interface EspecialidadesIdOut extends Result {
   data: EspecialidadesId[];
 }
+
+export interface DetalleServicioEsp {
+  anestesia:          string;
+  codigo_tipo:        string;
+  duracion:           string;
+  hospitalizacion:    string;
+  nombre_cx:          string;
+  recuperacion_total: string;
+  sedes:              string;
+  tipo:               string;
+}
+
+export interface DetalleServicioEspOut extends Result {
+  data: DetalleServicioEsp[];
+}

@@ -14,7 +14,7 @@ export const ListOfServicesPage = () => {
 
   const listarServicios = async () => {
     setLoading(true);
-    const servicios: EspecialidadesId[] = await especialidadPorId({ id: +id });
+    const servicios: EspecialidadesId[] = await especialidadPorId(+id );
     if (servicios) {
       setServicios(servicios);
     }

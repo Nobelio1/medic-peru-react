@@ -166,7 +166,7 @@ export const Login = () => {
 
                     >
                       <span className="font-bold text-xl text-white">
-                        "Ingresar"
+                        Ingresar
                       </span>
                     </button>
                   )}

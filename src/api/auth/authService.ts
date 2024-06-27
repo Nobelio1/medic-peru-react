@@ -15,6 +15,7 @@ interface LoginUserProps {
   user: LoginIn;
 }
 
+
 export const registerUser = async ({ user }: RegisterUserProps) => {
   try {
     const request = await fetch(
@@ -65,3 +66,29 @@ export const loginUser = async ({ user }: LoginUserProps) => {
     throw "Algo salio mal";
   }
 };
+
+
+export const loginDoctor = async (email: string ,token: string) => {
+  try {
+    const request = await fetch(
+      `${environment.API_MASTER}/sesion/loginGoogle/${email}/${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    let response: RegisterUserOut = await request.json();
+
+    if (response.code !== "000") {
+      return response.message;
+    }
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw "Algo salio mal";
+  }
+};
+

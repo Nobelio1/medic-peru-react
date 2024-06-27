@@ -1,6 +1,8 @@
 import { StateCreator } from 'zustand';
 import { CitasIn } from '../interfaces/citas.interface';
 import { generarCita } from '../api/medicPeru/CitasServices';
+import { detalleServicio } from '../api/medicPeru/MedicPeruEspecialidades';
+import { DetalleServicioEsp } from '../interfaces/especialidades.interface';
 
 export interface CitaActiva {
   id_servico: number;
@@ -13,6 +15,7 @@ export interface CitasSliceProps {
   setCita: (cita: CitasIn) => void
   setCitaActiva: (citaActiva: CitaActiva) => void
   generarCita: (cita: CitasIn) => Promise<string>
+  getDetalleServicio: (id: number) => Promise<DetalleServicioEsp[]>
 }
 
 export const createCitasSlice: StateCreator<CitasSliceProps>  =  (set) => ({
@@ -22,6 +25,10 @@ export const createCitasSlice: StateCreator<CitasSliceProps>  =  (set) => ({
   setCitaActiva: (citaActiva: CitaActiva) => set({ citaActiva }),
   generarCita: async (cita: CitasIn) => {
     const res = await generarCita({ cita })
+    return res;
+  },
+  getDetalleServicio: async (id: number) => {
+    const res = await detalleServicio(id)
     return res;
   }
 })
