@@ -12,6 +12,7 @@ import { obtenerIdTrans, sendPayment } from "../../api/payment/payment.services"
 import { useAppStore } from "../../store/useAppStore";
 import { v4 as uuidv4 } from 'uuid';
 import { generarCita } from "../../api/medicPeru/CitasServices";
+import { ModalCompra } from './components/detalle-compra/ModalCompra';
 
 const initialValues: DatosServicio = {
   card_number: "",
@@ -201,6 +202,9 @@ export const PaymentPage = () => {
               />
             </div>
             <div className="text-center mt-16">
+
+              <ModalCompra/>
+
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-bold text-xl"

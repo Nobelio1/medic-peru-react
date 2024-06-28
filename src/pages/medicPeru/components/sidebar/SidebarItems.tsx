@@ -16,14 +16,21 @@ import { useAppStore } from "../../../../store/useAppStore";
 
 export default function SidebarItems() {
   const location = useLocation();
-
   const usuario = useAppStore((state) => state.usuario);
 
   //!-------------------------------------------------------------------------------------------------------
 
+  const handleLinkClick = () => {
+    const drawerCheckbox = document.getElementById("my-drawer") as HTMLInputElement;
+    if (drawerCheckbox) {
+      drawerCheckbox.checked = false;
+    }
+  };
+  
+
   return (
     <main className="App">
-      <NavLink to={"/medic-peru"}>
+      <NavLink to={"/medic-peru"} onClick={handleLinkClick}>
         <SidebarItem
           icon={<LayoutDashboard size={30} />}
           text="Dashboard"
@@ -51,7 +58,7 @@ export default function SidebarItems() {
 
       {usuario.rol !== "1" && (
         <div>
-          <NavLink to={"/medic-peru/filter-doctor"}>
+          <NavLink to={"/medic-peru/filter-doctor"} onClick={handleLinkClick}>
             <SidebarItem
               icon={<BriefcaseMedical size={30} />}
               text="Doctores"
@@ -59,7 +66,7 @@ export default function SidebarItems() {
             />
           </NavLink>
 
-          <NavLink to={"/medic-peru/specialties"}>
+          <NavLink to={"/medic-peru/specialties"} onClick={handleLinkClick}>
             <SidebarItem
               icon={<Stethoscope size={30} />}
               text="Especialidades"
@@ -68,23 +75,8 @@ export default function SidebarItems() {
           </NavLink>
         </div>
       )}
-      {/* <NavLink to={"/medic-peru/chat"}>
-        <SidebarItem
-          icon={<MessageSquareMore size={30} />}
-          text="Chats"
-          active={location.pathname === "/medic-peru/chat"}
-        />
-      </NavLink>
-
-      <NavLink to={"/medic-peru/chat-ia"}>
-        <SidebarItem
-          icon={<BotMessageSquare size={30} />}
-          text="ChatIA"
-          active={location.pathname === "/medic-peru/chat-ia"}
-        />
-      </NavLink> */}
       <hr className="my-3 border border-gray-400 " />
       <SidebarItem icon={<Settings size={30} />} text="Configuracion" />
     </main>
   );
-}
+};

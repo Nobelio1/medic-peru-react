@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 
 export const Filter = () => {
   return (
@@ -28,9 +28,9 @@ export const Filter = () => {
                 <path d="M20 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
               </svg>
             </div>
-            <Link to="/medic-peru/filter-doctor">
+
               <p className="text-xl">Doctores disponibles</p>
-            </Link>
+
           </div>
           <div className="text-4xl pr-2">
             <p>112</p>
@@ -104,3 +104,5 @@ export const Filter = () => {
     </div>
   );
 };
+
+
