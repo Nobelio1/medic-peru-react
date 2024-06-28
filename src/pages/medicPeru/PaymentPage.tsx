@@ -8,11 +8,15 @@ import {
   PaymentToken,
 } from "../../interfaces/customers.interface";
 import { createToken } from "../../api/payment/token.services";
-import { obtenerIdTrans, sendPayment } from "../../api/payment/payment.services";
+import {
+  obtenerIdTrans,
+  sendPayment,
+} from "../../api/payment/payment.services";
 import { useAppStore } from "../../store/useAppStore";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { generarCita } from "../../api/medicPeru/CitasServices";
-import { ModalCompra } from './components/detalle-compra/ModalCompra';
+import { ModalCompra } from "./components/detalle-compra/ModalCompra";
+import { useState } from "react";
 
 const initialValues: DatosServicio = {
   card_number: "",
@@ -38,6 +42,8 @@ export const PaymentPage = () => {
   const precio = useAppStore((state) => state.precio);
   const setCita = useAppStore((state) => state.setCita);
   const cita = useAppStore((state) => state.cita);
+
+  const [error, setError] = useState(false);
 
   const price = localStorage.getItem("price");
   const nagivate = useNavigate();
@@ -80,15 +86,21 @@ export const PaymentPage = () => {
       },
     };
 
-    const response: string = await sendPayment( payment );
-    const idTrans: number = await obtenerIdTrans(response);
+    const response = await sendPayment(payment);
+
+    if (response.error_message) {
+      setError(true);
+      return;
+    }
+
+    const idTrans: number = await obtenerIdTrans(response.id);
 
     setCita({ ...cita, idTransaccion: idTrans });
 
-    console.log(cita)
+    console.log(cita);
     const citaCreada = await generarCita({ cita });
 
-    if(citaCreada === "000"){
+    if (citaCreada === "000") {
       nagivate("/medic-peru/specialties/servicie/success");
     }
   };
@@ -202,8 +214,7 @@ export const PaymentPage = () => {
               />
             </div>
             <div className="text-center mt-16">
-
-              <ModalCompra/>
+              {error && <ModalCompra />}
 
               <button
                 type="submit"

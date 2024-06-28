@@ -58,9 +58,8 @@ export const sendPayment = async ( payment: PaymentToken) => {
     });
 
     let response: PaymentResponse = await request.json();
-    console.log(response)
 
-    return response.id;
+    return response;
   } catch (error) {
     console.log(error);
     throw new Error("Algo salio mal");
