@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import SidebarItems from "../medicPeru/components/sidebar/SidebarItems";
+import SidebarItems from '../medicPeru/components/sidebar/SidebarItems';
 import Sidebar from "../medicPeru/components/sidebar/Sidebar";
 import { Menu } from "lucide-react";
 import { Logo } from "../../assets";

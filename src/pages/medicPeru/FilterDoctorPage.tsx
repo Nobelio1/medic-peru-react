@@ -18,7 +18,7 @@ export const FilterDoctorPage = () => {
       <div className="bg-white rounded-md px-2 ">
         <Link className="btn btn-ghost text-lg" to={"/medic-peru/"}>
           <SlArrowLeft />
-          Volver
+          Cerrar
         </Link>
       </div>
 
