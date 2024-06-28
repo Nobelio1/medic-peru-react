@@ -2,9 +2,11 @@ import {
   CitasIn,
   CitasOut,
   Disponibilidad,
+  EventosOut,
   ObtenerDisponibilidad,
   ObtenerDisponibilidadOut,
 } from "../../interfaces/citas.interface";
+import { Result } from "../../interfaces/medicPeru.interface";
 import { environment } from "../environment";
 
 interface CitasProps {
@@ -22,7 +24,7 @@ interface ObtenerDisponibilidadProps {
 export const generarCita = async ({ cita }: CitasProps) => {
   try {
     const req = await fetch(
-      `${environment.API_MASTER}/citas/crearCita`,
+      `${environment.API_MASTER}/citas/agendar`,
       {
         method: "POST",
         headers: {
@@ -32,12 +34,12 @@ export const generarCita = async ({ cita }: CitasProps) => {
       }
     );
 
-    const res: CitasOut = await req.json();
+    const res: Result = await req.json();
 
     if (res.code !== "000") {
       throw new Error(res.message);
     }
-    return res.data;
+    return res.code;
   } catch (error) {
     console.error(error);
     throw new Error("Error al servicio de generar citas");
@@ -84,6 +86,32 @@ export const obtenerDisponibilidad = async ({
     );
 
     const res: ObtenerDisponibilidadOut = await req.json();
+
+    if (res.code !== "000") {
+      throw new Error(res.message);
+    }
+
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al servicio de generar citas");
+  }
+};
+
+
+export const getEventos = async (email:string) => {
+  try {
+    const req = await fetch(
+      `${environment.API_MASTER}/citas/por-doctor/${email}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const res: EventosOut = await req.json();
 
     if (res.code !== "000") {
       throw new Error(res.message);

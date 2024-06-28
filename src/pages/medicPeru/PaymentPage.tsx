@@ -8,8 +8,10 @@ import {
   PaymentToken,
 } from "../../interfaces/customers.interface";
 import { createToken } from "../../api/payment/token.services";
-import { paymentByToken } from "../../api/payment/payment.services";
+import { obtenerIdTrans, sendPayment } from "../../api/payment/payment.services";
 import { useAppStore } from "../../store/useAppStore";
+import { v4 as uuidv4 } from 'uuid';
+import { generarCita } from "../../api/medicPeru/CitasServices";
 
 const initialValues: DatosServicio = {
   card_number: "",
@@ -32,8 +34,9 @@ const initialValues: DatosServicio = {
 };
 
 export const PaymentPage = () => {
-  const orderId = useAppStore((state) => state.orderId);
   const precio = useAppStore((state) => state.precio);
+  const setCita = useAppStore((state) => state.setCita);
+  const cita = useAppStore((state) => state.cita);
 
   const price = localStorage.getItem("price");
   const nagivate = useNavigate();
@@ -58,11 +61,12 @@ export const PaymentPage = () => {
     };
 
     const id_token: string | undefined = await createToken({ token: token });
+    const myUuid = uuidv4();
 
     const payment: PaymentToken = {
       amount: precio,
       description: values.description,
-      order_id: orderId,
+      order_id: myUuid,
       source_id: id_token,
       method: "card",
       currency: "PEN",
@@ -75,11 +79,15 @@ export const PaymentPage = () => {
       },
     };
 
-    const response: string | undefined = await paymentByToken({
-      payment: payment,
-    });
+    const response: string = await sendPayment( payment );
+    const idTrans: number = await obtenerIdTrans(response);
 
-    if (response) {
+    setCita({ ...cita, idTransaccion: idTrans });
+
+    console.log(cita)
+    const citaCreada = await generarCita({ cita });
+
+    if(citaCreada === "000"){
       nagivate("/medic-peru/specialties/servicie/success");
     }
   };
@@ -106,7 +114,6 @@ export const PaymentPage = () => {
           // }}
           onSubmit={(values) => {
             values.amount = Number(price);
-            let desc: any = localStorage.getItem("service");
             values.description = "";
             values.country_code = "PE";
             values.holder_name = `${values.name} ${values.last_name}`;

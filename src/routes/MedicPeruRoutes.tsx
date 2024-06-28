@@ -9,6 +9,7 @@ import { MedicalHistoryRoutes } from "./MedicalHistoryRoutes";
 import { CitasPages } from "../pages/medicPeru/CitasPages";
 import { CitaDetallePage } from "../pages/medicPeru/CitaDetallePage";
 import { EspecilidadesRoutes } from "./EspecilidadesRoutes";
+import { DefinirDisponibilidad } from "../pages/medicPeru/DefinirDisponibilidad";
 
 export const MedicPeruRoutes = () => {
   return (
@@ -29,6 +30,7 @@ export const MedicPeruRoutes = () => {
           <Route path="/cita-medica" element={<CitasPages />} />
           <Route path="/cita-detalle/:id" element={<CitaDetallePage />} />
           <Route path="/edit-paciente" element={<EditProfilePage />} />
+          <Route path="/disponibilidad" element={<DefinirDisponibilidad />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

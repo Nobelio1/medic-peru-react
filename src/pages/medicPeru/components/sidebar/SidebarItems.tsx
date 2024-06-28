@@ -1,5 +1,6 @@
 import {
   BriefcaseMedical,
+  CalendarCheck,
   ClipboardPlus,
   LayoutDashboard,
   Settings,
@@ -22,7 +23,6 @@ export default function SidebarItems() {
 
   return (
     <main className="App">
-      {/* ALGUNAS RUTAS ESTAR AQUI PROVISIONALMENTE */}
       <NavLink to={"/medic-peru"}>
         <SidebarItem
           icon={<LayoutDashboard size={30} />}
@@ -31,13 +31,22 @@ export default function SidebarItems() {
         />
       </NavLink>
       {usuario.rol === "1" && (
-        <NavLink to={"/medic-peru/cita-medica"}>
-          <SidebarItem
-            icon={<ClipboardPlus size={30} />}
-            text="Citas"
-            active={location.pathname === "/medic-peru/cita-medica"}
-          />
-        </NavLink>
+        <>
+          <NavLink to={"/medic-peru/cita-medica"}>
+            <SidebarItem
+              icon={<ClipboardPlus size={30} />}
+              text="Citas"
+              active={location.pathname === "/medic-peru/cita-medica"}
+            />
+          </NavLink>
+          <NavLink to={"/medic-peru/disponibilidad"}>
+            <SidebarItem
+              icon={<CalendarCheck size={30} />}
+              text="Disponibilidad"
+              active={location.pathname === "/medic-peru/disponibilidad"}
+            />
+          </NavLink>
+        </>
       )}
 
       {usuario.rol !== "1" && (

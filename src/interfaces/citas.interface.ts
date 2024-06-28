@@ -1,14 +1,16 @@
 import { Result } from "./medicPeru.interface";
 
+
+
 export interface CitasIn {
-  accessToken:    string;
-  attendeeEmails: string[];
-  description:    string;
-  endTime:        string;
-  location:       string;
-  startTime:      string;
-  summary:        string;
+  descripcion:   string;
+  duracion:      number;
+  emailDoctor:   string;
+  emailPaciente: string;
+  fechaHora:     string;
+  idTransaccion: number;
 }
+
 
 export interface CitasSalida {
   attendees:   Attendee[];
@@ -75,4 +77,18 @@ export interface ObtenerDisponibilidad {
 
 export interface ObtenerDisponibilidadOut extends Result {
   data: string[];
+}
+
+export interface Eventos {
+  descripcion:   string;
+  duracion:      number;
+  emailDoctor:   string;
+  emailPaciente: string;
+  fechaHora:     Date;
+  idCita:        number;
+  idTransaccion: number;
+}
+
+export interface EventosOut extends Result {
+  data: Eventos[];
 }
