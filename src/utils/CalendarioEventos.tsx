@@ -1,7 +1,7 @@
 import {Scheduler} from "@aldabil/react-scheduler"
 import { useAppStore } from "../store/useAppStore"
 import { useEffect } from "react";
-import { getEventos } from "../api/medicPeru/CitasServices";
+import {  getEventosDoctor } from "../api/medicPeru/CitasServices";
 
 export interface Eventos {
   event_id: number | string;
@@ -22,7 +22,7 @@ export const CalendarioEventos = () => {
 
 
   const eventos = async () =>{
-    const listaEventos = await getEventos(usuario.email) 
+    const listaEventos = await getEventosDoctor(usuario.email) 
     listaEventos.map((evento) => {
       events.push({
         event_id: evento.idCita,
@@ -34,6 +34,8 @@ export const CalendarioEventos = () => {
       })
     })
   }
+
+  
 
   useEffect(() => {
     eventos()

@@ -4,10 +4,14 @@ import { SlArrowLeft } from "react-icons/sl";
 import { useEffect, useState } from "react";
 import { Especialidades } from "../../interfaces/especialidades.interface";
 import { listarEspecialidades } from "../../api/medicPeru/MedicPeruEspecialidades";
+import { useAppStore } from "../../store/useAppStore";
+import { CitasIn } from "../../interfaces/citas.interface";
 
 export const AllSpecialtiesPage = () => {
   const [especialidad, setEspecialidad] = useState<Especialidades[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const setCita = useAppStore((state) => state.setCita);
 
   const listaEspecialidad = async () => {
     setLoading(true);
@@ -20,6 +24,7 @@ export const AllSpecialtiesPage = () => {
 
   useEffect(() => {
     listaEspecialidad();
+    setCita({} as CitasIn)
   }, []);
 
   return (

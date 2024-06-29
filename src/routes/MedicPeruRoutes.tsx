@@ -10,6 +10,7 @@ import { CitasPages } from "../pages/medicPeru/CitasPages";
 import { CitaDetallePage } from "../pages/medicPeru/CitaDetallePage";
 import { EspecilidadesRoutes } from "./EspecilidadesRoutes";
 import { DefinirDisponibilidad } from "../pages/medicPeru/DefinirDisponibilidad";
+import { CitasPacientePage } from "../pages/medicPeru/CitasPacientePage";
 
 export const MedicPeruRoutes = () => {
   return (
@@ -28,6 +29,7 @@ export const MedicPeruRoutes = () => {
           <Route path="/profile-doctor/:id" element={<ProfileDoctorPage />} />
           <Route path="/filter-doctor" element={<FilterDoctorPage />} />
           <Route path="/cita-medica" element={<CitasPages />} />
+          <Route path="/cita-medica-paciente" element={<CitasPacientePage />} />
           <Route path="/cita-detalle/:id" element={<CitaDetallePage />} />
           <Route path="/edit-paciente" element={<EditProfilePage />} />
           <Route path="/disponibilidad" element={<DefinirDisponibilidad />} />

@@ -44,3 +44,26 @@ export const listarDoctoresPorEsp = async (id: number) => {
     throw new Error("Error al intentar conectar al servicio");
   }
 }
+
+
+export const listarDoctoresPorServicio = async (id: number) => {
+  try {
+    const request = await fetch(
+      `${environment.API_MASTER}/data/listarDoctoresPorSrvc/${id}`,
+      {
+        method: "GET",
+      }
+    );
+
+    const response: DoctoresOut = await request.json();
+
+    if (response.code !== "000") {
+      throw new Error("Error al hallar el servicio!!");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al intentar conectar al servicio");
+  }
+}

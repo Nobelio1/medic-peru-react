@@ -10,7 +10,6 @@ const password = "";
 const basicAuth = btoa(`${username}:${password}`);
 
 export const createToken = async ({ token }: { token: CreationToken }) => {
-  console.log(token);
   try {
     const request = await fetch(
       `${environment.API_OPENPAY}/${KEYS.MERCHANT_ID}/tokens`,

@@ -38,7 +38,7 @@ export default function Sidebar({ children }: SidebarProps) {
         <div className="p-4 pb-2 flex items-center justify-center mt-3 gap-2 ">
           <Link to="/medic-peru" className="flex items-center gap-1">
             <img src={Logo} alt="logo-icon" className="w-12" />
-            <h3 className="font-bold text-2xl montserrat-bold">MedicPeru</h3>
+            <h3 className="font-bold text-2xl montserrat-bold">Cirugias 24 horas</h3>
           </Link>
         </div>
 

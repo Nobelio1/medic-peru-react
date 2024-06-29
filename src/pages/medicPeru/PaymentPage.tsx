@@ -40,15 +40,14 @@ const initialValues: DatosServicio = {
 
 export const PaymentPage = () => {
   const precio = useAppStore((state) => state.precio);
-  const setCita = useAppStore((state) => state.setCita);
   const cita = useAppStore((state) => state.cita);
 
   const [error, setError] = useState(false);
 
   const price = localStorage.getItem("price");
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const retrocer = () => {
-    nagivate(-1);
+    navigate(-1);
   };
 
   const processPayment = async (values: DatosServicio) => {
@@ -88,20 +87,22 @@ export const PaymentPage = () => {
 
     const response = await sendPayment(payment);
 
-    if (response.error_message) {
+    if (response.http_code) {
       setError(true);
       return;
     }
 
-    const idTrans: number = await obtenerIdTrans(response.id);
+    const idTrans = await obtenerIdTrans(response.id);
 
-    setCita({ ...cita, idTransaccion: idTrans });
+    console.log("idTrans", idTrans);
 
+    // setCita({ ...cita, idTransaccion: idTrans });
+    cita.idTransaccion = idTrans;
     console.log(cita);
     const citaCreada = await generarCita({ cita });
 
     if (citaCreada === "000") {
-      nagivate("/medic-peru/specialties/servicie/success");
+      navigate("/medic-peru/specialties/servicie/success");
     }
   };
 

@@ -6,6 +6,7 @@ import { authRegisterValidator } from "../../../utils/auth/authValidator";
 import { registerUser } from "../../../api/auth/authService";
 import { useState } from "react";
 import { RegisterUserIn } from "../../../interfaces/auth.inteface";
+import { useAppStore } from "../../../store/useAppStore";
 
 //!----------------------------------------------------------------------------
 
@@ -25,10 +26,12 @@ export const RegisterPacient = () => {
   const navigate = useNavigate();
   const [isValidad, setIsValidad] = useState(false);
   const [message, setMessage] = useState("");
+  const rolRegistro = useAppStore((state) => state.rolRegistro);
 
   //*-------------------------------------------------
 
   const onRegisterUser = async (user: RegisterUserIn) => {
+    user.rol = +rolRegistro;
     const accessUser = await registerUser({ user: user });
 
     if (accessUser !== "1") {

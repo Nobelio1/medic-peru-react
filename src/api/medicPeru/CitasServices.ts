@@ -99,10 +99,36 @@ export const obtenerDisponibilidad = async ({
 };
 
 
-export const getEventos = async (email:string) => {
+export const getEventosDoctor  = async (email:string) => {
   try {
     const req = await fetch(
-      `${environment.API_MASTER}/citas/por-doctor/${email}`,
+      `${environment.API_MASTER}/citas/listarCitasEmailDoctor/${email}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const res: EventosOut = await req.json();
+
+    if (res.code !== "000") {
+      throw new Error(res.message);
+    }
+
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al servicio de generar citas");
+  }
+};
+
+
+export const getEventosPaciente  = async (email:string) => {
+  try {
+    const req = await fetch(
+      `${environment.API_MASTER}/citas/listarCitasEmailPaciente/${email}`,
       {
         method: "GET",
         headers: {

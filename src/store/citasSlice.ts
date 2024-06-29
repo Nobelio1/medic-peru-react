@@ -18,7 +18,7 @@ export interface CitasSliceProps {
   setOrder: (id: string) => void
   setPrecio: (precio: number) => void
   setCitaActiva: (citaActiva: CitaActiva) => void
-  generarCita: (cita: CitasIn) => Promise<CitasSalida>
+  // generarCita: (cita: CitasIn) => Promise<CitasSalida>
   getDetalleServicio: (id: number) => Promise<DetalleServicioEsp[]>
 }
 

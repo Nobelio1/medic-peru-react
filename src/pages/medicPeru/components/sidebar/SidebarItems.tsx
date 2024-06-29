@@ -21,12 +21,13 @@ export default function SidebarItems() {
   //!-------------------------------------------------------------------------------------------------------
 
   const handleLinkClick = () => {
-    const drawerCheckbox = document.getElementById("my-drawer") as HTMLInputElement;
+    const drawerCheckbox = document.getElementById(
+      "my-drawer"
+    ) as HTMLInputElement;
     if (drawerCheckbox) {
       drawerCheckbox.checked = false;
     }
   };
-  
 
   return (
     <main className="App">
@@ -37,6 +38,7 @@ export default function SidebarItems() {
           active={location.pathname === "/medic-peru"}
         />
       </NavLink>
+
       {usuario.rol === "1" && (
         <>
           <NavLink to={"/medic-peru/cita-medica"}>
@@ -58,6 +60,13 @@ export default function SidebarItems() {
 
       {usuario.rol !== "1" && (
         <div>
+          <NavLink to={"/medic-peru/cita-medica-paciente"}>
+            <SidebarItem
+              icon={<ClipboardPlus size={30} />}
+              text="Citas"
+              active={location.pathname === "/medic-peru/cita-medica-paciente"}
+            />
+          </NavLink>
           <NavLink to={"/medic-peru/filter-doctor"} onClick={handleLinkClick}>
             <SidebarItem
               icon={<BriefcaseMedical size={30} />}
@@ -79,4 +88,4 @@ export default function SidebarItems() {
       <SidebarItem icon={<Settings size={30} />} text="Configuracion" />
     </main>
   );
-};
+}

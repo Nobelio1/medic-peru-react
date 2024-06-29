@@ -4,15 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store/useAppStore";
 import { EspecialidadesId } from "../../interfaces/especialidades.interface";
 import { especialidadPorId } from "../../api/medicPeru/MedicPeruEspecialidades";
-import { listarDoctoresPorEsp } from "../../api/medicPeru/doctoresServices";
+import { listarDoctoresPorServicio } from "../../api/medicPeru/doctoresServices";
 import { Doctores } from "../../interfaces/doctores.interface";
-import { Precio, precio } from "../../data/precio";
+import { Precio, precio } from '../../data/precio';
 import { CitasIn } from "../../interfaces/citas.interface";
 import { getDisponibilidad } from "../../api/medicPeru/disponibildadService";
+import { setPersistence } from "firebase/auth";
 
 export interface DetalleServicio {
   desc: string;
   price: string;
+}
+
+interface ServicioItemsProps {
+  nombre: string
+  precio: number
 }
 
 const sedes = [
@@ -37,7 +43,6 @@ export const DetalleCompraPage = () => {
   const [doctores, setDoctores] = useState<Doctores[]>([]);
   const [listaPrecios, setListaPrecios] = useState<Precio[]>([]);
   const [horasDisponibles, setHorasDisponibles] = useState<string[]>([]);
-  const [precioSld, setPrecioSld] = useState(0);
   const [sede, setSede] = useState<boolean>(true);
   const [citas, setCitas] = useState<CitasIn>({
     descripcion: "",
@@ -46,7 +51,18 @@ export const DetalleCompraPage = () => {
     emailPaciente: "",
     fechaHora: "",
     idTransaccion: 0,
+    id_servicio: 0,
   });
+
+
+  const [precioPagar, setPrecioPagar] = useState(0)
+  const [ivg, setIvg] = useState(0)
+  const [precioBase, setPrecioBase] = useState(0);
+
+
+  const [soloCita, setSoloCita] = useState(false)
+  const [serviciosAdicionales, setServiciosAdicionales] = useState(false)
+  
 
   const setPrecio = useAppStore((state) => state.setPrecio);
   const usuario = useAppStore((state) => state.usuario);
@@ -70,7 +86,7 @@ export const DetalleCompraPage = () => {
   };
 
   const doctoresDisponibles = async () => {
-    const doctoresDis: Doctores[] = await listarDoctoresPorEsp(id_especialidad);
+    const doctoresDis: Doctores[] = await listarDoctoresPorServicio(id_especialidad);
     if (doctoresDis.length === 0) {
       setDoctores([]);
     } else {
@@ -80,8 +96,11 @@ export const DetalleCompraPage = () => {
 
   const precioDisponibles = () => {
     const precios = precio.filter((p) => p.id_servicio === id_servico);
-    if(precios.length === 1){
-      setPrecio(precios[0].precio)
+    if (precios.length === 1) {
+      setPrecioBase(precios[0].precio) //precio original
+      setIvg(precios[0].precio*0.18) //ivg
+      const igv2 = ivg
+      setPrecioPagar(precios[0].precio + igv2) //precio a pagar
     }
 
     if (!!!precios[0].id_sede) {
@@ -92,15 +111,10 @@ export const DetalleCompraPage = () => {
 
   const precioActual = (e: any) => {
     const precioAct = listaPrecios.find((p) => p.id_sede === +e.target.value);
-    setPrecioSld(precioAct?.precio!);
+    setPrecioBase(precioAct?.precio!)
+    setIvg(precioAct?.precio!*0.18);
+    setPrecioPagar(precioAct?.precio! + precioAct?.precio!*0.18)
   };
-
-  // const precioSede = () => {
-  //   console.log(listaPrecios[0].precio)
-  //   if(!sede){
-  //     setPrecioSld(listaPrecios[0].precio);
-  //   }
-  // }
 
   const goToPayment = () => {
     navigate("/medic-peru/specialties/servicie/payment");
@@ -130,24 +144,52 @@ export const DetalleCompraPage = () => {
     setCitas({
       ...citas,
       fechaHora: fecha,
-    })
-  }
+    });
+  };
 
   const citaGen = async () => {
+    const nuevaCita: CitasIn = {
+      ...citas,
+      duracion: 90,
+      emailDoctor: "nobelio2304gino@gmail.com",
+      emailPaciente: usuario.email,
+      id_servicio: id_servico
+    };
 
-      const nuevaCita: CitasIn = {
-        ...citas,
-        duracion: 90,
-        emailDoctor: "nobelio2304gino@gmail.com",
-        emailPaciente: usuario.email,
-      };
-
-      setCita(nuevaCita);
-      if(listaPrecios.length !== 1){
-        setPrecio(precioSld);
-      }
-      goToPayment();
+    setCita(nuevaCita);
+    setPrecio(precioPagar);
+    goToPayment();
   };
+
+  const soloConsultaMedica = () => {
+    const nuevoValor = !soloCita;
+    const ivgAuxBase = precioBase*0.18;
+    const preccioAuxBase = precioBase + ivgAuxBase;
+    setSoloCita(nuevoValor);
+
+    if(nuevoValor){
+      setIvg(50*0.18)
+      setPrecioPagar(50 + 50*0.18)
+    }else{
+      setIvg(ivgAuxBase)
+      setPrecioPagar(preccioAuxBase)
+    }
+  }
+
+  const todosServiciosAdicionales = () => {
+    const nuevoValor = !serviciosAdicionales;
+    const ivgAuxBase = precioBase*0.18;
+    const preccioAuxBase = precioBase + ivgAuxBase;
+    setServiciosAdicionales(nuevoValor);
+
+    if(nuevoValor){
+      setIvg((precioBase + 2350)*0.18)
+      setPrecioPagar((precioBase + 2350)*0.18 + precioBase + 2350)
+    }else{
+      setIvg(ivgAuxBase)
+      setPrecioPagar(preccioAuxBase)
+    }
+  }
 
   useEffect(() => {
     getServicio();
@@ -236,11 +278,39 @@ export const DetalleCompraPage = () => {
             </div>
           )}
 
-          <div className="mt-52 flex items-center w-full bg-sky-200 justify-between py-2 px-4 rounded-md">
-            <p className="font-bold">Total:</p>
-            <p className="font-bold text-xl">
-              S/ {sede ? precioSld : listaPrecios[0].precio}
-            </p>
+
+          <div className="mt-52 flex flex-col w-full bg-sky-200 py-2 px-4 rounded-md">
+            <div className="mb-2">
+              <input type="checkbox" id="solo_consulta" className="mr-2" disabled={serviciosAdicionales} onChange={soloConsultaMedica} />
+              <label htmlFor="solo_consulta" className="font-medium" >¿Solo comprar la consulta médica?</label>
+            </div>
+            <ServicioItems nombre="Exámenes pre-quirúrgicos" precio={50} />
+          </div>
+
+          <div className="mt-4 flex flex-col w-full bg-sky-200 py-2 px-4 rounded-md">
+            <div className="mb-2">
+              <input type="checkbox" id="servicio_adicionales" className="mr-2" disabled={soloCita} onChange={todosServiciosAdicionales} />
+              <label htmlFor="servicio_adicionales" className="font-medium" >¿Incluir servicios adicionales?</label>
+            </div>
+            <ServicioItems nombre="Exámenes pre-quirúrgicos" precio={200} />
+            <ServicioItems nombre="Riesgo cardiológico" precio={100} />
+            <ServicioItems nombre="Radiografía de tórax" precio={50} />
+            <ServicioItems nombre="Riesgo neumológico" precio={2000} />
+          </div>
+
+          <div className=" mt-4 flex flex-col w-full bg-sky-200 py-2 px-4 rounded-md">
+            <div className="flex justify-between mb-2">
+              <p className="font-normal"> Igv:</p>
+              <p className="font-normal text-mf">
+                S/ {ivg}
+              </p>
+            </div>
+            <div className="flex justify-between">
+              <p className="font-bold">Total:</p>
+              <p className="font-bold text-xl">
+                S/ {precioPagar}
+              </p>
+            </div>
           </div>
           <div className="mt-2">
             <button
@@ -253,5 +323,14 @@ export const DetalleCompraPage = () => {
         </div>
       </div>
     </>
+  );
+};
+
+const ServicioItems = ({nombre, precio} : ServicioItemsProps) => {
+  return (
+    <div className="flex justify-between mb-2 ">
+      <p className="font-normal text-sm"> {nombre}:</p>
+      <p className="font-normal text-sm">S/ {precio}</p>
+    </div>
   );
 };

@@ -13,17 +13,21 @@ export interface User {
 
 export interface AuthSliceProps {
   usuario: User
+  rolRegistro: string
   checking: boolean
   logged: boolean
   setUser: (usuario: User) => void
   logout: () => Promise<boolean>
   onLogin: (user: LoginIn) => Promise<LoginRes>
+  setRol: (rol: string) => void
 }
 
 export const createAuthSlice: StateCreator<AuthSliceProps> = (set, get) => ({
   usuario: {} as User,
+  rolRegistro: '',
   checking: false,
   logged: false,
+  setRol: (rol: string) => set({ rolRegistro: rol }),
   onLogin: async (user: LoginIn) => {
     set({
       checking: true,

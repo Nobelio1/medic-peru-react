@@ -9,6 +9,7 @@ export interface CitasIn {
   emailPaciente: string;
   fechaHora:     string;
   idTransaccion: number;
+  id_servicio?:  number;
 }
 
 
@@ -87,6 +88,9 @@ export interface Eventos {
   fechaHora:     Date;
   idCita:        number;
   idTransaccion: number;
+  id_servicio?: number,
+  imagen_url?: string,
+  nombre_servicio?: string
 }
 
 export interface EventosOut extends Result {

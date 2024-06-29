@@ -80,6 +80,8 @@ export const obtenerIdTrans = async (id: string) => {
 
     const res:IdTrans  = await req.json();
 
+    console.log(res)
+
     if (res.code !== "000") {
       throw new Error(res.message);
     }

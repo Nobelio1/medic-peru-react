@@ -15,9 +15,9 @@ const WithSidebar = () => {
             <label htmlFor="my-drawer" className=" drawer-button pr-3">
               <Menu />
             </label>
-            <img src={Logo} alt="logo-icon" className="w-10" />
+            <img src={Logo} alt="logo-icon" className="w-16" />
             <h3 className="pl-1 font-bold text-xl montserrat-bold">
-              MedicPeru
+              Cirugias 24 horas
             </h3>
           </nav>
         </header>
