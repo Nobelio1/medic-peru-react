@@ -11,7 +11,7 @@ export const HomeMobilePage = () => {
           <div className="w-[625px] relative -left-10 mb-4 overflow-hidden">
             <img src={MedicalLogo} alt="logo-icono" />
           </div>
-          <h1 className="font-bold text-2xl">¡Hola! Bienvendido a MedicPeru</h1>
+          <h1 className="font-bold text-2xl">¡Hola! Bienvendido a Cirugias 24 horas</h1>
           <p className="text-center text-md text-gray-800 pt-4">
             Una app donde podras reservar tus citas, gestionar documentos,
             chatear con los doctores y muchos más

@@ -9,7 +9,6 @@ import { Doctores } from "../../interfaces/doctores.interface";
 import { Precio, precio } from '../../data/precio';
 import { CitasIn } from "../../interfaces/citas.interface";
 import { getDisponibilidad } from "../../api/medicPeru/disponibildadService";
-import { setPersistence } from "firebase/auth";
 
 export interface DetalleServicio {
   desc: string;

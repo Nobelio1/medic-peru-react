@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { CitasIn, CitasSalida } from '../interfaces/citas.interface';
+import { CitasIn} from '../interfaces/citas.interface';
 import { generarCita } from '../api/medicPeru/CitasServices';
 import { detalleServicio } from '../api/medicPeru/MedicPeruEspecialidades';
 import { DetalleServicioEsp } from '../interfaces/especialidades.interface';
